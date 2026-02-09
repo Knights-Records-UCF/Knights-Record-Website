@@ -1,5 +1,20 @@
 import Image from "next/image"
 
+const colorArr = [
+    {
+        color: "bg-[#CCBABA]",
+    },
+    {
+        color: "bg-[#818FE1]",
+    },
+    {
+        color: "bg-[#E181D6]",
+    },
+    {
+        color: "bg-[#E18181]",
+    },
+]
+
 export default function About() {
     return (
         <div className="flex flex-col items-center mt-8">
@@ -23,14 +38,14 @@ export default function About() {
                 Join Now
             </button>
             <div>
-                <h1 className="mt-12 text-[#656565] font-semibold text-3xl">
+                <h1 className="mt-12 text-[#656565] font-semibold text-[26px] mb-2">
                     Connect with Us
                 </h1>
             </div>
             <div className="w-229 border-t-[1.5px] border-[#D9D9D9] " /> {/* modify layout.tsx at some point so each page has a footer/space at bottom */}
-            <div className="mt-3 grid grid-cols-4 gap-4 place-items-center mb-20">
-                {Array.from({ length: 4 }).map((_, i) => (
-                    <div key={i} className="w-16 h-16 bg-[#CCBABA] rounded-2xl" />
+            <div className="mt-4 grid grid-cols-4 gap-5 place-items-center mb-20">
+                {colorArr.map((cube, i) => (
+                    <div key={i} className={`w-16 h-16 ${cube.color} rounded-2xl `} />
                 ))}
             </div>
 
