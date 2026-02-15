@@ -17,7 +17,7 @@ const colorArr = [
 
 export default function About() {
     return (
-        <div className="flex flex-col items-center mt-8">
+        <div className="flex flex-col items-center max-h-screen mb-16">
             <div className="">
                 <Image
                     src="/CDCase.svg"
@@ -32,18 +32,18 @@ export default function About() {
                 Knights Records aims to foster the growth of emerging artists and industry professionals within the UCF and Orlando communities by operating as a mock music label. Through hands-on management, marketing, and event coordination, we provide students and local talent with the tools, resources, and experience needed to succeed in the music industry.
             </p>
             <button
-                className="mt-3 px-4 py-1 rounded-md bg-[#656565] text-white font-semibold"
+                className="mt-5 px-4 py-1 rounded-md bg-[#656565] text-white font-semibold"
                 type="button"
             >
                 Join Now
             </button>
             <div>
-                <h1 className="mt-12 text-[#656565] font-semibold text-[26px] mb-2">
+                <h1 className="mt-12 text-[#656565] font-[525] text-[24px] mb-2">
                     Connect with Us
                 </h1>
             </div>
             <div className="w-229 border-t-[1.5px] border-[#D9D9D9] " /> {/* modify layout.tsx at some point so each page has a footer/space at bottom */}
-            <div className="mt-4 grid grid-cols-4 gap-5 place-items-center mb-20">
+            <div className="mt-4 grid grid-cols-4 gap-5 place-items-center">
                 {colorArr.map((cube, i) => (
                     <div key={i} className={`w-16 h-16 ${cube.color} rounded-2xl `} />
                 ))}
