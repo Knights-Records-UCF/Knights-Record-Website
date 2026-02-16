@@ -10,30 +10,30 @@ interface PersonArrayProp {
 
 const ExecutiveBoard: Person[] = [
   {
-    name: "Dani",
+    name: "Dany",
     role: "President",
     image: "/images/1.jpg",
   },
   { name: "Tommy", role: "Vice-President", image: "/images/tommy.png" },
-  { name: "Lis", role: "Secretary", image: "" },
+  { name: "Lis", role: "Secretary", image: "/images/lis.png" },
 ];
 
 const FinanceBoard: Person[] = [
-  { name: "Lizbeth", role: "VP of Marketing", image: "" },
-  { name: "Sienna Hilland", role: "Head of Marketing", image: "" },
-  { name: "Bob", role: "Secretary", image: "" },
+  { name: "Colin", role: "Head of Marketing", image: "/images/colin.png" },
 ];
 
 const MarketingBoard: Person[] = [
   { name: "Lizbeth", role: "VP of Marketing", image: "" },
   { name: "Sienna Hilland", role: "Head of Marketing", image: "" },
-  { name: "Bob", role: "Secretary", image: "" },
 ];
 
 const EventsBoard: Person[] = [
-  { name: "Cassidy Zanger", role: "VP of Membership", image: "" },
-  { name: "Maria Vega", role: "VP of Events", image: "" },
-  { name: "Bob", role: "Secretary", image: "" },
+  {
+    name: "Cassidy Zanger",
+    role: "VP of Membership",
+    image: "/images/cassidy.jpg",
+  },
+  { name: "Maria Vega", role: "VP of Events", image: "/images/maria.JPG" },
 ];
 
 function TeamContainers({ arr }: PersonArrayProp) {
@@ -52,7 +52,7 @@ function TeamContainers({ arr }: PersonArrayProp) {
               <img
                 src={a.image}
                 // alt={"Picture of " + a.name}
-                className="w-30 h-30 bg-pink-300 rounded object-cover"
+                className="w-30 h-30 min-w-30 min-h-30 bg-pink-300 rounded object-cover"
               />
               <h2 className="font-semibold">{a.name}</h2>
               <p className="text-sm">{a.role}</p>
