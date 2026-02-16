@@ -1,19 +1,61 @@
-function TeamContainers() {
+interface Person {
+  name: string;
+  role: string;
+  image: string;
+}
+
+interface PersonArrayProp {
+  arr: Person[];
+}
+
+const ExecutiveBoard: Person[] = [
+  {
+    name: "Dani",
+    role: "President",
+    image: "/images/1.jpg",
+  },
+  { name: "Tommy", role: "Vice-President", image: "/images/tommy.png" },
+  { name: "Lis", role: "Secretary", image: "" },
+];
+
+const FinanceBoard: Person[] = [
+  { name: "Lizbeth", role: "VP of Marketing", image: "" },
+  { name: "Sienna Hilland", role: "Head of Marketing", image: "" },
+  { name: "Bob", role: "Secretary", image: "" },
+];
+
+const MarketingBoard: Person[] = [
+  { name: "Lizbeth", role: "VP of Marketing", image: "" },
+  { name: "Sienna Hilland", role: "Head of Marketing", image: "" },
+  { name: "Bob", role: "Secretary", image: "" },
+];
+
+const EventsBoard: Person[] = [
+  { name: "Cassidy Zanger", role: "VP of Membership", image: "" },
+  { name: "Maria Vega", role: "VP of Events", image: "" },
+  { name: "Bob", role: "Secretary", image: "" },
+];
+
+function TeamContainers({ arr }: PersonArrayProp) {
   return (
     <>
       <div className="flex gap-5 py-3">
         {/* team member vvv */}
 
         {/* testing how it looks :D */}
-        {[0, 0, 0, 0, 0, 0].map((a, index) => {
+        {arr.map((a, index) => {
           return (
             <div
               key={index}
               className="flex flex-col [&_h2]:text-[#656565] [&_p]:text-[#656565]"
             >
-              <div className="w-30 h-30 bg-pink-300 rounded"></div>
-              <h2 className="font-semibold">Dany</h2>
-              <p className="text-sm">President</p>
+              <img
+                src={a.image}
+                // alt={"Picture of " + a.name}
+                className="w-30 h-30 bg-pink-300 rounded object-cover"
+              />
+              <h2 className="font-semibold">{a.name}</h2>
+              <p className="text-sm">{a.role}</p>
             </div>
           );
         })}
@@ -31,7 +73,7 @@ export default function Executive() {
           <h1 className="font-bold text-3xl ">Executive Board</h1>
         </div>
 
-        {TeamContainers()}
+        <TeamContainers arr={ExecutiveBoard} />
       </div>
 
       <div className="block">
@@ -39,7 +81,7 @@ export default function Executive() {
           <h1 className="font-bold text-3xl ">Finance</h1>
         </div>
 
-        {TeamContainers()}
+        <TeamContainers arr={FinanceBoard} />
       </div>
 
       <div className="block">
@@ -47,7 +89,7 @@ export default function Executive() {
           <h1 className="font-bold text-3xl ">Marketing</h1>
         </div>
 
-        {TeamContainers()}
+        <TeamContainers arr={MarketingBoard} />
       </div>
 
       <div className="block">
@@ -55,7 +97,7 @@ export default function Executive() {
           <h1 className="font-bold text-3xl ">Events</h1>
         </div>
 
-        {TeamContainers()}
+        <TeamContainers arr={EventsBoard} />
       </div>
     </div>
   );
