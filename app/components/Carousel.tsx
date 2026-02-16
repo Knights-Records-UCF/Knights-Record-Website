@@ -28,13 +28,13 @@ export default function Carousel() {
             <div className="grid grid-cols-4 gap-25 ">
                 {announcementsArr.map((announcement, index) => (
                     <div key={index} className="w-60">
-                        <h1 className="text-[#656565] text-[14px] font-medium"> 
+                        <h1 className="text-[#656565] text-[14px] font-525"> 
                             {announcement.title}
                         </h1>
-                        <p className="text-[#656565] w-48 text-[14px] text-left leading-none">
+                        <p className="text-[#656565] w-52 text-[14px] text-left leading-none">
                             {announcement.description}
                         </p>
-                        <div className={`${announcement.bgColor} mt-1 h-42 w-60  rounded-xl`} />
+                        <div className={`${announcement.bgColor} mt-1.5 h-42 w-60  rounded-xl`} />
                     </div>
                 ))}
             </div>
