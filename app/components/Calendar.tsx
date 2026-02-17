@@ -67,11 +67,20 @@ export default function Calendar() {
     }, []);
 
     // Setup date
+    /*
+     * Note that this works fine rn because Feb and March both start on
+     * Sunday, but we'll need way of adding blank blocks to make sure the 1st
+     * of the month is accurate
+     * Ex: Apr 1st is Wed so 1 should be placed in Wed col and
+     * Sun, Mon, & Tue in row 1 should be blank cells 
+     * 'startWeekday' will have to be utilized to achieve this im p sure
+     */
     const currentDate = new Date(); // Mon Feb 16 2026 13:08:56 GMT-0500 (Eastern Standard Time)
     const currentYear = currentDate.getFullYear(); // 2026 
     const currentMonth = currentDate.getMonth(); // 0 = Jan, 1 = Feb, ... 11 = Dec // 0
     const firstDayOfMonth = new Date(currentYear, currentMonth, 1); // Sun Feb 01 2026
-    const startWeekday = firstDayOfMonth.getDay();
+    const startWeekday = firstDayOfMonth.getDay(); // 0, Sunday
+    // console.log(startWeekday); 
     const lastDayOfMonth = new Date(currentYear, currentMonth + 1, 0); // Sat Feb 28 2026
 
     const monthArr = [];
@@ -90,6 +99,7 @@ export default function Calendar() {
             </div>
             */}
 
+            {/* Make a skeleton loader at some point for cleaner animations later */}
             {loading && (<p> loading </p>)}
             {!loading && (
 

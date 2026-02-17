@@ -1,42 +1,47 @@
-// Temp array, we gonna use a db later
-const announcementsArr = [
-    {
-        title: "Next meeting",
-        description: "hello oijdoifjaoidsjfo jasdof fdosfj osdjfosd",
-        bgColor: "bg-[#E18181]",
-    },
-    {
-        title: "Workshop!!!",
-        description: "hello oijdoifjaoidsjfo jasdof fdosfj osdjfosd",
-        bgColor: "bg-[#17A1FA]",
-    },
-    {
-        title: "Super cool social",
-        description: "hello oijdoifjaoidsjfo jasdof fdosfj osdjfosd",
-        bgColor: "bg-[#8AFFC8]",
-    },
-    {
-        title: "Helo guys!!!!",
-        description: "hello oijdoifjaoidsjfo jasdof fdosfj osdjfosd",
-        bgColor: "bg-[#1C7049]",
-    }
-]
+"use client";
+import { useState } from "react";
 
-export default function Carousel() {
+interface announcement {
+    title: string;
+    description: string;
+    bgColor: string;
+}
+
+
+export default function Carousel({ children }: { children: announcement[] }) {
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    function prev() {
+        setCurrentIndex(currentIndex === 0 ? children.length - 1 : currentIndex - 1)
+    }
+
+    function next() {
+        setCurrentIndex(currentIndex === children.length - 1 ? 0 : currentIndex + 1)
+    }
     return (
-        <div>
-            <div className="grid grid-cols-4 gap-25 ">
-                {announcementsArr.map((announcement, index) => (
+        <div className="overflow-hidden relative">
+            <div className="flex flex-row gap-4 transition-transform ease-out duration-500" style={{ transform: `translateX(-${currentIndex * 50}%)` }}>
+                {children.map((child, index) => (
                     <div key={index} className="w-60">
-                        <h1 className="text-[#656565] text-[14px] font-525"> 
-                            {announcement.title}
+                        <h1 className="text-[#656565] text-[14px] font-525">
+                            {child.title}
                         </h1>
-                        <p className="text-[#656565] w-52 text-[14px] text-left leading-none">
-                            {announcement.description}
+                        <p className="text-[#656565] w-52 text-[14px] text-left leading-none line-clamp-2">
+                            {child.description}
                         </p>
-                        <div className={`${announcement.bgColor} mt-1.5 h-42 w-60  rounded-xl`} />
+                        <div className={`${child.bgColor} mt-1.5 h-42 w-60  rounded-xl`} />
                     </div>
                 ))}
+            </div>
+            <div className="absolute inset-0 flex items-center justify-between p-4">
+                <button
+                    onClick={prev}>
+                    {'<'}
+                </button>
+                <button
+                    onClick={next}>
+                    {'>'}
+                </button>
             </div>
         </div>
     )
