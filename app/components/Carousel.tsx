@@ -7,20 +7,47 @@ interface announcement {
     bgColor: string;
 }
 
-
 export default function Carousel({ children }: { children: announcement[] }) {
-    const [currentIndex, setCurrentIndex] = useState(0);
+    const [currSlide, setCurrSlide] = useState(0);
 
     function prev() {
-        setCurrentIndex(currentIndex === 0 ? children.length - 1 : currentIndex - 1)
+        setCurrSlide(currSlide === 0 ? children.length - 1 : currSlide - 1)
     }
 
     function next() {
-        setCurrentIndex(currentIndex === children.length - 1 ? 0 : currentIndex + 1)
+        // >= just for flexibility between showcasing two announcements at a time or just one, depends on what we wanna do
+        setCurrSlide(currSlide >= children.length - 1 ? 0 : currSlide + 1) 
     }
+
+    function tempButton() {
+        return (
+            <div className="flex flex-row gap-2">
+                <button
+                    onClick={prev}>
+                    {'<'}
+                </button>
+                <button
+                    onClick={next}>
+                    {'>'}
+                </button>
+            </div>
+        )
+    }
+
     return (
         <div className="overflow-hidden relative">
-            <div className="flex flex-row gap-4 transition-transform ease-out duration-500" style={{ transform: `translateX(-${currentIndex * 50}%)` }}>
+            <div className="flex mt-2 items-center ">
+                <h1 className=" text-[#656565] font-[525] text-3xl">
+                    Announcements
+                </h1>
+                <div className="ml-2">
+                    {tempButton()}
+                </div>
+            </div>
+            <div className="border border-[#D9D9D9] mb-0.5" />
+            <div className="flex flex-row gap-4 transition-transform ease-out duration-500"
+                 style={{ transform: `translateX(-${(currSlide * 256)}px)`}} // 256 bc w-60 + gap-4 omggggg
+            >
                 {children.map((child, index) => (
                     <div key={index} className="w-60">
                         <h1 className="text-[#656565] text-[14px] font-525">
@@ -32,16 +59,6 @@ export default function Carousel({ children }: { children: announcement[] }) {
                         <div className={`${child.bgColor} mt-1.5 h-42 w-60  rounded-xl`} />
                     </div>
                 ))}
-            </div>
-            <div className="absolute inset-0 flex items-center justify-between p-4">
-                <button
-                    onClick={prev}>
-                    {'<'}
-                </button>
-                <button
-                    onClick={next}>
-                    {'>'}
-                </button>
             </div>
         </div>
     )
