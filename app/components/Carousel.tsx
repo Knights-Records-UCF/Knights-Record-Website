@@ -8,18 +8,35 @@ interface announcement {
 }
 
 export default function Carousel({ children }: { children: announcement[] }) {
-    const [currSlide, setCurrSlide] = useState(0);
+    const [visibleAnnouncement, setVisibleAnnouncement] = useState(0);
+    const [currAnnouncement, setCurrAnnouncement] = useState(0);
+    const [showModal, setShowModal] = useState(false);
+
+    function Modal({ announcement }: { announcement: announcement }) {
+        return (
+            <div className="fixed text-center border  ">
+                <h2 className="">{announcement.title}</h2>
+                <p className="">{announcement.description}</p>
+                <button
+                    onClick={() => setShowModal(false)}
+                >
+                    Close
+                </button>
+            </div>
+        )
+    }
 
     function prev() {
-        setCurrSlide(currSlide === 0 ? children.length - 1 : currSlide - 1)
+        setVisibleAnnouncement(visibleAnnouncement === 0 ? children.length - 1 : visibleAnnouncement - 1)
     }
 
     function next() {
         // >= just for flexibility between showcasing two announcements at a time or just one, depends on what we wanna do
-        setCurrSlide(currSlide >= children.length - 1 ? 0 : currSlide + 1) 
+        setVisibleAnnouncement(visibleAnnouncement >= children.length - 1 ? 0 : visibleAnnouncement + 1)
     }
 
-    function tempButton() {
+    // Find icons for this button later
+    function TempButton() {
         return (
             <div className="flex flex-row gap-2">
                 <button
@@ -41,12 +58,13 @@ export default function Carousel({ children }: { children: announcement[] }) {
                     Announcements
                 </h1>
                 <div className="ml-2">
-                    {tempButton()}
+                    <TempButton />
                 </div>
             </div>
             <div className="border border-[#D9D9D9] mb-0.5" />
-            <div className="flex flex-row gap-4 transition-transform ease-out duration-500"
-                 style={{ transform: `translateX(-${(currSlide * 256)}px)`}} // 256 bc w-60 + gap-4 omggggg
+            <div
+                className="flex flex-row gap-4 transition-transform ease-out duration-500"
+                style={{ transform: `translateX(-${(visibleAnnouncement * 256)}px)` }} // 256 bc w-60 + gap-4 omggggg
             >
                 {children.map((child, index) => (
                     <div key={index} className="w-60">
@@ -56,10 +74,19 @@ export default function Carousel({ children }: { children: announcement[] }) {
                         <p className="text-[#656565] w-52 text-[14px] text-left leading-none line-clamp-2">
                             {child.description}
                         </p>
-                        <div className={`${child.bgColor} mt-1.5 h-42 w-60  rounded-xl`} />
+                        <div
+                            className={`${child.bgColor} mt-1.5 h-42 w-60  rounded-xl`}
+                            onClick={() => {
+                                setShowModal(true);
+                                setCurrAnnouncement(index);
+                            }}
+                        />
                     </div>
                 ))}
             </div>
+            {showModal &&
+                <Modal announcement={children[currAnnouncement]} />
+            }
         </div>
     )
 }

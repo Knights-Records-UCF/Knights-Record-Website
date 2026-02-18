@@ -12,7 +12,7 @@ interface announcement {
 const announcementsArr : announcement[] = [
     {
         title: "Next meeting",
-        description: "hello oijdoifjaoidsjfo jasdof fdosfj osdjfosd",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget ultricies lacinia, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc.",
         bgColor: "bg-[#E18181]",
     },
     {
