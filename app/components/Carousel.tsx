@@ -14,14 +14,24 @@ export default function Carousel({ children }: { children: announcement[] }) {
 
     function Modal({ announcement }: { announcement: announcement }) {
         return (
-            <div className="fixed text-center border  ">
-                <h2 className="">{announcement.title}</h2>
-                <p className="">{announcement.description}</p>
-                <button
-                    onClick={() => setShowModal(false)}
+            <div
+                className="fixed inset-0 z-50 flex p-4 items-center text-center justify-center bg-black/10"
+                onClick={() => setShowModal(false)}
+            >
+                <div
+                    className="w-100 h-100 bg-white rounded-xl  shadow-2xl drop-shadow-2xl flex flex-col items-center"
+                    onClick={(e) => e.stopPropagation()}
                 >
-                    Close
-                </button>
+                    <div className=" flex w-full justify-center">
+                        <h2 className="text-2xl font-bold text-[#656565] p-2 w-[90%] ">{announcement.title} </h2>
+                        <button
+                            className="font-bold text-[#656565]/90 hover:text-black transition-all duration-300 ease-in-out"
+                            onClick={() => setShowModal(false)}> X
+                        </button>
+                    </div>
+                    <div className={`w-full h-full ${announcement.bgColor}`} />
+                    <p className="text-[#656565] h-24 p-2">{announcement.description}</p>
+                </div>
             </div>
         )
     }

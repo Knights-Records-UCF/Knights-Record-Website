@@ -1,3 +1,17 @@
+type CalendarEvent = {
+    id: string;
+    summary: string;
+    description: string;
+    // add the time 
+    
+}
+
+
+type CalendarResponse = {
+    items: CalendarEvent[];
+}
+
+
 export async function GET() {
     const apiKey = process.env.GOOGLE_API_KEY;
     const calendarId = process.env.GOOGLE_CALENDAR_ID;
