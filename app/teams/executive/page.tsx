@@ -71,7 +71,7 @@ function TeamContainers({ arr }: PersonArrayProp) {
 export default function Executive() {
   return (
     <div className="[&>div:not(.fatHeader)]:py-2 gap-2 w-full px-10 [&_h1]:text-[#656565]">
-      <div className="py-10 fatHeader"></div>
+      <div className="py-5 fatHeader"></div>
       <div className="block">
         <div className="w-full border-b-[1.5px] border-gray-300 ">
           <h1 className="font-bold text-3xl ">Executive Board</h1>
