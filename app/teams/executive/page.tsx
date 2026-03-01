@@ -24,7 +24,11 @@ const FinanceBoard: Person[] = [
 
 const MarketingBoard: Person[] = [
   { name: "Lizbeth", role: "VP of Marketing", image: "" },
-  { name: "Sienna Hilland", role: "Head of Marketing", image: "" },
+  {
+    name: "Sienna Hilland",
+    role: "Head of Marketing",
+    image: "/images/sienna.png",
+  },
 ];
 
 const EventsBoard: Person[] = [
@@ -69,7 +73,7 @@ export default function Executive() {
     <div className="[&>div:not(.fatHeader)]:py-2 gap-2 w-full px-10 [&_h1]:text-[#656565]">
       <div className="py-10 fatHeader"></div>
       <div className="block">
-        <div className="w-full border-b-2 border-gray-300 ">
+        <div className="w-full border-b-[1.5px] border-gray-300 ">
           <h1 className="font-bold text-3xl ">Executive Board</h1>
         </div>
 
@@ -77,7 +81,7 @@ export default function Executive() {
       </div>
 
       <div className="block">
-        <div className="w-full border-b-2 border-gray-300 ">
+        <div className="w-full border-b-[1.5px] border-gray-300 ">
           <h1 className="font-bold text-3xl ">Finance</h1>
         </div>
 
@@ -85,7 +89,7 @@ export default function Executive() {
       </div>
 
       <div className="block">
-        <div className="w-full border-b-2 border-gray-300 ">
+        <div className="w-full border-b-[1.5px] border-gray-300 ">
           <h1 className="font-bold text-3xl ">Marketing</h1>
         </div>
 
@@ -93,7 +97,7 @@ export default function Executive() {
       </div>
 
       <div className="block">
-        <div className="w-full border-b-2 border-gray-300 ">
+        <div className="w-full border-b-[1.5px] border-gray-300 ">
           <h1 className="font-bold text-3xl ">Events</h1>
         </div>
 
