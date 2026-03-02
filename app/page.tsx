@@ -7,6 +7,20 @@ interface Announcement {
     bgColor: string;
 }
 
+const months = [
+    "January", // 0 
+    "February",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December", // 11
+]
+
 // Temp array, we gonna use a db later
 const announcementsArr : Announcement[] = [
     {
@@ -50,7 +64,7 @@ export default function Home() {
       <Carousel announcement={announcementsArr} />
       <div className="mt-12">
         <h1 className="font-[525] text-2xl text-left text-[#656565]">
-          February <span className="text-xl font-normal text-[#656565]/50"> 2026</span>
+          {`${months[new Date().getMonth()]}`} <span className="text-xl font-normal text-[#656565]/50"> 2026</span>
         </h1>
         <div className="border border-[#D9D9D9] mb-4" />
         <Calendar />

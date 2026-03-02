@@ -1,10 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
 
-const monthNames = [
-    "January",
+const months = [
+    "January", // 0 
     "February",
-    "March", "April",
+    "March",
+    "April",
     "May",
     "June",
     "July",
@@ -12,7 +13,7 @@ const monthNames = [
     "September",
     "October",
     "November",
-    "December",
+    "December", // 11
 ]
 
 const weekDays = [
@@ -46,10 +47,19 @@ export default function Calendar() {
 
                 const data: CalendarResponse = await res.json();
 
-                console.log("Entire calendar json", data)
+                // console.log("Entire calendar json", data)
 
-                console.log("single event", data.items[0]);
+                // console.log("single event", data.items[0]);
 
+                const GClength = data.items.length;
+
+                console.log(GClength); // 5
+
+
+
+                // 
+
+                // dateTesting(GClength, data, currDate);
                 setEvents(data.items);
             }
             catch (error) {
@@ -65,58 +75,112 @@ export default function Calendar() {
 
     }, []);
 
-    // Setup date
-    /*
-     * Note that this works fine rn because Feb and March both start on
-     * Sunday, but we'll need way of adding blank blocks to make sure the 1st
-     * of the month is accurate
-     * Ex: Apr 1st is Wed so 1 should be placed in Wed col and
-     * Sun, Mon, & Tue in row 1 should be blank cells 
-     * 'startWeekday' will have to be utilized to achieve this im p sure
-     */
-    const currentDate = new Date(); // Mon Feb 16 2026 13:08:56 GMT-0500 (Eastern Standard Time)
-    const currentYear = currentDate.getFullYear(); // 2026 
-    const currentMonth = currentDate.getMonth(); // 0 = Jan, 1 = Feb, ... 11 = Dec // 0
-    const firstDayOfMonth = new Date(currentYear, currentMonth, 1); // Sun Feb 01 2026
-    const startWeekday = firstDayOfMonth.getDay(); // 0, Sunday
-    // console.log(startWeekday); 
-    const lastDayOfMonth = new Date(currentYear, currentMonth + 1, 0); // Sat Feb 28 2026
+    // Just outputs the events, and whether they are in the past or future compared to the current date
+    function dateTesting(length: number, data: CalendarResponse, currDate: Date) {
+        for (let i = 0; i < length; i++) {
+            let GCDate: Date;
+            // output date and datetime
+            // Date corresponds to a full day event
+            // Datetime corresponds to the specific time
+            if (data.items[i].start.dateTime) {
+                console.log(`Datetime of event ${i} which is ${data.items[i].summary}: ${data.items[i].start.dateTime}`);
 
-    const monthArr = [];
+                GCDate = new Date(data.items[i].start.dateTime);
+                console.log(`DateTime object: ${GCDate}`);
+            }
+            else {
+                console.log(`This is a full day event (${i}) "${data.items[i].summary}" and the date is ${data.items[i].start.date}`);
+                GCDate = new Date(data.items[i].start.date);
+                console.log(`Date object: ${GCDate}`);
+            }
 
-    for (let i = 1; i < lastDayOfMonth.getDate() + 1; i++) {
-        monthArr.push(i)
+            console.log(`${GCDate > currDate}`); // Outputs true if date is in future, otherwise false
+
+        }
     }
 
-    return (
-        <div className="border-2 border-[#D0D0D0]">
-            {/* Ugly
-            <div className="flex justify-center">
-                <h1 className=" text-center p-2 text-sm mt-2 bg-black text-white rounded-lg ">
-                    {monthNames[currentMonth]}
-                </h1>
-            </div>
-            */}
 
-            {/* Make a skeleton loader at some point for cleaner animations later */}
-            {loading && (<p> loading </p>)}
-            {!loading && (
 
-                // Calendar Grid
-                <div className="grid grid-cols-7 mt-2">
-                    {weekDays.map((day) => (
-                        <h2 key={day} className="text-lg ml-2 text-[#858585]">{day}</h2>
-                    ))}
 
-                {/* Day of the month */}
-                    {monthArr.map((day) => {
+    function dayMappingTest() {
+
+    }
+
+
+    function oldCalendarSetup() {
+        <div className="grid grid-cols-7 mt-2">
+            {weekDays.map((day) => (
+                <h2 key={day} className="text-lg ml-2 text-[#858585]">{day}</h2>
+            ))}
+
+            {/* Day of the month */}
+            {/* {monthArr.map((day) => {
                         return (
                             <div className="border-t border-[#f2f2f7] border-b w-32 h-32" key={day}>
                                 <p className="ml-3 mt-2 ">{day}</p>
                             </div>
                         );
                     })}
+                    */}
+        </div>
+    }
+
+    console.log("------------------------------------------------------------");
+    const currDate = new Date("April 3, 2026"); // Current date and time
+    const currMonth = currDate.getMonth(); // 0-11
+    console.log(`The current date is: ${currDate}`)
+    console.log(`The month is ${months[currMonth]}`); 
+
+    const lastOfMonth = new Date(currDate.getFullYear(), currDate.getMonth() + 1, 0);
+
+    console.log(`The last day of the month of ${months[currDate.getMonth()]} is ${lastOfMonth}`);
+    console.log(`The index of the last weekday of the month is: ${lastOfMonth.getDay()} and that weekday is ${weekDays[lastOfMonth.getDay()]}`);
+
+
+    // This is the first day of april
+    const firstOfMonth = new Date(currDate.getFullYear(), currDate.getMonth(), 1);
+
+    console.log(`The first day of the month of ${months[currMonth]} is ${firstOfMonth}`);
+    console.log(`The index of the first weekday of the month is ${firstOfMonth.getDay()} and that weekday is ${weekDays[firstOfMonth.getDay()]}`);
+
+    const totalDays = lastOfMonth.getDate();
+    console.log(`For the month of ${months[currDate.getMonth()]}, there are a total of ${totalDays} days`);
+
+    const calendarCells = []
+
+    for (let i = 0; i < firstOfMonth.getDay(); i++) {
+        calendarCells.push(null);
+    }
+
+
+    for (let i = 1; i < totalDays; i++) {
+        calendarCells.push(i);
+    }
+
+    console.log(`${calendarCells}`); 
+
+
+    return (
+        <div className="border-2 border-[#D0D0D0]">
+
+            {/* Make a skeleton loader at some point for cleaner animations later */}
+            {loading && (<p> loading </p>)}
+            {!loading && (
+                // Calendar grid, DONT WORRY ABOUT TWO NULL  KEYS FOR NOW THIS DONT MATTER 
+                <div className="grid grid-cols-7 mt-2">
+                    {weekDays.map((day) => (
+                        <h2 key={day} className="text-lg ml-2 text-[#858585]">{day}</h2>
+                    ))}
+                    {calendarCells.map((day) => {
+                        return (
+                            <div className="border-t border-[#f2f2f7] border-b w-32 h-32" key={day}>
+                                <p className="ml-3 mt-2 ">{day}</p>
+                            </div>
+                        );
+                    })}
+
                 </div>
+
             )}
         </div>
     )
