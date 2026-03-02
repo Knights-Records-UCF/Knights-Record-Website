@@ -55,6 +55,9 @@ export default function Calendar() {
 
                 console.log(GClength); // 5
 
+                console.log("++++++++++++++++++++++++++++++++++++++");
+                dateTesting(GClength, data, currDate);
+
 
 
                 // 
@@ -79,19 +82,32 @@ export default function Calendar() {
     function dateTesting(length: number, data: CalendarResponse, currDate: Date) {
         for (let i = 0; i < length; i++) {
             let GCDate: Date;
+            let GCDateDay : number;
             // output date and datetime
             // Date corresponds to a full day event
             // Datetime corresponds to the specific time
             if (data.items[i].start.dateTime) {
+
                 console.log(`Datetime of event ${i} which is ${data.items[i].summary}: ${data.items[i].start.dateTime}`);
+                
 
                 GCDate = new Date(data.items[i].start.dateTime);
                 console.log(`DateTime object: ${GCDate}`);
+
+                GCDateDay = GCDate.getDate();
+                console.log(`The day of the month of the event, ${data.items[i].summary} is ${GCDateDay}`);
+                
             }
             else {
+
                 console.log(`This is a full day event (${i}) "${data.items[i].summary}" and the date is ${data.items[i].start.date}`);
+
                 GCDate = new Date(data.items[i].start.date);
                 console.log(`Date object: ${GCDate}`);
+
+
+                GCDateDay = GCDate.getDate();
+                console.log(`The day of the month of the event, ${data.items[i].summary} is ${GCDateDay}`);
             }
 
             console.log(`${GCDate > currDate}`); // Outputs true if date is in future, otherwise false
@@ -100,32 +116,7 @@ export default function Calendar() {
     }
 
 
-
-
-    function dayMappingTest() {
-
-    }
-
-
-    function oldCalendarSetup() {
-        <div className="grid grid-cols-7 mt-2">
-            {weekDays.map((day) => (
-                <h2 key={day} className="text-lg ml-2 text-[#858585]">{day}</h2>
-            ))}
-
-            {/* Day of the month */}
-            {/* {monthArr.map((day) => {
-                        return (
-                            <div className="border-t border-[#f2f2f7] border-b w-32 h-32" key={day}>
-                                <p className="ml-3 mt-2 ">{day}</p>
-                            </div>
-                        );
-                    })}
-                    */}
-        </div>
-    }
-
-    console.log("------------------------------------------------------------");
+    console.log("--------------------------------------");
     const currDate = new Date("April 3, 2026"); // Current date and time
     const currMonth = currDate.getMonth(); // 0-11
     console.log(`The current date is: ${currDate}`)
@@ -146,6 +137,10 @@ export default function Calendar() {
     const totalDays = lastOfMonth.getDate();
     console.log(`For the month of ${months[currDate.getMonth()]}, there are a total of ${totalDays} days`);
 
+
+
+
+    // For creating the calendar 
     const calendarCells = []
 
     for (let i = 0; i < firstOfMonth.getDay(); i++) {
@@ -153,7 +148,7 @@ export default function Calendar() {
     }
 
 
-    for (let i = 1; i < totalDays; i++) {
+    for (let i = 1; i < totalDays + 1; i++) {
         calendarCells.push(i);
     }
 
@@ -174,7 +169,18 @@ export default function Calendar() {
                     {calendarCells.map((day) => {
                         return (
                             <div className="border-t border-[#f2f2f7] border-b w-32 h-32" key={day}>
-                                <p className="ml-3 mt-2 ">{day}</p>
+                                <p className="ml-3 mt-2 ">{day} </p>
+                                {events.map((event) => {
+                                    let eventDate: Date;
+                                    if (event.start.dateTime) {
+                                        eventDate = new Date(event.start.dateTime);
+                                    } else {
+                                        eventDate = new Date(event.start.date);
+                                    }
+                                    if (eventDate.getDate() === day) {
+                                        return <p className="">{event.summary}</p>;
+                                    }
+                                })}
                             </div>
                         );
                     })}
