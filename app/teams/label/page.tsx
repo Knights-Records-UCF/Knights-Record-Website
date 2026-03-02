@@ -23,8 +23,6 @@ const LabelManagement: Person[] = [
 
 const LabelMarketing: Person[] = [
   { name: "Anen Jamir", role: "Social Media Assistant", image: "" },
-  { name: "Diana Ramon", role: "Social Media Assistant", image: "" },
-  { name: "Siddh Gandhi", role: "Social Media Assistant", image: "" },
   { name: "Mio Raimondi", role: "Social Media Assistant", image: "" },
 ];
 
@@ -32,7 +30,6 @@ const ArtistRepertoire: Person[] = [
   { name: "Gabby Govantez", role: "A&R Manager", image: "" },
   { name: "Paulina Diaz", role: "A&R Manager", image: "/images/paulina.png" },
   { name: "Ariah Claude", role: "A&R Manager", image: "/images/ariah.png" },
-  { name: "Jorge", role: "A&R Assistant", image: "" },
 ];
 
 const ArtistPromotions: Person[] = [
@@ -55,6 +52,12 @@ const ConcertManagement: Person[] = [
     image: "/images/lauren.jpeg",
   },
   { name: "Mikayla Chu", role: "Concert Productions Assistant", image: "" },
+];
+
+const Creative: Person[] = [
+  {
+    name: "Elliot Gunn", role: "Social Media Assistant", image: "/images/elliot_irl.jpeg",
+  },
 ];
 
 function TeamContainers({ arr }: PersonArrayProp) {
@@ -127,6 +130,14 @@ export default function Executive() {
         </div>
 
         <TeamContainers arr={ConcertManagement} />
+      </div>
+
+      <div className="block">
+        <div className="w-full border-b-[1.5px] border-gray-300 ">
+          <h1 className="font-bold text-3xl ">Creative</h1>
+        </div>
+
+        <TeamContainers arr={Creative} />
       </div>
     </div>
   );
