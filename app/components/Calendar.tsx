@@ -117,7 +117,7 @@ export default function Calendar() {
 
 
     console.log("--------------------------------------");
-    const currDate = new Date(); // Current date and time
+    const currDate = new Date( ); // Current date and time
     const currMonth = currDate.getMonth(); // 0-11
     console.log(`The current date is: ${currDate}`)
     console.log(`The month is ${months[currMonth]}`);
@@ -158,7 +158,6 @@ export default function Calendar() {
 
 
     return (
-        // Reference: https://www.icloud.com/calendar/
         <div className="border-2 border-[#D0D0D0]">
 
             {/* Make a skeleton loader at some point for cleaner animations later */}
@@ -170,6 +169,7 @@ export default function Calendar() {
                         <h2 key={day} className="text-lg ml-2 text-[#858585]">{day}</h2>
                     ))}
                     {calendarCells.map((day) => {
+                        // if (day == new Date().getDay())
                         return (
                             <div className="border-t border-[#f2f2f7] border-b w-32 h-32" key={day}>
                                 <p className="ml-3 mt-2 ">{day} </p>
@@ -180,13 +180,33 @@ export default function Calendar() {
                                     } else {
                                         eventDate = new Date(event.start.date);
                                     }
+
+                                    let time = eventDate.toLocaleTimeString("en-US");
+                                    let TOD = time.slice(-2); // Time of day (AM/PM)
+                                    console.log(`The time is currently ${time}`);
+                                    console.log(`${time.length} is the length of the time string`);
+
+                                    if (time.length == 10) { // 9:30:00 PM
+                                        console.log(`Time is: ${time.slice(0, 4)}`);
+                                        console.log(TOD);
+                                        console.log(`Formatted time is: ${time.slice(0,4)} ${TOD}`);
+                                        time = time.slice(0,4);
+                                    }
+                                    else { // 10:30:00 PM
+                                        console.log(`Time is: ${time.slice(0,5)}`);
+                                        console.log(TOD);
+                                        console.log(`Formatted time is: ${time.slice(0,5)} ${TOD}`)
+                                        time = time.slice(0,5);
+                                    }
+                                    
+
                                     if (eventDate.getDate() === day) {
                                         return (
                                             <button 
-                                                className="flex flex-row items-center mt-1 group focus:bg-[#E18181] rounded-sm"
+                                                className="flex flex-row items-center mt-1 w-32 group focus:bg-[#E18181] rounded-sm h-4"
                                             >
                                                  <div className="ml-1 w-2 h-2 shrink-0 bg-[#E18181] group-focus:bg-white rounded-full "/>
-                                                 <p className="text-left pl-1 text-xs line-clamp-1">{event.summary}</p>
+                                                 <p className="text-left pl-1 text-xs line-clamp-1">{event.summary} <span className="text-[9px] text-[#858585] group-focus:text-black ml-6">{time} {TOD}</span></p>
                                             </button>
                                         );
                                     }
