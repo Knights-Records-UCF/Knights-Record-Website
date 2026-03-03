@@ -82,21 +82,21 @@ export default function Calendar() {
     function dateTesting(length: number, data: CalendarResponse, currDate: Date) {
         for (let i = 0; i < length; i++) {
             let GCDate: Date;
-            let GCDateDay : number;
+            let GCDateDay: number;
             // output date and datetime
             // Date corresponds to a full day event
             // Datetime corresponds to the specific time
             if (data.items[i].start.dateTime) {
 
                 console.log(`Datetime of event ${i} which is ${data.items[i].summary}: ${data.items[i].start.dateTime}`);
-                
+
 
                 GCDate = new Date(data.items[i].start.dateTime);
                 console.log(`DateTime object: ${GCDate}`);
 
                 GCDateDay = GCDate.getDate();
                 console.log(`The day of the month of the event, ${data.items[i].summary} is ${GCDateDay}`);
-                
+
             }
             else {
 
@@ -117,10 +117,10 @@ export default function Calendar() {
 
 
     console.log("--------------------------------------");
-    const currDate = new Date("April 3, 2026"); // Current date and time
+    const currDate = new Date(); // Current date and time
     const currMonth = currDate.getMonth(); // 0-11
     console.log(`The current date is: ${currDate}`)
-    console.log(`The month is ${months[currMonth]}`); 
+    console.log(`The month is ${months[currMonth]}`);
 
     const lastOfMonth = new Date(currDate.getFullYear(), currDate.getMonth() + 1, 0);
 
@@ -152,16 +152,19 @@ export default function Calendar() {
         calendarCells.push(i);
     }
 
-    console.log(`${calendarCells}`); 
+    console.log(`${calendarCells}`);
+
+    
 
 
     return (
+        // Reference: https://www.icloud.com/calendar/
         <div className="border-2 border-[#D0D0D0]">
 
             {/* Make a skeleton loader at some point for cleaner animations later */}
             {loading && (<p> loading </p>)}
             {!loading && (
-                // Calendar grid, DONT WORRY ABOUT TWO NULL  KEYS FOR NOW THIS DONT MATTER 
+                // Calendar grid, DONT WORRY ABOUT MULTIPLE CHILDREN W/ THE SAME NULL KEY FOR NOW THIS DONT MATTER 
                 <div className="grid grid-cols-7 mt-2">
                     {weekDays.map((day) => (
                         <h2 key={day} className="text-lg ml-2 text-[#858585]">{day}</h2>
@@ -178,7 +181,14 @@ export default function Calendar() {
                                         eventDate = new Date(event.start.date);
                                     }
                                     if (eventDate.getDate() === day) {
-                                        return <p className="">{event.summary}</p>;
+                                        return (
+                                            <button 
+                                                className="flex flex-row items-center mt-1 group focus:bg-[#E18181] rounded-sm"
+                                            >
+                                                 <div className="ml-1 w-2 h-2 shrink-0 bg-[#E18181] group-focus:bg-white rounded-full "/>
+                                                 <p className="text-left pl-1 text-xs line-clamp-1">{event.summary}</p>
+                                            </button>
+                                        );
                                     }
                                 })}
                             </div>
