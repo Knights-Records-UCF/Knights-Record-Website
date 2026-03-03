@@ -111,28 +111,14 @@ export default function Navbar() {
             </ul>
 
             {/* Footer */}
-            <div className="mt-auto pt-6 pb-5">
-            <div className="flex justify-center gap-1 mb-2">
-                {[
-                { Icon: RiInstagramFill, label: "Instagram",},
-                { Icon: IoLogoDiscord, label: "Discord",},
-                { Icon: IoLogoLinkedin, label: "LinkedIn",  },
-                { Icon: IoMail, label: "Email", },
-                ].map(({ Icon, label }) => (
-                <a
-                    key={label}
-                    href="#"
-                    aria-label={label}
-                    className="w-12 h-12 flex items-center justify-center text-[#B8B8B8] rounded-xl hover:bg-[#EBEBEB] transition"
-                >
-                    <Icon className="text-4xl" />
-                </a>
-                ))}
-            </div>
-
-            <div className="text-xs text-[#B8B8B8] flex justify-center">
-                @ 2026 Knights Records
-            </div>
+            <div className="mt-auto text-lg pt-6 pb-5">
+                <div className='flex justify-center gap-4 text-[#B8B8B8] mb-3 text-4xl'>
+                    <a href="#" ><RiInstagramFill /></a>
+                    <a href="#" ><IoLogoDiscord className="mt-0.5"/></a>
+                    <a href="#" ><IoLogoLinkedin className="mb-0.5" /></a>
+                    <a href="#" ><IoMail  /></a>
+                </div>
+                <div className="text-xs text-[#B8B8B8] flex justify-center">@ 2026 Knights Records</div>
             </div>
         </aside>
 
