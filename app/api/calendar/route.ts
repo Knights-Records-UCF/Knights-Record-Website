@@ -9,7 +9,7 @@ export async function GET() {
         `https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events?key=${apiKey}` +
         `&singleEvents=true` +
         `&orderBy=startTime` +
-        `&maxResults=10` +
+        `&maxResults=30` +
         `&timeMin=${new Date().toISOString()}`;
     
     const res = await fetch(url);

@@ -146,8 +146,8 @@ export default function Calendar() {
     const eventsPerDay: Record<number, CalendarEvent[]> = {};
 
     events.forEach((event) => {
-        let eventDate : Date;
-        
+        let eventDate: Date;
+
         // 24-hour event vs specified event length
         if (event.start.dateTime) {
             eventDate = new Date(event.start.dateTime);
@@ -175,7 +175,7 @@ export default function Calendar() {
             {loading && (<p> loading </p>)}
             {!loading && (
                 // Calendar grid, DONT WORRY ABOUT MULTIPLE CHILDREN W/ THE SAME NULL KEY FOR NOW THIS DONT MATTER 
-                <div className="grid grid-cols-7 mt-2">
+                <div className="grid grid-cols-7 mt-2 ml-4">
                     {weekDays.map((day) => (
                         <h2 key={day} className="text-lg ml-2 text-[#858585]">{day}</h2>
                     ))}
@@ -185,13 +185,21 @@ export default function Calendar() {
                             return null;
                         }
 
-                        const dayEvents = eventsPerDay[day] ?? []; // Returns either an event of 
+                        const dayEvents = eventsPerDay[day] ?? []; // Returns either an event of array objects or empty array
                         const eventCount = dayEvents.length;
                         console.log(`On day ${day} there are a total of ${eventCount} events`)
-                        
+
+                        const visibleEvents = eventCount
+                            <= 3 ? dayEvents
+                            : dayEvents.slice(0, 2); // Show only 2 events if there are more than 3, otherwise show all events
+
+                        console.log(`There are ${visibleEvents.length} visible events`)
+                        const remainingEvents = eventCount - visibleEvents.length; // The remaining events that aren't shown
+
                         return (
-                            <div className="border-t border-[#f2f2f7] border-b w-32 h-32" key={day}>
-                                {day === new Date().getDate() ? ( // Circle current day (someone double check if this is properly aligned please!)
+                            <div className="border-t border-[#f2f2f7] border-b w-32 h-24" key={day}>
+                                {/* Circle current day (someone double check if this is properly aligned please!)*/}
+                                {day === currDate.getDate() ? (
                                     <div className="w-7.5 h-7.5 bg-red-500 rounded-full ml-3 pl-1.25 pt-0.5 mt-1.5">
                                         <p className=" ">
                                             {day}
@@ -201,7 +209,8 @@ export default function Calendar() {
                                     <p className="ml-3 mt-2">{day}</p>
                                 )}
 
-                                {events.map((event) => {
+                                {/* Show Events */}
+                                {visibleEvents.map((event) => {
                                     let eventDate: Date;
 
                                     if (event.start.dateTime) {
@@ -228,25 +237,36 @@ export default function Calendar() {
                                         time = time.slice(0, 5);
                                     }
 
-
-                                    if (eventDate.getDate() === day) {
-                                        return (
-                                            <button
-                                                className="flex flex-row items-center mt-1 w-32 group focus:bg-[#E18181] rounded-sm h-4"
-                                                // onClick={() => setShowModal(true)}
-                                            >
-                                                <div className="ml-1 w-2 h-2 shrink-0 bg-[#E18181] group-focus:bg-white rounded-full " />
-                                                <p className="text-left pl-1 text-xs line-clamp-1">{event.summary} <span className="text-[9px] text-[#858585] group-focus:text-black ml-6">{time} {TOD}</span></p>
-                                            </button>
-                                        );
-                                    }
+                                    return (
+                                        <button
+                                            key={event.id}
+                                            className="flex flex-row items-center mt-1 w-32 group focus:bg-red-400 rounded-sm h-4"
+                                        >
+                                            <div className="ml-1 w-2 h-2 shrink-0 bg-red-400 group-focus:bg-white rounded-full" />
+                                            <p className="text-left pl-1 text-xs line-clamp-1">
+                                                {event.summary}
+                                                <span className="text-[9px] text-[#858585] group-focus:text-black ml-6">
+                                                    {time} {TOD}
+                                                </span>
+                                            </p>
+                                        </button>
+                                    );
                                 })}
+
+                                {remainingEvents > 0 && (
+                                    <button 
+                                        onClick={() => {alert("MODAL")}}
+                                        className="text-left pl-1 text-xs text-[#858585] cursor-pointer">
+                                        {remainingEvents} more...
+                                    </button>
+                                )}
+
+
+
                             </div>
                         );
                     })}
-
                 </div>
-
             )}
         </div>
     )
