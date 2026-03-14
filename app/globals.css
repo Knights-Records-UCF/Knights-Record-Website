@@ -1,5 +1,16 @@
 @import "tailwindcss";
 
+/* Thank you reddit */
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
 
 
 /*
@@ -27,6 +38,8 @@
 }
   */
 
+  
+
 body {
   /* background: var(--background);
   color: var(--foreground);
@@ -35,3 +48,4 @@ body {
   background: #ffffff;
   font-family: "Inter", sans-serif;
 }
+

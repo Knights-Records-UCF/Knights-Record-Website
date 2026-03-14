@@ -1,7 +1,11 @@
 "use client";
+import { time } from "console";
 import { useEffect, useState } from "react";
 
-
+interface ModalProps {
+    day: number;
+    modalEvents: CalendarEvent[];
+}
 
 type CalendarEvent = {
     id: string;
@@ -17,16 +21,14 @@ type CalendarEvent = {
         dateTime: string;
         date: string;
     }
-
 }
-
 
 type CalendarResponse = {
     items: CalendarEvent[];
 }
 
 const months = [
-    "January", // 0 
+    "January",
     "February",
     "March",
     "April",
@@ -37,7 +39,7 @@ const months = [
     "September",
     "October",
     "November",
-    "December", // 11
+    "December"
 ]
 
 const weekDays = [
@@ -56,7 +58,7 @@ export default function Calendar() {
     const [error, setError] = useState<string | null>(null);
     const [events, setEvents] = useState<CalendarEvent[]>([]);
     const [showModal, setShowModal] = useState(false);
-
+    const [selectedDay, setSelectedDay] = useState<number | null>(null);
 
     useEffect(() => {
         async function fetchCalendar() {
@@ -74,12 +76,8 @@ export default function Calendar() {
                 const data: CalendarResponse = await res.json();
 
                 // console.log("Entire calendar json", data)
-
                 // console.log("single event", data.items[0]);
 
-                // 
-
-                // dateTesting(GClength, data, currDate);
                 setEvents(data.items);
             }
             catch (error) {
@@ -95,40 +93,34 @@ export default function Calendar() {
 
     }, []);
 
-
-
-
     const currDate = new Date(); // Current date and time
     const currMonth = currDate.getMonth(); // 0-11
-    // console.log(`The current date is: ${currDate}`)
-    // console.log(`The month is ${months[currMonth]}`);
-
     const lastOfMonth = new Date(currDate.getFullYear(), currDate.getMonth() + 1, 0);
-
-    // console.log(`The last day of the month of ${months[currDate.getMonth()]} is ${lastOfMonth}`);
-    // console.log(`The index of the last weekday of the month is: ${lastOfMonth.getDay()} and that weekday is ${weekDays[lastOfMonth.getDay()]}`);
-
-
-    // This is the first day of april
     const firstOfMonth = new Date(currDate.getFullYear(), currDate.getMonth(), 1);
-
-    // console.log(`The first day of the month of ${months[currMonth]} is ${firstOfMonth}`);
-    // console.log(`The index of the first weekday of the month is ${firstOfMonth.getDay()} and that weekday is ${weekDays[firstOfMonth.getDay()]}`);
-
     const totalDays = lastOfMonth.getDate();
-    // console.log(`For the month of ${months[currDate.getMonth()]}, there are a total of ${totalDays} days`);
 
-
-    function Modal() {
+    function Modal({ day, modalEvents }: ModalProps) {
         return (
-            <div>
-                <h1> Modal </h1>
-                <p> hi </p>
+            <div className="h-[99.8px] w-[150.571px] bg-white rounded-xl border border-gray-100 absolute -inset-x-3 -inset-y-1 z-50 p-2 drop-shadow-2xl shadow-2xl inset-shadow-2xl overflow-y-auto no-scrollbar">
+                {modalEvents.map((CalendarEvent) => (
+                    <button
+                        key={CalendarEvent.id}
+                        className="flex flex-row items-center mt-1 w-32 group focus:bg-red-400 rounded-sm h-4"
+                    >
+                        <div className="ml-1 w-2 h-2 shrink-0 bg-red-400 group-focus:bg-white rounded-full" />
+                        <p className="text-left pl-1 text-xs line-clamp-1">
+                            {CalendarEvent.summary}
+                            <span className="text-[9px] text-[#858585] group-focus:text-black ml-6">
+                                00:00 AM
+                            </span>
+                        </p>
+                    </button>
+                ))}
             </div>
         )
     }
 
-    // For creating the calendar 
+    // Creating the calendar 
     const calendarCells = []
 
     for (let i = 0; i < firstOfMonth.getDay(); i++) {
@@ -136,11 +128,9 @@ export default function Calendar() {
     }
 
 
-    for (let i = 1; i < totalDays + 1; i++) {
-        calendarCells.push(i);
+    for (let j = 1; j < totalDays + 1; j++) {
+        calendarCells.push(j);
     }
-
-    console.log(`${calendarCells}`);
 
     // Creating an object where key is a number (day) and value is array of CalendarEvent objects
     const eventsPerDay: Record<number, CalendarEvent[]> = {};
@@ -165,8 +155,6 @@ export default function Calendar() {
         // At that day, push the event object to the array
         eventsPerDay[day].push(event);
     })
-
-
 
     return (
         <div className="border-2 border-[#D0D0D0]">
@@ -197,10 +185,10 @@ export default function Calendar() {
                         const remainingEvents = eventCount - visibleEvents.length; // The remaining events that aren't shown
 
                         return (
-                            <div className="border-t border-[#f2f2f7] border-b w-32 h-24" key={day}>
+                            <div className="border-t border-[#f2f2f7] border-b w-32 h-24 relative" key={day}>
                                 {/* Circle current day (someone double check if this is properly aligned please!)*/}
                                 {day === currDate.getDate() ? (
-                                    <div className="w-7.5 h-7.5 bg-red-500 rounded-full ml-3 pl-1.25 pt-0.5 mt-1.5">
+                                    <div className="w-7.5 h-7.5 bg-red-500 text-white rounded-full ml-3 pl-1.25 pt-0.5 mt-1.5">
                                         <p className=" ">
                                             {day}
                                         </p>
@@ -253,16 +241,19 @@ export default function Calendar() {
                                     );
                                 })}
 
+                                {selectedDay === day && (
+                                    <Modal day={selectedDay} modalEvents={dayEvents} />
+                                )}
+
                                 {remainingEvents > 0 && (
-                                    <button 
-                                        onClick={() => {alert("MODAL")}}
+                                    <button
+                                        onClick={() => {
+                                            setSelectedDay(day);
+                                        }}
                                         className="text-left pl-1 text-xs text-[#858585] cursor-pointer">
                                         {remainingEvents} more...
                                     </button>
                                 )}
-
-
-
                             </div>
                         );
                     })}
