@@ -1,10 +1,10 @@
 "use client";
-import { time } from "console";
 import { useEffect, useState } from "react";
 
 interface ModalProps {
     day: number;
     modalEvents: CalendarEvent[];
+    onClose: () => void;
 }
 
 type CalendarEvent = {
@@ -115,32 +115,41 @@ export default function Calendar() {
         return `${time} ${TOD}`
     }
 
-    function Modal({ modalEvents, }: ModalProps) {
+    function Modal({ modalEvents, onClose }: ModalProps) {
         return (
-            <div className="h-[99.8px] w-[150.571px] bg-white rounded-xl border border-gray-100 absolute -inset-x-3 -inset-y-1 z-50 p-2 drop-shadow-2xl shadow-2xl inset-shadow-2xl overflow-y-auto no-scrollbar">
-                {modalEvents.map((CalendarEvent) => {
-                    let time: string = getTime(CalendarEvent);
+            <>
+                <div
+                    className="fixed inset-0 z-40"
+                    onClick={onClose}
+                />
+                <div
+                    className="h-[99.8px] w-[150.571px] bg-white rounded-xl border border-gray-100 absolute -inset-x-3 -inset-y-1 z-50 p-2 drop-shadow-2xl shadow-2xl inset-shadow-2xl overflow-y-auto no-scrollbar"
+                    onClick={(e) => e.stopPropagation()}
+                >
+                    {modalEvents.map((CalendarEvent) => {
+                        let time: string = getTime(CalendarEvent);
 
-                    return (
+                        return (
 
-                        <button
-                            key={CalendarEvent.id}
-                            className="flex flex-row items-center mt-1 w-32 group focus:bg-red-400 rounded-sm h-4 px-1"
-                        >
-                            <div className=" w-2 h-2 shrink-0 bg-red-400 group-focus:bg-white rounded-full" />
-                            <div className="flex items-center justify-between w-full pl-1">
-                                <p className=" text-xs truncate max-w-17.5">
-                                    {CalendarEvent.summary}
-                                </p>
-                                <span className="text-[9px] text-[#858585] group-focus:text-black">
-                                    {time}
-                                </span>
-                            </div>
-                        </button>
-                    )
-                })}
+                            <button
+                                key={CalendarEvent.id}
+                                className="flex flex-row items-center mt-1 w-32 group focus:bg-red-400 rounded-sm h-4 px-1"
+                            >
+                                <div className=" w-2 h-2 shrink-0 bg-red-400 group-focus:bg-white rounded-full" />
+                                <div className="flex items-center justify-between w-full pl-1">
+                                    <p className=" text-xs truncate max-w-17.5">
+                                        {CalendarEvent.summary}
+                                    </p>
+                                    <span className="text-[9px] text-[#858585] group-focus:text-black">
+                                        {time}
+                                    </span>
+                                </div>
+                            </button>
+                        )
+                    })}
 
-            </div>
+                </div>
+            </>
         )
     }
 
@@ -194,6 +203,7 @@ export default function Calendar() {
                     ))}
 
                     {calendarCells.map((day, index) => {
+                        // Fill blank cells so the 1st of every month isnt Sunday
                         if (day === null) {
                             return null;
                         }
@@ -250,7 +260,7 @@ export default function Calendar() {
                                 })}
 
                                 {selectedDay === day && (
-                                    <Modal day={selectedDay} modalEvents={dayEvents} />
+                                    <Modal day={selectedDay} modalEvents={dayEvents} onClose={() => setSelectedDay(null)} />
                                 )}
 
                                 {remainingEvents > 0 && (

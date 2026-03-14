@@ -9,8 +9,8 @@ export async function GET() {
         `https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events?key=${apiKey}` +
         `&singleEvents=true` +
         `&orderBy=startTime` +
-        `&maxResults=30` +
-        `&timeMin=${new Date().toISOString()}`; // To show the full list of events for the month try: {` $months[new Date().getMonth()] 1, ${new Date().getFullYear()} 00:00:00`}
+        `&maxResults=60` +
+        `&timeMin=${new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString()}`; // To show the full list of events for the month try: {` $months[new Date().getMonth()] 1, ${new Date().getFullYear()} 00:00:00`}
     
     const res = await fetch(url);
 
