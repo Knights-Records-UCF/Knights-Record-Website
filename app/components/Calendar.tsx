@@ -57,16 +57,13 @@ export default function Calendar() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [events, setEvents] = useState<CalendarEvent[]>([]);
-    const [showModal, setShowModal] = useState(false);
     const [selectedDay, setSelectedDay] = useState<number | null>(null);
 
     useEffect(() => {
         async function fetchCalendar() {
             try {
-
                 setLoading(true);
                 setError(null);
-
                 const res = await fetch("/api/calendar");
 
                 if (!res.ok) {
@@ -74,10 +71,8 @@ export default function Calendar() {
                 }
 
                 const data: CalendarResponse = await res.json();
-
                 // console.log("Entire calendar json", data)
                 // console.log("single event", data.items[0]);
-
                 setEvents(data.items);
             }
             catch (error) {
@@ -94,31 +89,55 @@ export default function Calendar() {
     }, []);
 
     const currDate = new Date(); // Current date and time
-    const currMonth = currDate.getMonth(); // 0-11
     const lastOfMonth = new Date(currDate.getFullYear(), currDate.getMonth() + 1, 0);
     const firstOfMonth = new Date(currDate.getFullYear(), currDate.getMonth(), 1);
     const totalDays = lastOfMonth.getDate();
 
-    function Modal({ day, modalEvents }: ModalProps) {
+    function Modal({ day, modalEvents, }: ModalProps) {
         return (
             <div className="h-[99.8px] w-[150.571px] bg-white rounded-xl border border-gray-100 absolute -inset-x-3 -inset-y-1 z-50 p-2 drop-shadow-2xl shadow-2xl inset-shadow-2xl overflow-y-auto no-scrollbar">
-                {modalEvents.map((CalendarEvent) => (
-                    <button
-                        key={CalendarEvent.id}
-                        className="flex flex-row items-center mt-1 w-32 group focus:bg-red-400 rounded-sm h-4"
-                    >
-                        <div className="ml-1 w-2 h-2 shrink-0 bg-red-400 group-focus:bg-white rounded-full" />
-                        <p className="text-left pl-1 text-xs line-clamp-1">
-                            {CalendarEvent.summary}
-                            <span className="text-[9px] text-[#858585] group-focus:text-black ml-6">
-                                00:00 AM
-                            </span>
-                        </p>
-                    </button>
-                ))}
+                {modalEvents.map((CalendarEvent) => {
+                    let eventDate: Date;
+
+                    if (CalendarEvent.start.dateTime) {
+                        eventDate = new Date(CalendarEvent.start.dateTime);
+                    } else {
+                        eventDate = new Date(CalendarEvent.start.date);
+                    }
+
+                    let time: string = eventDate.toLocaleTimeString("en-US");
+                    let TOD = time.slice(-2);
+
+                    if (time.length == 10) {
+                        time = time.slice(0, 4);
+                    }
+                    else {
+                        time = time.slice(0, 5);
+                    }
+
+                    return (
+
+                        <button
+                            key={CalendarEvent.id}
+                            className="flex flex-row items-center mt-1 w-32 group focus:bg-red-400 rounded-sm h-4 px-1"
+                        >
+                            <div className=" w-2 h-2 shrink-0 bg-red-400 group-focus:bg-white rounded-full" />
+                            <div className="flex items-center justify-between w-full pl-1">
+                                <p className=" text-xs truncate max-w-17.5">
+                                    {CalendarEvent.summary}
+                                </p>
+                                <span className="text-[9px] text-[#858585] group-focus:text-black">
+                                    {time} {TOD}
+                                </span>
+                            </div>
+                        </button>
+                    )
+                })}
+
             </div>
         )
     }
+
 
     // Creating the calendar 
     const calendarCells = []
@@ -207,7 +226,7 @@ export default function Calendar() {
                                         eventDate = new Date(event.start.date);
                                     }
 
-                                    let time = eventDate.toLocaleTimeString("en-US");
+                                    let time: string = eventDate.toLocaleTimeString("en-US");
                                     let TOD = time.slice(-2); // Time of day (AM/PM)
                                     // console.log(`The time is currently ${time}`);
                                     // console.log(`${time.length} is the length of the time string`);
@@ -228,15 +247,23 @@ export default function Calendar() {
                                     return (
                                         <button
                                             key={event.id}
-                                            className="flex flex-row items-center mt-1 w-32 group focus:bg-red-400 rounded-sm h-4"
+                                            className="flex items-center mt-1 w-32 group focus:bg-red-400 rounded-sm h-4 px-1"
                                         >
-                                            <div className="ml-1 w-2 h-2 shrink-0 bg-red-400 group-focus:bg-white rounded-full" />
-                                            <p className="text-left pl-1 text-xs line-clamp-1">
-                                                {event.summary}
-                                                <span className="text-[9px] text-[#858585] group-focus:text-black ml-6">
+                                            <div className="w-2 h-2 shrink-0 bg-red-400 group-focus:bg-white rounded-full" />
+
+                                            <div className="flex items-center justify-between w-full pl-1">
+
+                                                {/* Event summary */}
+                                                <p className="text-xs truncate max-w-17.5 ">
+                                                    {event.summary}
+                                                </p>
+
+                                                {/* Time */}
+                                                <span className="text-[9px] text-[#858585] group-focus:text-black">
                                                     {time} {TOD}
                                                 </span>
-                                            </p>
+
+                                            </div>
                                         </button>
                                     );
                                 })}
