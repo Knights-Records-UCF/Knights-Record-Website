@@ -93,27 +93,33 @@ export default function Calendar() {
     const firstOfMonth = new Date(currDate.getFullYear(), currDate.getMonth(), 1);
     const totalDays = lastOfMonth.getDate();
 
-    function Modal({ day, modalEvents, }: ModalProps) {
+    function getTime(calEvent: CalendarEvent) {
+
+        let eventDate: Date;
+
+        if (calEvent.start.dateTime) {
+            eventDate = new Date(calEvent.start.dateTime);
+        } else {
+            eventDate = new Date(calEvent.start.date);
+        }
+
+        let time = eventDate.toLocaleTimeString("en-US");
+        let TOD = time.slice(-2);
+
+        if (time.length == 10) {
+            time = time.slice(0, 4);
+        } else {
+            time = time.slice(0, 5);
+        }
+
+        return `${time} ${TOD}`
+    }
+
+    function Modal({ modalEvents, }: ModalProps) {
         return (
             <div className="h-[99.8px] w-[150.571px] bg-white rounded-xl border border-gray-100 absolute -inset-x-3 -inset-y-1 z-50 p-2 drop-shadow-2xl shadow-2xl inset-shadow-2xl overflow-y-auto no-scrollbar">
                 {modalEvents.map((CalendarEvent) => {
-                    let eventDate: Date;
-
-                    if (CalendarEvent.start.dateTime) {
-                        eventDate = new Date(CalendarEvent.start.dateTime);
-                    } else {
-                        eventDate = new Date(CalendarEvent.start.date);
-                    }
-
-                    let time: string = eventDate.toLocaleTimeString("en-US");
-                    let TOD = time.slice(-2);
-
-                    if (time.length == 10) {
-                        time = time.slice(0, 4);
-                    }
-                    else {
-                        time = time.slice(0, 5);
-                    }
+                    let time: string = getTime(CalendarEvent);
 
                     return (
 
@@ -127,7 +133,7 @@ export default function Calendar() {
                                     {CalendarEvent.summary}
                                 </p>
                                 <span className="text-[9px] text-[#858585] group-focus:text-black">
-                                    {time} {TOD}
+                                    {time}
                                 </span>
                             </div>
                         </button>
@@ -194,13 +200,13 @@ export default function Calendar() {
 
                         const dayEvents = eventsPerDay[day] ?? []; // Returns either an event of array objects or empty array
                         const eventCount = dayEvents.length;
-                        console.log(`On day ${day} there are a total of ${eventCount} events`)
+                        // console.log(`On day ${day} there are a total of ${eventCount} events`)
 
                         const visibleEvents = eventCount
                             <= 3 ? dayEvents
                             : dayEvents.slice(0, 2); // Show only 2 events if there are more than 3, otherwise show all events
 
-                        console.log(`There are ${visibleEvents.length} visible events`)
+                        // console.log(`There are ${visibleEvents.length} visible events`)
                         const remainingEvents = eventCount - visibleEvents.length; // The remaining events that aren't shown
 
                         return (
@@ -218,32 +224,7 @@ export default function Calendar() {
 
                                 {/* Show Events */}
                                 {visibleEvents.map((event) => {
-                                    let eventDate: Date;
-
-                                    if (event.start.dateTime) {
-                                        eventDate = new Date(event.start.dateTime);
-                                    } else {
-                                        eventDate = new Date(event.start.date);
-                                    }
-
-                                    let time: string = eventDate.toLocaleTimeString("en-US");
-                                    let TOD = time.slice(-2); // Time of day (AM/PM)
-                                    // console.log(`The time is currently ${time}`);
-                                    // console.log(`${time.length} is the length of the time string`);
-
-                                    if (time.length == 10) { // 9:30:00 PM
-                                        // console.log(`Time is: ${time.slice(0, 4)}`);
-                                        // console.log(TOD);
-                                        // console.log(`Formatted time is: ${time.slice(0,4)} ${TOD}`);
-                                        time = time.slice(0, 4);
-                                    }
-                                    else { // 10:30:00 PM
-                                        // console.log(`Time is: ${time.slice(0,5)}`);
-                                        // console.log(TOD);
-                                        // console.log(`Formatted time is: ${time.slice(0,5)} ${TOD}`)
-                                        time = time.slice(0, 5);
-                                    }
-
+                                    let time = getTime(event);
                                     return (
                                         <button
                                             key={event.id}
@@ -260,7 +241,7 @@ export default function Calendar() {
 
                                                 {/* Time */}
                                                 <span className="text-[9px] text-[#858585] group-focus:text-black">
-                                                    {time} {TOD}
+                                                    {time}
                                                 </span>
 
                                             </div>
