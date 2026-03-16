@@ -52,7 +52,7 @@ export default function Vinyl() {
                         alt="Album Record"
                         width={128}
                         height={128}
-                        className={`absolute inset-0 z-0 h-full w-full object-cover rounded-full  transition-transform drop-shadow-gray-400 drop-shadow-md duration-300 scale-115 group-hover:translate-x-16`}
+                        className={`absolute inset-0 z-0 h-full w-full object-cover rounded-full  transition-transform drop-shadow-gray-400 drop-shadow-md duration-300 scale-115 group-hover:translate-x-16 group-hover:animate-[spin_5.5s_linear_infinite]`}
                     />
                 </div>
             ))}
