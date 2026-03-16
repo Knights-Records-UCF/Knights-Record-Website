@@ -1,55 +1,59 @@
-// When the time comes swap "sleeveColor" with "sleeveImage". We'll probably do something similar for "recordcolor"
+"use client";
+
+import { useState } from "react";
+import Image from "next/image";
 
 interface Record {
-    sleeveColor: string;
-    recordColor: string;
-
+    sleeveImage: string;
+    // recordImage: string; Commented out unless we decide to have custom records for each album
 }
 
 const recordArr: Record[] = [
     {
-        sleeveColor: "bg-[#81E1CE]",
-        recordColor: "bg-[#D9D9D9]"
+        sleeveImage: "/images/albumCovers/volumeAlpha.jpeg",
     },
     {
-        sleeveColor: "bg-[#DE81E1]",
-        recordColor: "bg-[#D9D9D9]",
+        sleeveImage: "/images/albumCovers/TCSOHIG.jpg",
     },
     {
-        sleeveColor: "bg-[#E18181]",
-        recordColor: "bg-[#D9D9D9]",
+        sleeveImage: "/images/albumCovers/200E.jpg",
     },
     {
-        sleeveColor: "bg-[#619190]",
-        recordColor: "bg-[#D9D9D9]",
+        sleeveImage: "/images/albumCovers/WLFGRL.jpg",
     },
     {
-        sleeveColor: "bg-[#E1C381]",
-        recordColor: "bg-[#D9D9D9]",
+        sleeveImage: "/images/albumCovers/SUBQ.jpg",
     },
 ]
 
 export default function Vinyl() {
+
     return (
-        // Maybe switch to aside later since this is lowk like a navbar but for artists
+        // Switch to aside later since this is lowk like a navbar but for artists
         <div className="flex flex-col gap-4">
             {recordArr.map((vinyl, i) => (
                 <div
                     key={i}
-                    className="relative w-32 h-32 group"
+                    className="relative w-32 h-32 group transition-all duration-450 fade-in-out hover:shadow-2xl"
                 >
-                    
 
                     {/* Album Sleeve */}
-                    <div
-                        className={`absolute inset-0 z-10 ${vinyl.sleeveColor} drop-shadow-md drop-shadow-gray-400`}
+                    <Image
+                        src={vinyl.sleeveImage}
+                        alt="Album Sleeve"
+                        width={128}
+                        height={128}
+                        className={`absolute inset-0 z-10 drop-shadow-md drop-shadow-black/70`}
                     />
 
                     {/* Record */}
-                    <div
-                        className={`absolute inset-0 z-0 ${vinyl.recordColor} rounded-full scale-95  transition-transform drop-shadow-gray-400 drop-shadow-md duration-300 group-hover:translate-x-16`}
-                    >
-                    </div>
+                    <Image
+                        src="/images/record.png"
+                        alt="Album Record"
+                        width={128}
+                        height={128}
+                        className={`absolute inset-0 z-0 h-full w-full object-cover rounded-full  transition-transform drop-shadow-gray-400 drop-shadow-md duration-300 scale-115 group-hover:translate-x-16`}
+                    />
                 </div>
             ))}
         </div>
