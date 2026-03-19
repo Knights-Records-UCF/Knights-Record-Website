@@ -13,7 +13,6 @@ import { IoLogoLinkedin } from "react-icons/io5"; // linkedin icon
 import { IoMail } from "react-icons/io5"; // email icon
 
 
-
 export default function Navbar() {
     const pathname = usePathname();
 
@@ -58,7 +57,7 @@ export default function Navbar() {
                 {/* Team dropdown */}
                 <li>
                 <div
-                    className={`rounded-xl transition-colors ${
+                    className={`rounded-xl transition-colors  ${
                     teamsOpen ? "bg-[#EBEBEB]" : ""
                     }`}
                 >
@@ -66,37 +65,41 @@ export default function Navbar() {
                     <button
                     type="button"
                     onClick={() => setTeamsOpen((v) => !v)}
-                    className="w-full text-left px-4 py-2 rounded-lg hover:bg-[#EBEBEB] flex flex-row items-center gap-2 text-[#656565]"
+                    className="w-full text-left px-4 py-2 pb-0 rounded-lg hover:bg-[#EBEBEB] flex flex-row items-center gap-2 text-[#656565] "
                     >
                     <IoPeople className="text-2xl text-[#b0ccb3]" /> Team
                     </button>
 
                     {/* Dropdown content */}
-                    {teamsOpen && (
-                    <div className="px-4 pb-3">
-                        <div className="my-2 h-px w-full bg-[#D8D8D8]" />
+                    <div
+                        className={`
+                            overflow-hidden transition-all duration-300 ease-in-out
+                            ${teamsOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}
+                        `}
+                        >
+                        <div className="my-2 h-px w-6/7 mx-auto bg-[#D8D8D8] " />
 
                         <Link
                             href="/teams/executive"
-                            className={`block px-8 rounded-md text-[15px] ${
+                            className={`block px-12 rounded-md text-[15px] ${
                                 pathname === "/teams/executive" ? "font-semibold" : ""
                             }`}
                             >
                             Executive Board
                         </Link>
 
-                        <div className="my-2 h-px w-full bg-[#D8D8D8]" />
+                        <div className="my-2 h-px w-6/7 mx-auto bg-[#D8D8D8]" />
 
                         <Link
                             href="/teams/label"
-                            className={`block  px-8 rounded-md text-[15px] ${
+                            className={`block pb-3 px-12 rounded-md text-[15px] ${
                                 pathname === "/teams/label" ? "font-semibold" : ""
                             }`}
                             >
                             Label Team
                         </Link>
                     </div>
-                    )}
+                    
                 </div>
                 </li>
 
