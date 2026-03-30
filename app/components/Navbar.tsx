@@ -25,11 +25,11 @@ export default function Navbar() {
     }, [isOnTeamsRoute]);
 
     const baseItem =
-        "block rounded-xl px-4 py-2 hover:bg-[#EBEBEB] text-[#656565]";
-    const activeItem = "bg-[#EBEBEB]";
+        "block rounded-xl px-4 py-2 hover:bg-[#EBEBEB] dark:hover:bg-[#39393B] text-[#656565]";
+    const activeItem = "bg-[#EBEBEB] dark:bg-[#39393B]";
 
     return (
-        <aside className='h-screen w-64 bg-[#F5F5F5] drop-shadow-sm drop-shadow-gray-400 flex flex-col pt-5 overflow-y-auto'>
+        <aside className='h-screen w-64 bg-[#F5F5F5] dark:bg-[#252526] drop-shadow-sm drop-shadow-gray-400 dark:drop-shadow-[#3B3B3C] flex flex-col pt-5 overflow-y-auto'>
 
             {/* Title */}
             <div className='text-xl font-semibold mb-8 text-[#656565] text-center'>Knights Records</div>
@@ -58,7 +58,7 @@ export default function Navbar() {
                 <li>
                 <div
                     className={`rounded-xl transition-colors  ${
-                    teamsOpen ? "bg-[#EBEBEB]" : ""
+                    teamsOpen ? "bg-[#EBEBEB] dark:bg-[#39393B]" : ""
                     }`}
                 >
                     {/* Top row (Team) */}
