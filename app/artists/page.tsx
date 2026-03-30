@@ -70,7 +70,7 @@ dont think theres a tangerine here, just forget that there isnt one`,
   {
     name: "ten7teen",
     img: "/images/ten7teen.jpg",
-    genres: ["Hip-Hop", "Experimental"],
+    genres: ["Hip-Hop", "Rap"],
     description: "orl",
     socialLinks: [
       "https://www.instagram.com/ten7teeen/",
