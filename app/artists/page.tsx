@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { ExternalLink } from "lucide-react";
+import Vinyl from "../components/Vinyl";
 
 interface Artist {
   name: string;
@@ -167,13 +168,9 @@ export default function Artists() {
 
   return (
     <div className="h-full grid grid-cols-[1fr_2fr]">
-      {/* just a simple sidebar, insert the album scroll here :D*/}
-      <div className="flex flex-col overflow-y-auto">
-        {ARTISTS.map((a, index) => (
-          <button key={a.name} onClick={() => setCurrentIndex(index)}>
-            {a.name}
-          </button>
-        ))}
+      {/* vinyl scroll! */}
+      <div className="flex flex-col items-center overflow-y-auto no-scrollbar py-10">
+        <Vinyl onSelectArtist={(index) => setCurrentIndex(index)} />
       </div>
 
       {/* displays the artist here!*/}
