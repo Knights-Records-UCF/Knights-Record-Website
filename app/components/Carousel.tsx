@@ -2,9 +2,12 @@
 import { useState } from "react";
 
 interface Announcement {
+    id: number;
     title: string;
     description: string;
-    bgColor: string;
+    backgroundColor: string;
+    createdAt: Date;
+    updatedAt: Date;
 }
 
 interface ModalProps {
@@ -38,7 +41,7 @@ function Modal({ announcement, onClose }: ModalProps) {
                         onClick={onClose}> X
                     </button>
                 </div>
-                <div className={`w-full h-full ${announcement.bgColor}`} />
+                <div className={`w-full h-full ${announcement.backgroundColor}`} />
                 <p className="text-[#656565] h-24 p-2">{announcement.description}</p>
             </div>
         </div>
@@ -91,8 +94,8 @@ export default function Carousel({ announcement }: CarouselProps) {
                 className="flex flex-row gap-4 transition-transform ease-out duration-500"
                 style={{ transform: `translateX(-${(visibleAnnouncement * 256)}px)` }} // 256 bc w-60 + gap-4 omggggg
             >
-                {announcement.map((item, index) => (
-                    <div key={index} className="w-60">
+                {announcement.map((item) => (
+                    <div key={item.id} className="w-60">
                         <h1 className="text-[#656565] text-[14px] font-525">
                             {item.title}
                         </h1>
@@ -100,10 +103,10 @@ export default function Carousel({ announcement }: CarouselProps) {
                             {item.description}
                         </p>
                         <div
-                            className={`${item.bgColor} mt-1.5 h-42 w-60  rounded-xl`}
+                            className={`${item.backgroundColor} mt-1.5 h-42 w-60  rounded-xl`}
                             onClick={() => {
                                 setShowModal(true);
-                                setCurrAnnouncement(index);
+                                setCurrAnnouncement(announcement.indexOf(item));
                             }}
                         />
                     </div>
