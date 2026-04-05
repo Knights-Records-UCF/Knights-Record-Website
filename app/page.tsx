@@ -1,5 +1,6 @@
 import Carousel from "./components/Carousel";
 import Calendar from "./components/Calendar";
+import NewAnnouncement from "./components/NewAnnouncement";
 import prisma from "@/lib/prisma";
 
 interface Announcement {
@@ -33,6 +34,7 @@ export default async function Home() {
   return (
     <div className=" text-left ">
       <Carousel announcement={announcement} />
+      <NewAnnouncement/>
       <div className="mt-12">
         <h1 className="font-[525] text-2xl text-left text-[#656565]">
           {`${months[new Date().getMonth()]}`} <span className="text-xl font-normal text-[#656565]/50">{` ${new Date().getFullYear()}`}</span>
