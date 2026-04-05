@@ -41,7 +41,9 @@ function Modal({ announcement, onClose }: ModalProps) {
                         onClick={onClose}> X
                     </button>
                 </div>
-                <div className={`w-full h-full ${announcement.backgroundColor}`} />
+                <div 
+                    className={`w-full h-full`}
+                    style={{ backgroundColor: announcement.backgroundColor }} />
                 <p className="text-[#656565] h-24 p-2">{announcement.description}</p>
             </div>
         </div>
@@ -103,7 +105,8 @@ export default function Carousel({ announcement }: CarouselProps) {
                             {item.description}
                         </p>
                         <div
-                            className={`${item.backgroundColor} mt-1.5 h-42 w-60  rounded-xl`}
+                            className={`mt-1.5 h-42 w-60 rounded-xl`}
+                            style={{ backgroundColor: item.backgroundColor}}
                             onClick={() => {
                                 setShowModal(true);
                                 setCurrAnnouncement(announcement.indexOf(item));

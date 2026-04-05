@@ -10,8 +10,7 @@ const prisma = new PrismaClient({
     adapter,
 });
 
-
-
+// Reseed at some point since I changed backgroundColor to be a normal string instead of a tailwind class
 async function main() {
     await prisma.announcement.createMany({
         data: [

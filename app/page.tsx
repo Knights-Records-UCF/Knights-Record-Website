@@ -27,7 +27,9 @@ const months = [
 ]
 
 export default async function Home() {
-  const announcement : Announcement[] = await prisma.announcement.findMany(); // Sort ts
+  const announcement : Announcement[] = await prisma.announcement.findMany({
+    orderBy: { id: "desc" }
+  });
   return (
     <div className=" text-left ">
       <Carousel announcement={announcement} />
