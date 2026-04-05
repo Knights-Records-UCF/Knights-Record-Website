@@ -10,42 +10,70 @@ const prisma = new PrismaClient({
     adapter,
 });
 
-// Reseed at some point since I changed backgroundColor to be a normal string instead of a tailwind class
 async function main() {
     await prisma.announcement.createMany({
         data: [
             {
                 title: "Next meeting",
                 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget ultricies lacinia, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc.",
-                backgroundColor: "bg-[#E18181]",
+                backgroundColor: "#E18181",
             },
             {
                 title: "Workshop!!!",
                 description: "hello oijdoifjaoidsjfo jasdof fdosfj osdjfosd",
-                backgroundColor: "bg-[#17A1FA]",
+                backgroundColor: "#17A1FA",
             },
             {
                 title: "Super cool social",
                 description: "hello oijdoifjaoidsjfo jasdof fdosfj osdjfosd",
-                backgroundColor: "bg-[#8AFFC8]",
+                backgroundColor: "#8AFFC8",
             },
             {
                 title: "Helo guys!!!!",
                 description: "hello oijdoifjaoidsjfo jasdof fdosfj osdjfosd",
-                backgroundColor: "bg-[#1C7049]",
+                backgroundColor: "#1C7049",
             },
             {
                 title: "Helo guys!!!!",
                 description: "hello oijdoifjaoidsjfo jasdof fdosfj osdjfosd",
-                backgroundColor: "bg-[#1C7049]",
+                backgroundColor: "#1C7049",
             },
             {
                 title: "Helo guys!!!!",
                 description: "hello oijdoifjaoidsjfo jasdof fdosfj osdjfosd",
-                backgroundColor: "bg-[#1C7049]",
+                backgroundColor: "#1C7049",
             },
         ]
     })
+
+    await prisma.artist.createMany({
+        data: [
+            {
+                name: "Ant Moreiro",
+                img: "/images/antmoreiro.jpg",
+                genres: ["Indie", "Pop"],
+                description:`📍Orlando, Florida || 19 🇨🇺
+                            Vocalist, Producer, Artist 🎶
+                            Never let another pilot fly in your plane 🌹`,
+                socialLinks: [
+                    "https://www.instagram.com/antmoreiro/",
+                    "https://www.youtube.com/@antmoreiro",
+                ],
+            }
+        ]
+    })
+
+    await prisma.board.createMany({
+        data: [
+            {
+                name: "Dany",
+                role: "President",
+                team: "Executive",
+                image: "/images/1.jpg",
+            }
+        ]
+    })
+
 }
 
 main();

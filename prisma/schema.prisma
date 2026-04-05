@@ -12,12 +12,29 @@ datasource db {
   provider = "postgresql"
 }
 
+// Consider uploadthing? for image upload later
 model Announcement {
   id Int @id @default(autoincrement())
   title String
   description String
   backgroundColor String
-
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt // Use later
+}
+
+model Artist {
+  id Int @id @default(autoincrement())
+  name String
+  img String
+  genres String[]
+  description String
+  socialLinks String[]
+}
+
+model Board {
+  id Int @id @default(autoincrement())
+  name String
+  role String
+  team String // Label or Executive
+  image String
 }
