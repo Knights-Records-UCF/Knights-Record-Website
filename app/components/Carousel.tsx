@@ -79,7 +79,7 @@ export default function Carousel({ announcement }: CarouselProps) {
     return (
         <div className="overflow-hidden relative">
             <div className="flex mt-2 items-center ">
-                <h1 className=" text-[#656565] dark:text-[#fbfbfb] font-[525] text-3xl">
+                <h1 className=" text-[#656565] dark:text-[#fbfbfb] font-[525] text-3xl transition-all duration-300 ease-in-out">
                     Announcements
                 </h1>
                 <div className="ml-2">
@@ -93,10 +93,10 @@ export default function Carousel({ announcement }: CarouselProps) {
             >
                 {announcement.map((item, index) => (
                     <div key={index} className="w-60">
-                        <h1 className="text-[#656565] dark:text-[#AEAEAE] text-[14px] font-525">
+                        <h1 className="text-[#656565] dark:text-[#AEAEAE] text-[14px] font-525 transition-all duration-300 ease-in-out">
                             {item.title}
                         </h1>
-                        <p className="text-[#656565] dark:text-[#D9D9D9] w-52 text-[14px] text-left leading-none line-clamp-2">
+                        <p className="text-[#656565] dark:text-[#D9D9D9] w-52 text-[14px] text-left leading-none line-clamp-2 transition-all duration-300 ease-in-out">
                             {item.description}
                         </p>
                         <div

@@ -51,15 +51,15 @@ function TeamContainers({ arr }: PersonArrayProp) {
           return (
             <div
               key={index}
-              className="flex flex-col [&_h2]:text-[#656565] [&_p]:text-[#656565] dark:[&_h2]:text-[#fbfbfb] dark:[&_p]:text-[#D9D9D9]"
+              className="flex flex-col [&_h2]:text-[#656565] [&_p]:text-[#656565] dark:[&_h2]:text-[#fbfbfb] dark:[&_p]:text-[#D9D9D9] transition-all duration-300 ease-in-out"
             >
               <img
                 src={a.image}
                 // alt={"Picture of " + a.name}
                 className="w-30 h-30 min-w-30 min-h-30 bg-pink-300 rounded-2xl object-cover"
               />
-              <h2 className="font-semibold">{a.name}</h2>
-              <p className="text-sm">{a.role}</p>
+              <h2 className="font-semibold transition-all duration-300 ease-in-out">{a.name}</h2>
+              <p className="text-sm transition-all duration-300 ease-in-out">{a.role}</p>
             </div>
           );
         })}
@@ -70,35 +70,35 @@ function TeamContainers({ arr }: PersonArrayProp) {
 
 export default function Executive() {
   return (
-    <div className="[&>div:not(.fatHeader)]:py-2 gap-2 w-full px-10 [&_h1]:text-[#656565] dark:[&_h1]:text-[#fbfbfb]">
+    <div className="[&>div:not(.fatHeader)]:py-2 gap-2 w-full px-10 [&_h1]:text-[#656565] dark:[&_h1]:text-[#fbfbfb] transition-all duration-300 ease-in-out">
       <div className="py-7 fatHeader"></div>
       <div className="block">
-        <div className="w-full border-b-[1.5px] border-gray-300 dark:border-[#8c8c8c]">
-          <h1 className="font-bold text-3xl ">Executive Board</h1>
+        <div className="w-full border-b-[1.5px] border-gray-300 dark:border-[#323236] transition-all duration-300 ease-in-out">
+          <h1 className="font-bold text-3xl transition-all duration-300 ease-in-out">Executive Board</h1>
         </div>
 
         <TeamContainers arr={ExecutiveBoard} />
       </div>
 
       <div className="block">
-        <div className="w-full border-b-[1.5px] border-gray-300 dark:border-[#b1b1b1]"> 
-          <h1 className="font-bold text-3xl ">Finance</h1>
+        <div className="w-full border-b-[1.5px] border-gray-300 dark:border-[#323236] transition-all duration-300 ease-in-out">
+          <h1 className="font-bold text-3xl transition-all duration-300 ease-in-out">Finance</h1>
         </div>
 
         <TeamContainers arr={FinanceBoard} />
       </div>
 
       <div className="block">
-        <div className="w-full border-b-[1.5px] border-gray-300 dark:border-[#b1b1b1]">
-          <h1 className="font-bold text-3xl ">Marketing</h1>
+        <div className="w-full border-b-[1.5px] border-gray-300 dark:border-[#323236] transition-all duration-300 ease-in-out">
+          <h1 className="font-bold text-3xl transition-all duration-300 ease-in-out">Marketing</h1>
         </div>
 
         <TeamContainers arr={MarketingBoard} />
       </div>
 
       <div className="block">
-        <div className="w-full border-b-[1.5px] border-gray-300 dark:border-[#b1b1b1]">
-          <h1 className="font-bold text-3xl ">Events</h1>
+        <div className="w-full border-b-[1.5px] border-gray-300 dark:border-[#323236] transition-all duration-300 ease-in-out">
+          <h1 className="font-bold text-3xl transition-all duration-300 ease-in-out">Events</h1>
         </div>
 
         <TeamContainers arr={EventsBoard} />
