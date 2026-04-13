@@ -174,7 +174,7 @@ export default function Artists() {
       </div>
 
       {/* displays the artist here!*/}
-      <div className="flex h-full w-full flex-col justify-center items-center [&_h2]:text-[#656565] [&_h1]:text-[#656565] [&_p]:text-[#656565] [&_p]:text-sm">
+      <div className="flex h-full w-full flex-col justify-center items-center [&_h2]:text-[#656565] dark:[&_h2]:text-[#fbfbfb] [&_h1]:text-[#656565] dark:[&_h1]:text-[#fbfbfb] [&_p]:text-[#656565] dark:[&_p]:text-[#D9D9D9] [&_p]:text-sm">
         <div
           className="h-64 w-64 bg-[#D9D9D9] rounded-full shadow-md overflow-hidden bg-cover bg-center transition-all duration-500"
           style={{ backgroundImage: `url(${artist.img})` }}

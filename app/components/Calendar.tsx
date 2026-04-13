@@ -191,7 +191,7 @@ export default function Calendar() {
     })
 
     return (
-        <div className="border-2 border-[#D0D0D0]">
+        <div className="border-2 border-[#D0D0D0] dark:border-[#323236] transition-all duration-300 ease-in-out">
 
             {/* Make a skeleton loader at some point for cleaner animations later */}
             {loading && (<p> loading </p>)}
@@ -220,16 +220,16 @@ export default function Calendar() {
                         const remainingEvents = eventCount - visibleEvents.length; // The remaining events that aren't shown
 
                         return (
-                            <div className="border-t border-[#f2f2f7] border-b w-32 h-24 relative" key={day}>
+                            <div className="border-t border-[#f2f2f7] dark:border-[#323236] border-b w-32 h-24 relative transition-all duration-300 ease-in-out" key={day}>
                                 {/* Circle current day (someone double check if this is properly aligned please!)*/}
                                 {day === currDate.getDate() ? (
-                                    <div className="w-7.5 h-7.5 bg-red-500 text-white rounded-full ml-3 pl-1.25 pt-0.5 mt-1.5">
+                                    <div className="w-7.5 h-7.5 bg-red-500 text-white dark:text-[#1f1f1f] rounded-full ml-3 pl-1.25 pt-0.5 mt-1.5 transition-all duration-300 ease-in-out">
                                         <p className=" ">
                                             {day}
                                         </p>
                                     </div>
                                 ) : (
-                                    <p className="ml-3 mt-2">{day}</p>
+                                    <p className="ml-3 mt-2 dark:text-[#fbfbfb] transition-all duration-300 ease-in-out">{day}</p>
                                 )}
 
                                 {/* Show Events */}

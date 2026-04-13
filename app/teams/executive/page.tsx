@@ -51,7 +51,7 @@ function TeamContainers({ arr }: PersonArrayProp) {
           return (
             <div
               key={index}
-              className="flex flex-col [&_h2]:text-[#656565] [&_p]:text-[#656565]"
+              className="flex flex-col [&_h2]:text-[#656565] [&_p]:text-[#656565] dark:[&_h2]:text-[#fbfbfb] dark:[&_p]:text-[#D9D9D9]"
             >
               <img
                 src={a.image}
@@ -70,10 +70,10 @@ function TeamContainers({ arr }: PersonArrayProp) {
 
 export default function Executive() {
   return (
-    <div className="[&>div:not(.fatHeader)]:py-2 gap-2 w-full px-10 [&_h1]:text-[#656565]">
+    <div className="[&>div:not(.fatHeader)]:py-2 gap-2 w-full px-10 [&_h1]:text-[#656565] dark:[&_h1]:text-[#fbfbfb]">
       <div className="py-7 fatHeader"></div>
       <div className="block">
-        <div className="w-full border-b-[1.5px] border-gray-300 ">
+        <div className="w-full border-b-[1.5px] border-gray-300 dark:border-[#8c8c8c]">
           <h1 className="font-bold text-3xl ">Executive Board</h1>
         </div>
 
@@ -81,7 +81,7 @@ export default function Executive() {
       </div>
 
       <div className="block">
-        <div className="w-full border-b-[1.5px] border-gray-300 ">
+        <div className="w-full border-b-[1.5px] border-gray-300 dark:border-[#b1b1b1]"> 
           <h1 className="font-bold text-3xl ">Finance</h1>
         </div>
 
@@ -89,7 +89,7 @@ export default function Executive() {
       </div>
 
       <div className="block">
-        <div className="w-full border-b-[1.5px] border-gray-300 ">
+        <div className="w-full border-b-[1.5px] border-gray-300 dark:border-[#b1b1b1]">
           <h1 className="font-bold text-3xl ">Marketing</h1>
         </div>
 
@@ -97,7 +97,7 @@ export default function Executive() {
       </div>
 
       <div className="block">
-        <div className="w-full border-b-[1.5px] border-gray-300 ">
+        <div className="w-full border-b-[1.5px] border-gray-300 dark:border-[#b1b1b1]">
           <h1 className="font-bold text-3xl ">Events</h1>
         </div>
 

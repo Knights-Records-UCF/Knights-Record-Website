@@ -71,7 +71,7 @@ function TeamContainers({ arr }: PersonArrayProp) {
           return (
             <div
               key={index}
-              className="flex flex-col w-30 [&_h2]:text-[#656565] [&_p]:text-[#656565]"
+              className="flex flex-col w-30 [&_h2]:text-[#656565] [&_p]:text-[#656565] dark:[&_h2]:text-[#fbfbfb] dark:[&_p]:text-[#D9D9D9]"
             >
               <img
                 src={a.image}
@@ -90,7 +90,7 @@ function TeamContainers({ arr }: PersonArrayProp) {
 
 export default function Executive() {
   return (
-    <div className="[&>div:not(.fatHeader)]:py-2 gap-2 w-full px-10 [&_h1]:text-[#656565]">
+    <div className="[&>div:not(.fatHeader)]:py-2 gap-2 w-full px-10 [&_h1]:text-[#656565] dark:[&_h1]:text-[#fbfbfb]">
       <div className="py-7 fatHeader"></div>
       <div className="block">
         <div className="w-full border-b-[1.5px] border-gray-300 ">

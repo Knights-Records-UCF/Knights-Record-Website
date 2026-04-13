@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
+import ThemeToggle from "./components/Theme-Toggle";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,13 +26,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <div className="flex h-screen overflow-hidden">
           <Navbar />
-            <main className="flex-1 overflow-y-auto p-8 bg-gray-50 dark:bg-[#1f1f1f]">{children}</main>
+            <main className="flex-1 overflow-y-auto p-8 bg-gray-50 dark:bg-[#1f1f1f] transition-all duration-300 ease-in-out">
+              {children}
+              <ThemeToggle />
+            </main>
         </div>
 
       </body>

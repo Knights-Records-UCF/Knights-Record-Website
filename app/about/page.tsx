@@ -28,7 +28,7 @@ export default function About() {
                     className="drop-shadow-lg shadow-lg drop-shadow-black m-4 hover:scale-105 transition-all ease-in-out duration-300" // Consider custom shadow values to be more accurate to figma
                 />
             </div>
-            <p className="text-[#656565] text-center text-lg w-148.75 mt-8">
+            <p className="text-[#656565] dark:text-[#fbfbfb] text-center text-lg w-148.75 mt-8">
                 Knights Records aims to foster the growth of emerging artists and industry professionals within the UCF and Orlando communities by operating as a mock music label. Through hands-on management, marketing, and event coordination, we provide students and local talent with the tools, resources, and experience needed to succeed in the music industry.
             </p>
             <button
@@ -38,7 +38,7 @@ export default function About() {
                 Join Now
             </button>
             <div>
-                <h1 className="mt-12 text-[#656565] font-[525] text-[24px] mb-2">
+                <h1 className="mt-12 text-[#656565] dark:text-[#fbfbfb] font-[525] text-[24px] mb-2">
                     Connect with Us
                 </h1>
             </div>
