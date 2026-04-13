@@ -48,7 +48,7 @@ function Modal({ announcement, onClose }: ModalProps) {
 // Find icons for this button later
 function TempButton({ onPrev, onNext }: ButtonProps) {
     return (
-        <div className="flex flex-row gap-2 dark:text-[#fbfbfb]">
+        <div className="flex flex-row gap-2 dark:text-[#fbfbfb] transition-all duration-300 ease-in-out">
             <button
                 onClick={onPrev}>
                 {'<'}
