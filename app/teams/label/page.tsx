@@ -1,11 +1,10 @@
+"use client";
+import ImageCarousel from "@/app/components/TeamCarousel";
+
 interface Person {
   name: string;
   role: string;
   image: string;
-}
-
-interface PersonArrayProp {
-  arr: Person[];
 }
 
 const LabelManagement: Person[] = [
@@ -23,7 +22,11 @@ const LabelManagement: Person[] = [
 
 const LabelMarketing: Person[] = [
   { name: "Anen Jamir", role: "Social Media Assistant", image: "" },
-  { name: "Mio Raimondi", role: "Social Media Assistant", image: "" },
+  {
+    name: "Mio Raimondi",
+    role: "Social Media Assistant",
+    image: "/images/mio.png",
+  },
 ];
 
 const ArtistRepertoire: Person[] = [
@@ -36,7 +39,7 @@ const ArtistPromotions: Person[] = [
   {
     name: "Meira Lee",
     role: "Artist Promotions Director",
-    image: "/images/meira.png",
+    image: "/images/meira.PNG",
   },
   {
     name: "Rockxy Nieves",
@@ -49,95 +52,45 @@ const ConcertManagement: Person[] = [
   {
     name: "Lauren Walker",
     role: "Concert Director",
-    image: "/images/lauren.jpeg",
+    image: "/images/lauren.JPEG",
   },
   { name: "Mikayla Chu", role: "Concert Productions Assistant", image: "" },
 ];
 
 const Creative: Person[] = [
   {
-    name: "Elliot Gunn", role: "Social Media Assistant", image: "/images/elliot_irl.jpeg",
+    name: "Elliot Gunn",
+    role: "Social Media Assistant",
+    image: "/images/elliot_irl.jpeg",
   },
 ];
 
-function TeamContainers({ arr }: PersonArrayProp) {
-  return (
-    <>
-      <div className="flex gap-5 py-3">
-        {/* team member vvv */}
-
-        {/* testing how it looks :D */}
-        {arr.map((a, index) => {
-          return (
-            <div
-              key={index}
-              className="flex flex-col w-30 [&_h2]:text-[#656565] [&_p]:text-[#656565]"
-            >
-              <img
-                src={a.image}
-                // alt={"Picture of " + a.name}
-                className="w-30 h-30 min-w-30 min-h-30 bg-pink-300 rounded-2xl object-cover"
-              />
-              <h2 className="font-semibold">{a.name}</h2>
-              <p className="text-sm">{a.role}</p>
-            </div>
-          );
-        })}
-      </div>
-    </>
-  );
-}
-
 export default function Executive() {
   return (
-    <div className="[&>div:not(.fatHeader)]:py-2 gap-2 w-full px-10 [&_h1]:text-[#656565]">
+    <div className="[&>div:not(.fatHeader)]:py-2 gap-2 w-full  px-4 md:px-10 [&_h1]:text-[#656565]">
       <div className="py-7 fatHeader"></div>
       <div className="block">
-        <div className="w-full border-b-[1.5px] border-gray-300 ">
-          <h1 className="font-bold text-3xl ">Label Management</h1>
-        </div>
-
-        <TeamContainers arr={LabelManagement} />
+        <ImageCarousel arr={LabelManagement} title={"Label Management"} />
       </div>
 
       <div className="block">
-        <div className="w-full border-b-[1.5px] border-gray-300 ">
-          <h1 className="font-bold text-3xl ">Label Marketing</h1>
-        </div>
-
-        <TeamContainers arr={LabelMarketing} />
+        <ImageCarousel arr={LabelMarketing} title={"Label Marketing"} />
       </div>
 
       <div className="block">
-        <div className="w-full border-b-[1.5px] border-gray-300 ">
-          <h1 className="font-bold text-3xl ">Artist & Repertoire</h1>
-        </div>
-
-        <TeamContainers arr={ArtistRepertoire} />
+        <ImageCarousel arr={ArtistRepertoire} title={"Artist & Repertoire"} />
       </div>
 
       <div className="block">
-        <div className="w-full border-b-[1.5px] border-gray-300 ">
-          <h1 className="font-bold text-3xl ">Artist Promotions</h1>
-        </div>
-
-        <TeamContainers arr={ArtistPromotions} />
+        <ImageCarousel arr={ArtistPromotions} title={"Artist Promotion"} />
       </div>
 
       <div className="block">
-        <div className="w-full border-b-[1.5px] border-gray-300 ">
-          <h1 className="font-bold text-3xl ">Concert Management</h1>
-        </div>
-
-        <TeamContainers arr={ConcertManagement} />
+        <ImageCarousel arr={ConcertManagement} title={"Concert Management"} />
       </div>
 
       <div className="block">
-        <div className="w-full border-b-[1.5px] border-gray-300 ">
-          <h1 className="font-bold text-3xl ">Creative</h1>
-        </div>
-
-        <TeamContainers arr={Creative} />
+        <ImageCarousel arr={Creative} title={"Creative"} />
       </div>
     </div>
   );

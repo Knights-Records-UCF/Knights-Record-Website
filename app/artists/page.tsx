@@ -15,20 +15,19 @@ const ARTISTS: Artist[] = [
   {
     name: "Ant Moreiro",
     img: "/images/antmoreiro.jpg",
-    genres: ["Indie", "Pop"],
-    description: `📍Orlando, Florida || 19 🇨🇺
-Vocalist, Producer, Artist 🎶
-Never let another pilot fly in your plane 🌹`,
+    genres: ["Indie", "Rap", "Bedroom Pop"],
+    description: `Anthony Ramirez-Moreiro, known professionally as Ant Moreiro, was born and raised in Sarasota, Florida. From a young age, he developed a deep appreciation for music, drawing inspiration from R&B, rap, and alternative sounds that continue to shape his style today. Ant continues to create new music and perform live, with an EP slated for release later this year.`,
     socialLinks: [
       "https://www.instagram.com/antmoreiro/",
       "https://www.youtube.com/@antmoreiro",
+      "https://open.spotify.com/artist/1gi1fMiYRLXxmsaekAexBV?si=1SMmNkUARx6XT7MhBEll-Q",
     ],
   },
 
   {
     name: "Drocas",
     img: "/images/drocas.jpg",
-    genres: ["Electronic", "Alternative"],
+    genres: ["Electronic Pop", "Rap"],
     description: "STREAM FLOOD 🌊",
     socialLinks: [
       "https://www.instagram.com/damndrocas/",
@@ -167,20 +166,22 @@ export default function Artists() {
   };
 
   return (
-    <div className="h-full grid grid-cols-[1fr_2fr]">
+    <div className="flex flex-col max-md:text-red-600 md:h-full md:grid md:grid-cols-[1fr_2fr]">
       {/* vinyl scroll! */}
-      <div className="flex flex-col items-center overflow-y-auto no-scrollbar py-10">
+      <div className=" pt-14 md:pl-0 order-1 md:order-0 flex flex-col items-center overflow-y-auto no-scrollbar md:py-10">
         <Vinyl onSelectArtist={(index) => setCurrentIndex(index)} />
       </div>
 
       {/* displays the artist here!*/}
       <div className="flex h-full w-full flex-col justify-center items-center [&_h2]:text-[#656565] [&_h1]:text-[#656565] [&_p]:text-[#656565] [&_p]:text-sm">
         <div
-          className="h-64 w-64 bg-[#D9D9D9] rounded-full shadow-md overflow-hidden bg-cover bg-center transition-all duration-500"
+          className="md:h-64 md:w-64 w-42 h-42 bg-[#D9D9D9] rounded-full shadow-md overflow-hidden bg-cover bg-center transition-all duration-500"
           style={{ backgroundImage: `url(${artist.img})` }}
         ></div>
 
-        <h1 className="font-bold text-3xl mt-8 mb-2 ">{artist.name}</h1>
+        <h1 className="font-bold text-2xl md:text-3xl mt-8 mb-2 ">
+          {artist.name}
+        </h1>
 
         <div className="h-px w-[80%] bg-[#D9D9D9] mb-5"></div>
 
