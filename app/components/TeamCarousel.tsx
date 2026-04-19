@@ -1,4 +1,5 @@
 "use client";
+import { User2 } from "lucide-react";
 import { useState } from "react";
 
 interface Person {
@@ -28,11 +29,18 @@ function TeamContainers({ arr, currentIndex }: PersonArrayProp) {
               key={index}
               className="flex flex-col flex-shrink-0 [&_h2]:text-[#656565] [&_p]:text-[#656565] w-30"
             >
-              <img
-                src={a.image}
-                // alt={"Picture of " + a.name}
-                className="w-30 h-30 min-w-30 min-h-30 bg-pink-300 rounded-2xl object-cover"
-              />
+              {a.image && (
+                <img
+                  src={a.image || ""}
+                  // alt={"Picture of " + a.name}
+                  className="w-30 h-30 min-w-30 min-h-30 bg-gray-300 rounded-2xl object-cover"
+                />
+              )}
+              {!a.image && (
+                <div className="w-30 h-30 min-w-30 min-h-30 bg-gray-300 rounded-2xl object-cover flex items-center justify-center">
+                  <User2 size={50} color={"white"} />
+                </div>
+              )}
               <h2 className="font-semibold">{a.name}</h2>
               <p className="text-sm">{a.role}</p>
             </div>
