@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { IoHome, IoInformationCircle } from "react-icons/io5"; // home icon
+import { IoHome } from "react-icons/io5"; // home icon
 import { IoIosInformationCircle } from "react-icons/io"; // about icon
 import { IoPeople } from "react-icons/io5"; // team icon
 import { MdLibraryMusic } from "react-icons/md"; // artists icon
@@ -11,7 +11,6 @@ import { RiInstagramFill } from "react-icons/ri"; // ig icon
 import { IoLogoDiscord } from "react-icons/io5"; // discord icon
 import { IoLogoLinkedin } from "react-icons/io5"; // linkedin icon
 import { IoMail } from "react-icons/io5"; // email icon
-import { IoClose } from "react-icons/io5"; // close icon
 import { IoMenu } from "react-icons/io5"; // menu icon
 
 export default function Navbar() {
@@ -128,10 +127,10 @@ export default function Navbar() {
         {/* Footer */}
         <div className="mt-auto text-lg pt-6 pb-5">
             <div className="flex justify-center gap-4 text-[#B8B8B8] mb-3 text-4xl">
-            <a href="#"><RiInstagramFill /></a>
-            <a href="#"><IoLogoDiscord className="mt-0.5" /></a>
-            <a href="#"><IoLogoLinkedin className="mb-0.5" /></a>
-            <a href="#"><IoMail /></a>
+            <a href="https://www.instagram.com/knightsrecordsucf/" target="_blank" rel="noopener noreferrer"><RiInstagramFill /></a>
+            <a href="https://discord.gg/dwtVd39UHq" target="_blank" rel="noopener noreferrer"><IoLogoDiscord className="mt-0.5" /></a>
+            <a href="https://www.linkedin.com/company/knights-records/" target="_blank" rel="noopener noreferrer"><IoLogoLinkedin className="mb-0.5" /></a>
+            <a href="mailto:knightsrecordsucf@gmail.com" target="_blank" rel="noopener noreferrer"><IoMail /></a>
             </div>
             <div className="text-xs text-[#B8B8B8] flex justify-center">
             @ 2026 Knights Records
