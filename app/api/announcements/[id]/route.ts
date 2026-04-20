@@ -48,6 +48,44 @@ export async function PATCH(req: Request, { params }: RouteContext) {
     revalidatePath("/");
     return Response.json({ ok: true });
   } catch {
-    return Response.json({ error: "Failed to update announcement" }, { status: 500 });
+    return Response.json(
+      { error: "Failed to update announcement" },
+      { status: 500 },
+    );
+  }
+}
+
+export async function DELETE(req: Request, { params }: RouteContext) {
+  const session = await getServerSession(authOptions);
+
+  if (!session?.user?.isAdmin) {
+    return Response.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  const { id } = await params;
+  const announcementId = Number(id);
+
+  if (!announcementId) {
+    return Response.json({ error: "Invalid announcement id" }, { status: 400 });
+  }
+
+  const existingAnnouncement = await prisma.announcement.findUnique({
+    where: { id: announcementId },
+  });
+
+  console.log("Existing announcement:", existingAnnouncement);
+
+  try {
+    await prisma.announcement.delete({
+      where: { id: announcementId },
+    });
+
+    revalidatePath("/");
+    return Response.json({ ok: true });
+  } catch {
+    return Response.json(
+      { error: "Failed to delete announcement" },
+      { status: 500 },
+    );
   }
 }
