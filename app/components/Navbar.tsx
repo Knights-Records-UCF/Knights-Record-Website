@@ -11,9 +11,14 @@ import { RiInstagramFill } from "react-icons/ri"; // ig icon
 import { IoLogoDiscord } from "react-icons/io5"; // discord icon
 import { IoLogoLinkedin } from "react-icons/io5"; // linkedin icon
 import { IoMail } from "react-icons/io5"; // email icon
+import type { Session } from "next-auth";
+
+type NavbarProps = {
+    user : Session["user"] | null;
+};
 
 
-export default function Navbar() {
+export default function Navbar({ user }: NavbarProps) {
     const pathname = usePathname();
 
     // auto-open if you're on a teams page
@@ -112,6 +117,14 @@ export default function Navbar() {
                 </Link>
                 </li>
             </ul>
+
+            <div>
+                {user ? (
+                    <div>
+                        <h1> Signed in as {user.email ?? "User"}</h1>
+                    </div>
+                ) : null}
+            </div>
 
             {/* Footer */}
             <div className="mt-auto text-lg pt-6 pb-5">
