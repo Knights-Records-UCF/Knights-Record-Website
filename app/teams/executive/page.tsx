@@ -1,3 +1,7 @@
+"use client";
+import ImageCarousel from "@/app/components/TeamCarousel";
+import { useState } from "react";
+
 interface Person {
   name: string;
   role: string;
@@ -6,6 +10,8 @@ interface Person {
 
 interface PersonArrayProp {
   arr: Person[];
+  title?: String;
+  currentIndex?: any;
 }
 
 const ExecutiveBoard: Person[] = [
@@ -40,68 +46,29 @@ const EventsBoard: Person[] = [
   { name: "Maria Vega", role: "VP of Events", image: "/images/maria.JPG" },
 ];
 
-function TeamContainers({ arr }: PersonArrayProp) {
-  return (
-    <>
-      <div className="flex gap-5 py-3">
-        {/* team member vvv */}
-
-        {/* testing how it looks :D */}
-        {arr.map((a, index) => {
-          return (
-            <div
-              key={index}
-              className="flex flex-col [&_h2]:text-[#656565] [&_p]:text-[#656565] dark:[&_h2]:text-[#fbfbfb] dark:[&_p]:text-[#D9D9D9] transition-all duration-300 ease-in-out"
-            >
-              <img
-                src={a.image}
-                // alt={"Picture of " + a.name}
-                className="w-30 h-30 min-w-30 min-h-30 bg-pink-300 rounded-2xl object-cover"
-              />
-              <h2 className="font-semibold transition-all duration-300 ease-in-out">{a.name}</h2>
-              <p className="text-sm transition-all duration-300 ease-in-out">{a.role}</p>
-            </div>
-          );
-        })}
-      </div>
-    </>
-  );
-}
-
 export default function Executive() {
   return (
-    <div className="[&>div:not(.fatHeader)]:py-2 gap-2 w-full px-10 [&_h1]:text-[#656565] dark:[&_h1]:text-[#fbfbfb] transition-all duration-300 ease-in-out">
+    <div className="dark:[&_h1]:text-[#fbfbfb] dark:[&_p]:text-[#D9D9D9] [&>div:not(.fatHeader)]:py-2 gap-2 w-full px-4 md:px-10 [&_h1]:text-[#656565]">
       <div className="py-7 fatHeader"></div>
-      <div className="block">
-        <div className="w-full border-b-[1.5px] border-gray-300 dark:border-[#323236] transition-all duration-300 ease-in-out">
-          <h1 className="font-bold text-3xl transition-all duration-300 ease-in-out">Executive Board</h1>
-        </div>
 
-        <TeamContainers arr={ExecutiveBoard} />
+      <div className="block">
+        <ImageCarousel arr={ExecutiveBoard} title={"Executive Board"} />
       </div>
 
       <div className="block">
-        <div className="w-full border-b-[1.5px] border-gray-300 dark:border-[#323236] transition-all duration-300 ease-in-out">
-          <h1 className="font-bold text-3xl transition-all duration-300 ease-in-out">Finance</h1>
-        </div>
-
-        <TeamContainers arr={FinanceBoard} />
+        <ImageCarousel arr={FinanceBoard} title={"Finance"} />
       </div>
 
       <div className="block">
-        <div className="w-full border-b-[1.5px] border-gray-300 dark:border-[#323236] transition-all duration-300 ease-in-out">
-          <h1 className="font-bold text-3xl transition-all duration-300 ease-in-out">Marketing</h1>
+        <div className="block">
+          <ImageCarousel arr={MarketingBoard} title={"Marketing"} />
         </div>
-
-        <TeamContainers arr={MarketingBoard} />
       </div>
 
       <div className="block">
-        <div className="w-full border-b-[1.5px] border-gray-300 dark:border-[#323236] transition-all duration-300 ease-in-out">
-          <h1 className="font-bold text-3xl transition-all duration-300 ease-in-out">Events</h1>
+        <div className="block">
+          <ImageCarousel arr={EventsBoard} title={"Events"} />
         </div>
-
-        <TeamContainers arr={EventsBoard} />
       </div>
     </div>
   );

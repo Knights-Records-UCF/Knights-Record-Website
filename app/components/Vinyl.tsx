@@ -14,10 +14,10 @@ interface VinylProps {
 
 const recordArr: Record[] = [
   {
-    sleeveImage: "/images/albumCovers/volumeAlpha.jpeg",
+    sleeveImage: "/images/albumCovers/RoseColoredEyes.png",
   },
   {
-    sleeveImage: "/images/albumCovers/TCSOHIG.jpg",
+    sleeveImage: "/images/albumCovers/FLOOD.png",
   },
   {
     sleeveImage: "/images/albumCovers/200E.jpg",
@@ -29,14 +29,14 @@ const recordArr: Record[] = [
     sleeveImage: "/images/albumCovers/SUBQ.jpg",
   },
   {
-    sleeveImage: "/images/albumCovers/SUBQ.jpg",
+    sleeveImage: "/images/albumCovers/volumeAlpha.jpeg",
   },
 ];
 
 export default function Vinyl({ onSelectArtist }: VinylProps) {
   return (
     // Switch to aside later since this is lowk like a navbar but for artists
-    <div className="flex flex-col gap-4">
+    <div className="pl-125 md:pl-0 flex md:flex-col gap-4">
       {recordArr.map((vinyl, i) => (
         <div
           key={i}
@@ -58,7 +58,7 @@ export default function Vinyl({ onSelectArtist }: VinylProps) {
             alt="Album Record"
             width={128}
             height={128}
-            className={`absolute inset-0 z-0 h-full w-full object-cover rounded-full  transition-transform drop-shadow-gray-400 dark:drop-shadow-black/70 drop-shadow-md duration-300 scale-115 group-hover:translate-x-16 group-hover:animate-[spin_5.5s_linear_infinite]`}
+            className={`absolute inset-0 z-0 h-full w-full object-cover rounded-full  transition-transform drop-shadow-gray-400 drop-shadow-md duration-300 scale-115 max-md:group-hover:translate-y-[-53px] md:group-hover:translate-x-16 group-hover:animate-[spin_5.5s_linear_infinite]`}
           />
         </div>
       ))}
