@@ -174,31 +174,33 @@ export default function Artists() {
       </div>
 
       {/* displays the artist here!*/}
-      <div className="flex h-full w-full flex-col justify-center items-center [&_h2]:text-[#656565] [&_h1]:text-[#656565] [&_p]:text-[#656565] [&_p]:text-sm">
+      <div className="flex h-full w-full flex-col justify-center items-center [&_h2]:text-[#656565] dark:[&_h2]:text-[#fbfbfb] [&_h1]:text-[#656565] dark:[&_h1]:text-[#fbfbfb] [&_p]:text-[#656565] dark:[&_p]:text-[#D9D9D9] [&_p]:text-sm transition-all duration-300 ease-in-out">
         <div
           className="h-64 w-64 bg-[#D9D9D9] rounded-full shadow-md overflow-hidden bg-cover bg-center transition-all duration-500"
           style={{ backgroundImage: `url(${artist.img})` }}
         ></div>
 
-        <h1 className="font-bold text-3xl mt-8 mb-2 ">{artist.name}</h1>
+        <h1 className="font-bold text-3xl mt-8 mb-2 transition-all duration-300 ease-in-out ">{artist.name}</h1>
 
-        <div className="h-px w-[80%] bg-[#D9D9D9] mb-5"></div>
+        <div className="h-px w-[80%] bg-[#D9D9D9] dark:bg-[#323236] mb-5 transition-all duration-300 ease-in-out"></div>
 
-        <div className="px-10 max-w-lg">
+        <div className="px-10 max-w-lg transition-all duration-300 ease-in-out">
           <div className="self-start my-2">
-            <p className="text-center font-semibold ">Genres</p>
-            <p className="text-center italic">{artist.genres.join(", ")}</p>
+            <p className="text-center font-semibold transition-all duration-300 ease-in-out">Genres</p>
+            <p className="text-center italic transition-all duration-300 ease-in-out">
+              {artist.genres.join(", ")}
+            </p>
           </div>
 
-          <p className="text-center mt-4 leading-relaxed whitespace-pre-line">
+          <p className="text-center mt-4 leading-relaxed whitespace-pre-line transition-all duration-300 ease-in-out">
             {artist.description}
           </p>
         </div>
 
-        <h2 className="text-xl mt-10 font-semibold text-center">
+        <h2 className="text-xl mt-10 font-semibold text-center transition-all duration-300 ease-in-out">
           Follow {artist.name}
         </h2>
-        <div className="h-px w-[80%] bg-gray-300 mt-2"></div>
+        <div className="h-px w-[80%] bg-gray-300 dark:bg-[#323236] mt-2 transition-all duration-300 ease-in-out"></div>
 
         {/* loops thru socials here*/}
         <div className="flex gap-4 mt-6">

@@ -64,10 +64,10 @@ export default function Home() {
     <div className=" text-left ">
       <Carousel announcement={announcementsArr} />
       <div className="mt-12">
-        <h1 className="font-[525] text-2xl text-left text-[#656565]">
-          {`${months[new Date().getMonth()]}`} <span className="text-xl font-normal text-[#656565]/50"> 2026</span>
+        <h1 className="font-[525] text-2xl text-left text-[#656565] dark:text-[#fbfbfb]">
+          {`${months[new Date().getMonth()]}`} <span className="text-xl font-normal text-[#656565]/50 dark:text-[#8e8e8f]"> 2026</span>
         </h1>
-        <div className="border border-[#D9D9D9] mb-4" />
+        <div className="border border-[#D9D9D9] dark:border-[#363636] mb-4 transition-all duration-300 ease-in-out" />
         <Calendar />
       </div>
 
