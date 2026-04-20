@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+
 /* Thank you reddit */
 @layer utilities {
   .no-scrollbar::-webkit-scrollbar {

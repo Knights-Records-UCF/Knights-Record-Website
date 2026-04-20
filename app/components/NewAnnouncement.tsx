@@ -1,7 +1,10 @@
+
 import Form from "next/form";
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { UploadButton } from "@/utils/uploadthing";
+import AnnouncementImageUploader from "./test";
 
 type AnnouncementFormProps = {
   submitLabel: string;
@@ -43,6 +46,10 @@ function AnnouncementForm({ submitLabel, action }: AnnouncementFormProps) {
             required
           />
         </div>
+        <div>
+          <label htmlFor="image">Image</label>
+          <AnnouncementImageUploader />
+        </div>
         <button type="submit" className="bg-gray-500 p-2 rounded-xl">
           {submitLabel}
         </button>
@@ -72,7 +79,7 @@ export default function NewAnnouncement() {
   }
 
   return (
-        <AnnouncementForm
+        <AnnouncementForm   
           submitLabel="Create announcement!"
           action={createAnnouncement}
         />
