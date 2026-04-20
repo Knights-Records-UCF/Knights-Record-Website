@@ -205,7 +205,12 @@ export default function Calendar() {
                     {calendarCells.map((day, index) => {
                         // Fill blank cells so the 1st of every month isnt Sunday
                         if (day === null) {
-                            return null;
+                            return (
+                                <div
+                                    key={`blank-${index}`}
+                                    className="border-t border-[#f2f2f7] border-b w-32 h-24"
+                                />
+                            );
                         }
 
                         const dayEvents = eventsPerDay[day] ?? []; // Returns either an event of array objects or empty array
