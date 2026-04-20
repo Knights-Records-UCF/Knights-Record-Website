@@ -77,9 +77,9 @@ export default function Navbar() {
                 <button
                 type="button"
                 onClick={() => setTeamsOpen((v) => !v)}
-                className="w-full text-left px-4 py-2 rounded-lg hover:bg-[#EBEBEB] dark:hover:bg-[#39393B] flex flex-row items-center gap-2 text-[#656565] dark:text-[#fbfbfb]"
+                className="w-full text-left px-4 py-2 rounded-lg hover:bg-[#EBEBEB] dark:hover:bg-[#39393B] flex flex-row items-center gap-2 text-[#656565] dark:text-[#fbfbfb] transition-all duration-300 ease-in-out"
                 >
-                <IoPeople className="text-2xl text-[#b0ccb3]" /> Team
+                <IoPeople className="text-2xl text-[#b0ccb3] transition-all duration-300 ease-in-out" /> Team
                 </button>
 
                 <div

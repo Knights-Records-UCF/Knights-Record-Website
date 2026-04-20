@@ -18,7 +18,7 @@ function TeamContainers({ arr, currentIndex }: PersonArrayProp) {
   return (
     <>
       <div
-        className="flex gap-5 py-3 transition-transform duration-500 ease-out"
+        className="flex gap-5 py-3 transition-transform duration-500 ease-out transition-all duration-300 ease-in-out"
         style={{ transform: `translateX(-${currentIndex * 140}px)` }}
       >
         {/* team member vvv */}
@@ -27,22 +27,22 @@ function TeamContainers({ arr, currentIndex }: PersonArrayProp) {
           return (
             <div
               key={index}
-              className="dark:[&_h2]:text-[#fbfbfb] dark:[&_p]:text-[#D9D9D9] flex flex-col flex-shrink-0 [&_h2]:text-[#656565] [&_p]:text-[#656565] w-30"
+              className="dark:[&_h2]:text-[#fbfbfb] dark:[&_p]:text-[#D9D9D9] flex flex-col flex-shrink-0 [&_h2]:text-[#656565] [&_p]:text-[#656565] w-30  "
             >
               {a.image && (
                 <img
                   src={a.image || ""}
                   // alt={"Picture of " + a.name}
-                  className="w-30 h-30 min-w-30 min-h-30 bg-gray-300 rounded-2xl object-cover"
+                  className="w-30 h-30 min-w-30 min-h-30 bg-gray-300 rounded-2xl object-cover "
                 />
               )}
               {!a.image && (
-                <div className="w-30 h-30 min-w-30 min-h-30 bg-gray-300 rounded-2xl object-cover flex items-center justify-center">
+                <div className="w-30 h-30 min-w-30 min-h-30 bg-gray-300 rounded-2xl object-cover flex items-center justify-center ">
                   <User2 size={50} color={"white"} />
                 </div>
               )}
-              <h2 className="font-semibold">{a.name}</h2>
-              <p className="text-sm">{a.role}</p>
+              <h2 className="font-semibold transition-all duration-300 ease-in-out">{a.name}</h2>
+              <p className="text-sm transition-all duration-300 ease-in-out">{a.role}</p>
             </div>
           );
         })}
@@ -64,9 +64,9 @@ export default function ImageCarousel({ arr, title }: PersonArrayProp) {
 
   return (
     <div className="relative w-full overflow-hidden group">
-      <div className="flex items-center gap-2 mb-4">
-        <div className="w-full border-b-[1.5px] border-gray-300 flex dark:border-[#323236] ">
-          <h1 className="font-bold text-2xl md:text-3xl">{title}</h1>
+      <div className="flex items-center gap-2 mb-4 ">
+        <div className="w-full border-b-[1.5px] border-gray-300 flex dark:border-[#323236] transition-all duration-300 ease-in-out">
+          <h1 className="font-bold text-2xl md:text-3xl transition-all duration-300 ease-in-out">{title}</h1>
           <button
             onClick={prev}
             className="ml-auto px-2 py-1 border border-none rounded dark:hover:bg-transparent hover:bg-gray-100 text-[#656565] dark:text-[#fbfbfb]"

@@ -179,7 +179,7 @@ export default function Artists() {
           style={{ backgroundImage: `url(${artist.img})` }}
         ></div>
 
-        <h1 className="font-bold text-2xl md:text-3xl mt-8 mb-2 ">
+        <h1 className="font-bold text-2xl md:text-3xl mt-8 mb-2 transition-all duration-300 ease-in-out ">
           {artist.name}
         </h1>
 
