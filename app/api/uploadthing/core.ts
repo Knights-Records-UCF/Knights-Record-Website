@@ -5,8 +5,6 @@ import { authOptions } from "@/lib/auth";
 
 const f = createUploadthing();
 
-
-
 export const ourFileRouter = {
     imageUploader: f({
         image: {
@@ -19,9 +17,9 @@ export const ourFileRouter = {
 
         console.log("Session in middleware:", session);
 
-        if (!session?.user?.isAdmin) {
+        /*if (!session?.user?.isAdmin) {
             throw new UploadThingError("Unauthorized");
-        }
+        }*/
 
         return { userId: session?.user.name ?? "Unknown" };
     })

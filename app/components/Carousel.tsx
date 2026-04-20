@@ -122,21 +122,21 @@ function Modal({ announcement, isAdmin, onClose }: ModalProps) {
         />
         {!isEditing && !deleteConfirm && (
           <div>
-            <p className="text-[#656565] h-24 p-2">
+            <p className="text-[#656565] h-24 p-2 ">
               {announcement.description}
             </p>
             {isAdmin && (
-              <div>
+              <div className="gap-2 flex flex-row justify-center">
                 <button
                   type="button"
-                  className="mb-3 rounded-lg bg-gray-500 p-4"
+                  className="mb-3 rounded-lg bg-gray-500 p-3"
                   onClick={() => setIsEditing(true)}
                 >
                   Edit announcement
                 </button>
                 <button
                   type="button"
-                  className="mb-3 rounded-lg bg-gray-500 p-4"
+                  className="mb-3 rounded-lg bg-gray-500 p-3"
                   onClick={() => setDeleteConfirm(true)}
                 >
                   Delete announcement
@@ -232,7 +232,7 @@ function Modal({ announcement, isAdmin, onClose }: ModalProps) {
                 type="button"
                 className="rounded-lg border w-full"
                 onClick={() => {
-                  setError("");
+                  setError(""); 
                   setDeleteConfirm(false);
                 }}
                 disabled={isDeleting}

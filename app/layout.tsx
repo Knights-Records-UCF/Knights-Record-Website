@@ -2,9 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
-import "@uploadthing/react/styles.css";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -23,7 +20,6 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({children,}: Readonly<{children: React.ReactNode;}>) {
-  const session = await getServerSession(authOptions);
 
   return (
     <html lang="en">
@@ -31,7 +27,7 @@ export default async function RootLayout({children,}: Readonly<{children: React.
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <div className="flex h-screen overflow-hidden">
-          <Navbar user={session?.user ?? null}/>
+          <Navbar />
             <main className="flex-1 overflow-y-auto p-8 bg-gray-50">{children}</main>
         </div>
 

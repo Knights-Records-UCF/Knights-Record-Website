@@ -1,62 +1,8 @@
 
-import Form from "next/form";
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { UploadButton } from "@/utils/uploadthing";
-import AnnouncementImageUploader from "./test";
-
-type AnnouncementFormProps = {
-  submitLabel: string;
-  action: (formData: FormData) => Promise<void>;
-};
-
-function AnnouncementForm({ submitLabel, action }: AnnouncementFormProps) {
-  return (
-    <div className="border mt-4 w-90">
-      <h2>Create Announcement</h2>
-      <Form action={action} className="">
-        <div>
-          <label htmlFor="title">Title</label>
-          <input
-            type="text"
-            id="title"
-            name="title"
-            placeholder="Enter title"
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="description">Description</label>
-          <textarea
-            id="description"
-            name="description"
-            placeholder="Enter description"
-            rows={1}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="backgroundColor">Background Color</label>
-          <input
-            type="text"
-            id="backgroundColor"
-            name="backgroundColor"
-            placeholder="Enter background color"
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="image">Image</label>
-          <AnnouncementImageUploader />
-        </div>
-        <button type="submit" className="bg-gray-500 p-2 rounded-xl">
-          {submitLabel}
-        </button>
-      </Form>
-    </div>
-  );
-}
+import NewAnnouncementModal from "./NewAnnouncementModal";
 
 export default function NewAnnouncement() {
   async function createAnnouncement(formData: FormData) {
@@ -79,9 +25,6 @@ export default function NewAnnouncement() {
   }
 
   return (
-        <AnnouncementForm   
-          submitLabel="Create announcement!"
-          action={createAnnouncement}
-        />
+    <NewAnnouncementModal action={createAnnouncement} />
   );
 }

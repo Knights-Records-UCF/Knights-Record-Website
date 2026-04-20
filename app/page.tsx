@@ -4,6 +4,7 @@ import NewAnnouncement from "./components/NewAnnouncement";
 import prisma from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
+import type { Session } from "next-auth";
 
 interface Announcement {
   id: number;
@@ -29,7 +30,11 @@ const months = [
   "December", // 11
 ];
 
-export default async function Home() {
+type HomeProps = {
+  user: Session["user"] | null;
+};
+
+export default async function Home({ user }: HomeProps) {
   let session = null;
   try {
     session = await getServerSession(authOptions);
@@ -38,6 +43,8 @@ export default async function Home() {
     session = null;
   }
   const isAdmin = Boolean(session?.user?.isAdmin);
+  console.log("Is Admin:", isAdmin);
+  console.log("User:", session?.user);
   const announcement: Announcement[] = await prisma.announcement.findMany({
     orderBy: { id: "desc" },
   });
@@ -45,7 +52,12 @@ export default async function Home() {
     <div className=" text-left ">
       <Carousel announcement={announcement} isAdmin={isAdmin} />
       {isAdmin && (
+        <div>
           <NewAnnouncement />
+          <h1 className="mt-4">
+            {session?.user.email ? `Signed in as ${session.user.email}` : "Not signed in"}
+          </h1>
+        </div>
       )}
       <div className="mt-12">
         <h1 className="font-[525] text-2xl text-left text-[#656565]">
