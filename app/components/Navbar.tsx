@@ -25,14 +25,14 @@ export default function Navbar() {
     }, [isOnTeamsRoute]);
 
     const baseItem =
-        "block rounded-xl px-4 py-2 hover:bg-[#EBEBEB] text-[#656565]";
-    const activeItem = "bg-[#EBEBEB]";
+        "block rounded-xl px-4 py-2 hover:bg-[#EBEBEB] dark:hover:bg-[#39393B] text-[#656565] dark:text-white transition-all duration-300 ease-in-out";
+    const activeItem = "bg-[#EBEBEB] dark:bg-[#39393B]";
 
     return (
-        <aside className='h-screen w-64 bg-[#F5F5F5] drop-shadow-sm drop-shadow-gray-400 flex flex-col pt-5 overflow-y-auto'>
+        <aside className='h-screen w-64 bg-[#F5F5F5] dark:bg-[#252526] drop-shadow-sm drop-shadow-gray-400 dark:drop-shadow-[#3B3B3C] flex flex-col pt-5 overflow-y-auto transition-all duration-300 ease-in-out'>
 
             {/* Title */}
-            <div className='text-xl font-semibold mb-8 text-[#656565] text-center'>Knights Records</div>
+            <div className='text-xl font-semibold mb-8 text-[#656565] dark:text-white text-center'>Knights Records</div>
 
             {/* Nav */}
             <ul className="px-4 pr-6 space-y-2 text-lg text-[#656565] pt-12">
@@ -58,14 +58,14 @@ export default function Navbar() {
                 <li>
                 <div
                     className={`rounded-xl transition-colors  ${
-                    teamsOpen ? "bg-[#EBEBEB]" : ""
+                    teamsOpen ? "bg-[#EBEBEB] dark:bg-[#39393B] transition-all duration-300 ease-in-out" : ""
                     }`}
                 >
                     {/* Top row (Team) */}
                     <button
                     type="button"
                     onClick={() => setTeamsOpen((v) => !v)}
-                    className="w-full text-left px-4 py-2 rounded-lg hover:bg-[#EBEBEB] flex flex-row items-center gap-2 text-[#656565] "
+                    className="w-full text-left px-4 py-2 rounded-lg hover:bg-[#EBEBEB] dark:hover:bg-[#39393B] flex flex-row items-center gap-2 text-[#656565] dark:text-[#fbfbfb] "
                     >
                     <IoPeople className="text-2xl text-[#b0ccb3]" /> Team
                     </button>
@@ -81,7 +81,7 @@ export default function Navbar() {
 
                         <Link
                             href="/teams/executive"
-                            className={`block px-12 rounded-md text-[15px] ${
+                            className={`block px-12 rounded-md text-[15px] dark:text-[#9e9e9e] ${
                                 pathname === "/teams/executive" ? "font-semibold" : ""
                             }`}
                             >
@@ -92,7 +92,7 @@ export default function Navbar() {
 
                         <Link
                             href="/teams/label"
-                            className={`block pb-3 px-12 rounded-md text-[15px] ${
+                            className={`block pb-3 px-12 rounded-md text-[15px] dark:text-[#9e9e9e] ${
                                 pathname === "/teams/label" ? "font-semibold" : ""
                             }`}
                             >

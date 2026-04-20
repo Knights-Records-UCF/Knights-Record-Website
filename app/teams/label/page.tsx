@@ -67,7 +67,7 @@ const Creative: Person[] = [
 
 export default function Executive() {
   return (
-    <div className="[&>div:not(.fatHeader)]:py-2 gap-2 w-full  px-4 md:px-10 [&_h1]:text-[#656565]">
+    <div className="dark:[&_h1]:text-[#fbfbfb] dark:[&_p]:text-[#D9D9D9]  [&>div:not(.fatHeader)]:py-2 gap-2 w-full  px-4 md:px-10 [&_h1]:text-[#656565]">
       <div className="py-7 fatHeader"></div>
       <div className="block">
         <ImageCarousel arr={LabelManagement} title={"Label Management"} />

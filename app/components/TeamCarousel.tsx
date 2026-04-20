@@ -27,7 +27,7 @@ function TeamContainers({ arr, currentIndex }: PersonArrayProp) {
           return (
             <div
               key={index}
-              className="flex flex-col flex-shrink-0 [&_h2]:text-[#656565] [&_p]:text-[#656565] w-30"
+              className="dark:[&_h2]:text-[#fbfbfb] dark:[&_p]:text-[#D9D9D9] flex flex-col flex-shrink-0 [&_h2]:text-[#656565] [&_p]:text-[#656565] w-30"
             >
               {a.image && (
                 <img
@@ -65,17 +65,17 @@ export default function ImageCarousel({ arr, title }: PersonArrayProp) {
   return (
     <div className="relative w-full overflow-hidden group">
       <div className="flex items-center gap-2 mb-4">
-        <div className="w-full border-b-[1.5px] border-gray-300 flex">
+        <div className="w-full border-b-[1.5px] border-gray-300 flex dark:border-[#323236] ">
           <h1 className="font-bold text-2xl md:text-3xl">{title}</h1>
           <button
             onClick={prev}
-            className="ml-auto px-2 py-1 border border-none rounded hover:bg-gray-100 text-[#656565]"
+            className="ml-auto px-2 py-1 border border-none rounded dark:hover:bg-transparent hover:bg-gray-100 text-[#656565] dark:text-[#fbfbfb]"
           >
             {"<"}
           </button>
           <button
             onClick={next}
-            className="px-2 py-1 border border-none  rounded hover:bg-gray-100 text-[#656565]"
+            className="px-2 py-1 border border-none  rounded dark:hover:bg-transparent hover:bg-gray-100 text-[#656565] dark:text-[#fbfbfb]"
           >
             {">"}
           </button>

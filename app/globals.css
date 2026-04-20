@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* Thank you reddit */
 @layer utilities {
   .no-scrollbar::-webkit-scrollbar {
