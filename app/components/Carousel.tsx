@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 interface Announcement {
@@ -12,6 +13,7 @@ interface Announcement {
 
 interface ModalProps {
     announcement: Announcement;
+    isAdmin: boolean;
     onClose: () => void;
 }
 
@@ -22,9 +24,53 @@ interface ButtonProps {
 
 interface CarouselProps {
     announcement: Announcement[];
+    isAdmin: boolean;
 }
 
-function Modal({ announcement, onClose }: ModalProps) {
+function Modal({ announcement, isAdmin, onClose }: ModalProps) {
+    const router = useRouter();
+    const [isEditing, setIsEditing] = useState(false);
+    const [isSaving, setIsSaving] = useState(false);
+    const [error, setError] = useState("");
+    const [title, setTitle] = useState(announcement.title);
+    const [description, setDescription] = useState(announcement.description);
+    const [backgroundColor, setBackgroundColor] = useState(announcement.backgroundColor);
+
+    async function saveAnnouncement() {
+        setError("");
+        if (!title.trim() || !description.trim() || !backgroundColor.trim()) {
+            setError("All fields are required.");
+            return;
+        }
+
+        setIsSaving(true);
+
+        try {
+            const res = await fetch(`/api/announcements/${announcement.id}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    title: title.trim(),
+                    description: description.trim(),
+                    backgroundColor: backgroundColor.trim(),
+                }),
+            });
+
+            if (!res.ok) {
+                const data = (await res.json().catch(() => null)) as { error?: string } | null;
+                setError(data?.error ?? "Failed to update announcement.");
+                return;
+            }
+
+            router.refresh(); // Refresh the page to show the updated announcement
+            onClose();
+        } finally {
+            setIsSaving(false);
+        }
+    }
+
     return (
         <div
             className="fixed inset-0 z-50 flex p-4 items-center text-center justify-center bg-black/10"
@@ -43,8 +89,81 @@ function Modal({ announcement, onClose }: ModalProps) {
                 </div>
                 <div 
                     className={`w-full h-full`}
-                    style={{ backgroundColor: announcement.backgroundColor }} />
-                <p className="text-[#656565] h-24 p-2">{announcement.description}</p>
+                    style={{ backgroundColor: announcement.backgroundColor }} 
+                />
+                {!isEditing && (
+                    <>
+                        <p className="text-[#656565] h-24 p-2">{announcement.description}</p>
+                        {isAdmin && (
+                            <button
+                                type="button"
+                                className="mb-3 rounded-lg bg-gray-500 p-4"
+                                onClick={() => setIsEditing(true)}
+                            >
+                                Edit announcement
+                            </button>
+                        )}
+                    </>
+                )}
+
+                {isEditing && isAdmin && (
+                    <div className="w-full p-4 text-left">
+                        <div className="mb-2">
+                            <label htmlFor="edit-title" className="block text-sm">Title</label>
+                            <input
+                                id="edit-title"
+                                type="text"
+                                className="w-full border"
+                                value={title}
+                                onChange={(e) => setTitle(e.target.value)}
+                            />
+                        </div>
+                        <div className="mb-2">
+                            <label htmlFor="edit-description" className="block text-sm">Description</label>
+                            <textarea
+                                id="edit-description"
+                                className="w-full border"
+                                rows={3}
+                                value={description}
+                                onChange={(e) => setDescription(e.target.value)}
+                            />
+                        </div>
+                        <div className="mb-2">
+                            <label htmlFor="edit-background-color" className="block text-sm">Background Color</label>
+                            <input
+                                id="edit-background-color"
+                                type="text"
+                                className="w-full border"
+                                value={backgroundColor}
+                                onChange={(e) => setBackgroundColor(e.target.value)}
+                            />
+                        </div>
+
+                        {error && <p className="mb-2 text-sm text-red-600">{error}</p>}
+
+                        <div className="flex gap-2">
+                            <button
+                                type="button"
+                                className="rounded-lg bg-gray-500 w-full"
+                                onClick={saveAnnouncement}
+                                disabled={isSaving}
+                            >
+                                {isSaving ? "Saving..." : "Save changes"}
+                            </button>
+                            <button
+                                type="button"
+                                className="rounded-lg border w-full"
+                                onClick={() => {
+                                    setIsEditing(false);
+                                    setError("");
+                                }}
+                                disabled={isSaving}
+                            >
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     )
@@ -66,7 +185,7 @@ function TempButton({ onPrev, onNext }: ButtonProps) {
     )
 }
 
-export default function Carousel({ announcement }: CarouselProps) {
+export default function Carousel({ announcement, isAdmin }: CarouselProps) {
     const [visibleAnnouncement, setVisibleAnnouncement] = useState(0);
     const [currAnnouncement, setCurrAnnouncement] = useState(0);
     const [showModal, setShowModal] = useState(false);
@@ -116,7 +235,11 @@ export default function Carousel({ announcement }: CarouselProps) {
                 ))}
             </div>
             {showModal &&
-                <Modal announcement={announcement[currAnnouncement]} onClose={() => setShowModal(false)} />
+                <Modal
+                    announcement={announcement[currAnnouncement]}
+                    isAdmin={isAdmin}
+                    onClose={() => setShowModal(false)}
+                />
             }
         </div>
     )
