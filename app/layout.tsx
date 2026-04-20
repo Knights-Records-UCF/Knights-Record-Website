@@ -32,12 +32,12 @@ export default function RootLayout({
       >
         <div className="flex h-screen overflow-hidden">
           <Navbar />
-            <main className="flex-1 overflow-y-auto p-8 bg-gray-50 dark:bg-[#1f1f1f] transition-all duration-300 ease-in-out">
-              {children}
-              <ThemeToggle />
-            </main>
-        </div>
 
+          <main className="flex-1 overflow-y-auto bg-gray-50 dark:bg-[#1f1f1f] transition-all duration-300 ease-in-out p-4 pt-20 md:p-8">
+            {children}
+            <ThemeToggle />
+          </main>
+        </div>
       </body>
     </html>
   );
