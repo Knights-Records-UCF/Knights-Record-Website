@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Form from "next/form";
-import AnnouncementImageUploader from "./test";
 
 type NewAnnouncementModalProps = {
   action: (formData: FormData) => Promise<void>;
@@ -82,7 +81,6 @@ export default function NewAnnouncementModal({ action }: NewAnnouncementModalPro
                 <label htmlFor="image" className="text-sm">
                   Image
                 </label>
-                <AnnouncementImageUploader />
               </div>
 
               <div className="flex items-center gap-2 pt-2">
