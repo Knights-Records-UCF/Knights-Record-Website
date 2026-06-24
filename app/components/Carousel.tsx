@@ -249,12 +249,18 @@ function Modal({ announcement, isAdmin, onClose }: ModalProps) {
 
 // Find icons for this button later
 function TempButton({ onPrev, onNext }: ButtonProps) {
-  return (
-    <div className="flex flex-row gap-2">
-      <button onClick={onPrev}>{"<"}</button>
-      <button onClick={onNext}>{">"}</button>
-    </div>
-  );
+    return (
+        <div className="flex flex-row gap-2 dark:text-[#fbfbfb] transition-all duration-300 ease-in-out">
+            <button
+                onClick={onPrev}>
+                {'<'}
+            </button>
+            <button
+                onClick={onNext}>
+                {'>'}
+            </button>
+        </div>
+    )
 }
 
 export default function Carousel({ announcement, isAdmin }: CarouselProps) {
@@ -279,12 +285,42 @@ export default function Carousel({ announcement, isAdmin }: CarouselProps) {
     );
   }
 
-  return (
-    <div className="overflow-hidden relative">
-      <div className="flex mt-2 items-center ">
-        <h1 className=" text-[#656565] font-[525] text-3xl">Announcements</h1>
-        <div className="ml-2">
-          <TempButton onPrev={prev} onNext={next} />
+    return (
+        <div className="overflow-hidden relative">
+            <div className="flex mt-2 items-center ">
+                <h1 className=" text-[#656565] dark:text-[#fbfbfb] font-[525] text-3xl transition-all duration-300 ease-in-out">
+                    Announcements
+                </h1>
+                <div className="ml-2">
+                    <TempButton onPrev={prev} onNext={next} />
+                </div>
+            </div>
+            <div className="border border-[#D9D9D9] dark:border-[#363636] mb-0.5 transition-all duration-300 ease-in-out" />
+            <div
+                className="flex flex-row gap-4 transition-transform ease-out duration-500"
+                style={{ transform: `translateX(-${(visibleAnnouncement * 256)}px)` }} // 256 bc w-60 + gap-4 omggggg
+            >
+                {announcement.map((item, index) => (
+                    <div key={index} className="w-60">
+                        <h1 className="text-[#656565] dark:text-[#AEAEAE] text-[14px] font-525 transition-all duration-300 ease-in-out">
+                            {item.title}
+                        </h1>
+                        <p className="text-[#656565] dark:text-[#D9D9D9] w-52 text-[14px] text-left leading-none line-clamp-2 transition-all duration-300 ease-in-out">
+                            {item.description}
+                        </p>
+                        <div
+                            className={`${item.bgColor} mt-1.5 h-42 w-60  rounded-xl`}
+                            onClick={() => {
+                                setShowModal(true);
+                                setCurrAnnouncement(index);
+                            }}
+                        />
+                    </div>
+                ))}
+            </div>
+            {showModal &&
+                <Modal announcement={announcement[currAnnouncement]} onClose={() => setShowModal(false)} />
+            }
         </div>
       </div>
       <div className="border border-[#D9D9D9] mb-0.5" />

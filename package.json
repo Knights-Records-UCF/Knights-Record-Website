@@ -12,6 +12,7 @@
     "@prisma/adapter-pg": "^7.8.0",
     "@prisma/client": "^7.8.0",
     "dotenv": "^17.4.2",
+    "lucide-react": "^1.7.0",
     "icons": "^1.0.0",
     "next": "^16.2.1",
     "next-auth": "^4.24.14",
