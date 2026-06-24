@@ -300,8 +300,8 @@ export default function Carousel({ announcement, isAdmin }: CarouselProps) {
                 className="flex flex-row gap-4 transition-transform ease-out duration-500"
                 style={{ transform: `translateX(-${(visibleAnnouncement * 256)}px)` }} // 256 bc w-60 + gap-4 omggggg
             >
-                {announcement.map((item, index) => (
-                    <div key={index} className="w-60">
+                {announcement.map((item) => (
+                    <div key={item.id} className="w-60">
                         <h1 className="text-[#656565] dark:text-[#AEAEAE] text-[14px] font-525 transition-all duration-300 ease-in-out">
                             {item.title}
                         </h1>
@@ -309,51 +309,21 @@ export default function Carousel({ announcement, isAdmin }: CarouselProps) {
                             {item.description}
                         </p>
                         <div
-                            className={`${item.bgColor} mt-1.5 h-42 w-60  rounded-xl`}
+                            className={`mt-1.5 h-42 w-60 rounded-xl`}
+                            style={{ backgroundColor: item.backgroundColor }}
                             onClick={() => {
-                                setShowModal(true);
-                                setCurrAnnouncement(index);
+                              setShowModal(true);
+                              setCurrAnnouncement(announcement.indexOf(item));
                             }}
                         />
                     </div>
                 ))}
             </div>
             {showModal &&
-                <Modal announcement={announcement[currAnnouncement]} onClose={() => setShowModal(false)} />
+                <Modal announcement={announcement[currAnnouncement]} 
+                isAdmin={isAdmin}
+                onClose={() => setShowModal(false)} />
             }
         </div>
-      </div>
-      <div className="border border-[#D9D9D9] mb-0.5" />
-      <div
-        className="flex flex-row gap-4 transition-transform ease-out duration-500"
-        style={{ transform: `translateX(-${visibleAnnouncement * 256}px)` }} // 256 bc w-60 + gap-4 omggggg
-      >
-        {announcement.map((item) => (
-          <div key={item.id} className="w-60">
-            <h1 className="text-[#656565] text-[14px] font-525">
-              {item.title}
-            </h1>
-            <p className="text-[#656565] w-52 text-[14px] text-left leading-none line-clamp-2">
-              {item.description}
-            </p>
-            <div
-              className={`mt-1.5 h-42 w-60 rounded-xl`}
-              style={{ backgroundColor: item.backgroundColor }}
-              onClick={() => {
-                setShowModal(true);
-                setCurrAnnouncement(announcement.indexOf(item));
-              }}
-            />
-          </div>
-        ))}
-      </div>
-      {showModal && (
-        <Modal
-          announcement={announcement[currAnnouncement]}
-          isAdmin={isAdmin}
-          onClose={() => setShowModal(false)}
-        />
-      )}
-    </div>
   );
 }
