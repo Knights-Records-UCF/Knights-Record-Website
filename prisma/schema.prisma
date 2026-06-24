@@ -1,0 +1,40 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// Consider uploadthing? for image upload later
+model Announcement {
+  id Int @id @default(autoincrement())
+  title String
+  description String
+  backgroundColor String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt // Use later
+}
+
+model Artist {
+  id Int @id @default(autoincrement())
+  name String
+  img String
+  genres String[]
+  description String
+  socialLinks String[]
+}
+
+model Board {
+  id Int @id @default(autoincrement())
+  name String
+  role String
+  team String // Label or Executive
+  image String
+}

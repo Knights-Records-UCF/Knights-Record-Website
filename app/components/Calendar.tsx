@@ -196,7 +196,7 @@ export default function Calendar() {
             {/* Make a skeleton loader at some point for cleaner animations later */}
             {loading && (<p> loading </p>)}
             {!loading && (
-                // Calendar grid, DONT WORRY ABOUT MULTIPLE CHILDREN W/ THE SAME NULL KEY FOR NOW THIS DONT MATTER 
+                // Calendar grid
                 <div className="grid grid-cols-7 mt-2 ml-4">
                     {weekDays.map((day) => (
                         <h2 key={day} className="text-lg ml-2 text-[#858585]">{day}</h2>
@@ -205,7 +205,12 @@ export default function Calendar() {
                     {calendarCells.map((day, index) => {
                         // Fill blank cells so the 1st of every month isnt Sunday
                         if (day === null) {
-                            return null;
+                            return (
+                                <div
+                                    key={`blank-${index}`}
+                                    className="border-t border-[#f2f2f7] border-b w-32 h-24"
+                                />
+                            );
                         }
 
                         const dayEvents = eventsPerDay[day] ?? []; // Returns either an event of array objects or empty array
