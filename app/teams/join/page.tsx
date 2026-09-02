@@ -434,21 +434,37 @@ export default function JoinTeamPage() {
                 </div>
             </div>
 
-            {/* Gradient */}
+            {/* Gradients*/}
+            <div className="fixed bottom-0 left-0 md:left-65 right-0 h-40 pointer-events-none z-20">
+
+            {/* Light mode gradient */}
             <div
                 className="
-                fixed bottom-0 left-0 md:left-65 right-0
-                h-40
-                pointer-events-none
-                bg-linear-to-b
-                from-transparent
-                via-white/40
-                to-white
-                dark:via-[#1E1E1E]/70
-                dark:to-[#1E1E1E]
-                z-20
-            "
+                    absolute inset-0
+                    bg-linear-to-b
+                    from-transparent
+                    via-white/40
+                    to-white
+                    opacity-100
+                    dark:opacity-0
+                    transition-opacity duration-300 ease-in-out
+                "
             />
+
+            {/* Dark mode gradient */}
+            <div
+                className="
+                    absolute inset-0
+                    bg-linear-to-b
+                    from-transparent
+                    via-[#1E1E1E]/70
+                    to-[#1E1E1E]
+                    opacity-0
+                    dark:opacity-100
+                    transition-opacity duration-300 ease-in-out
+                "
+            />
+        </div>
 
         </main>
     );
