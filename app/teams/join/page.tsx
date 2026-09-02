@@ -5,13 +5,11 @@ import { useState } from "react";
 import { IoChevronDown } from "react-icons/io5";
 import { IoFilter } from "react-icons/io5";
 
-
-
-
 type Role = {
     id: number;
     title: string;
     committee: string;
+    team: "Executive Board" | "Label Team";
     description: string;
     applyLink?: string;
     image?: string;
@@ -22,6 +20,7 @@ const roles: Role[] = [
         id: 1,
         title: "President",
         committee: "Executive Board",
+        team: "Executive Board",
         description:
             "Provides strategic leadership for Knights Records, oversees all organizational operations, chairs executive meetings, and represents the organization to UCF and external partners.",
         applyLink: "#",
@@ -31,6 +30,7 @@ const roles: Role[] = [
         id: 2,
         title: "Vice President",
         committee: "Executive Board",
+        team: "Executive Board",
         description:
             "Supports the President in organizational leadership, oversees committee coordination, and ensures initiatives are executed effectively across all departments.",
         applyLink: "#",
@@ -40,6 +40,7 @@ const roles: Role[] = [
         id: 3,
         title: "Secretary",
         committee: "Executive Board",
+        team: "Executive Board",
         description:
             "Maintains meeting notes, organizational records, attendance, and official documentation while ensuring clear communication among officers and members.",
         applyLink: "#",
@@ -49,6 +50,7 @@ const roles: Role[] = [
         id: 4,
         title: "Treasurer",
         committee: "Finance",
+        team: "Executive Board",
         description:
             "Oversees the organization's budget, financial planning, fundraising efforts, and compliance with UCF financial policies while providing financial updates to the Executive Board.",
         applyLink: "#",
@@ -58,6 +60,7 @@ const roles: Role[] = [
         id: 5,
         title: "Head of Finance",
         committee: "Finance",
+        team: "Executive Board",
         description:
             "Assists with budgeting, expense tracking, reimbursement processes, fundraising logistics, and maintaining accurate financial records.",
         applyLink: "#",
@@ -67,6 +70,7 @@ const roles: Role[] = [
         id: 6,
         title: "VP of Events",
         committee: "Events",
+        team: "Executive Board",
         description:
             "Leads the planning and execution of organization-wide events, manages event logistics and timelines, and coordinates with committees, venues, and performers. Events include: Guest Speakers, Fundraisers, Workshops, Socials, etc.",
         applyLink: "#",
@@ -76,6 +80,7 @@ const roles: Role[] = [
         id: 7,
         title: "Head of Events",
         committee: "Events",
+        team: "Executive Board",
         description:
             "Supports event planning by coordinating volunteers, managing event operations, and ensuring smooth execution before, during, and after events. Events include: Guest Speakers, Fundraisers, Workshops, Socials, etc.",
         applyLink: "#",
@@ -85,6 +90,7 @@ const roles: Role[] = [
         id: 8,
         title: "VP of Membership",
         committee: "Membership",
+        team: "Executive Board",
         description:
             "Leads member recruitment, onboarding, engagement, and retention while fostering a welcoming and active organizational culture.",
         applyLink: "#",
@@ -93,7 +99,8 @@ const roles: Role[] = [
     {
         id: 9,
         title: "Head of Membership",
-        committee: "Membership",   
+        committee: "Membership",
+        team: "Executive Board",
         description:
             "Assists with recruitment efforts, member communications, attendance tracking, and planning member development and social activities.",
         applyLink: "#",
@@ -103,6 +110,7 @@ const roles: Role[] = [
         id: 10,
         title: "VP of Marketing",
         committee: "Marketing",
+        team: "Executive Board",
         description:
             "Develops marketing strategy for the organization, oversees branding and social media, and manages promotional campaigns for events and initiatives.",
         applyLink: "#",
@@ -112,6 +120,7 @@ const roles: Role[] = [
         id: 11,
         title: "Head of Marketing",
         committee: "Marketing",
+        team: "Executive Board",
         description:
             "Creates marketing content, assists with social media management, and supports promotional campaigns to increase organizational visibility.",
         applyLink: "#",
@@ -121,6 +130,7 @@ const roles: Role[] = [
         id: 12,
         title: "Web Designer",
         committee: "Marketing",
+        team: "Executive Board",
         description:
             "Designs, updates, and maintains the organization's website while ensuring accurate information, strong branding, and a user-friendly experience.",
         applyLink: "#",
@@ -130,6 +140,7 @@ const roles: Role[] = [
         id: 13,
         title: "Label Operations Director",
         committee: "Label Operations",
+        team: "Label Team",
         description:
             "Oversees day-to-day label operations, manages artist relations, coordinates projects across departments, and ensures artists receive organizational support.",
         applyLink: "#",
@@ -138,6 +149,7 @@ const roles: Role[] = [
         id: 14,
         title: "A&R Director",
         committee: "Artist & Repertoire",
+        team: "Label Team",
         description:   
             "Leads artist recruitment, evaluates talent, oversees artist development, and serves as the primary liaison between artists and the label.",
         applyLink: "#",
@@ -146,6 +158,7 @@ const roles: Role[] = [
         id: 15,
         title: "A&R Manager",
         committee: "Artist & Repertoire",
+        team: "Label Team",
         description:
             "Assists with artist scouting, maintains communication with their assigned artist, provides developmental support, and helps coordinate artist projects.",
         applyLink: "#",
@@ -154,6 +167,7 @@ const roles: Role[] = [
         id: 16,
         title: "Marketing Director",
         committee: "Marketing",
+        team: "Label Team",
         description:
             "Leads marketing strategy for signed artists, oversees release campaigns, and coordinates branding efforts across creative and promotional teams.",
         applyLink: "#",
@@ -162,6 +176,7 @@ const roles: Role[] = [
         id: 17,
         title: "Marketing Manager / Graphic Designer",
         committee: "Marketing",
+        team: "Label Team",
         description:
             "Executes artist marketing campaigns, manages promotional content, monitors campaign performance, and assists with release planning as well as graphic design support.",
         applyLink: "#",
@@ -170,6 +185,7 @@ const roles: Role[] = [
         id: 18,
         title: "Artist & Promotions Director",
         committee: "Artist & Promotions",
+        team: "Label Team",
         description:
             "Leads promotional initiatives for artists and label events while developing partnerships and outreach opportunities within the UCF and Orlando communities.",
         applyLink: "#",
@@ -178,6 +194,7 @@ const roles: Role[] = [
         id: 19,
         title: "Artist & Promotions Manager",
         committee: "Artist & Promotions",
+        team: "Label Team",
         description:
             "Supports promotional campaigns, coordinates outreach efforts, assists with partnerships, and helps increase artist and event visibility.",
         applyLink: "#",
@@ -186,6 +203,7 @@ const roles: Role[] = [
         id: 20,
         title: " Live Events Director",
         committee: " Live Events",
+        team: "Label Team",
         description:
             "Plans and manages artist showcases, concerts, and live performances while coordinating logistics, production, and venue operations.",
         applyLink: "#",
@@ -194,6 +212,7 @@ const roles: Role[] = [
         id: 21,
         title: "Live Events Assistant",
         committee: "Live Events",
+        team: "Label Team",
         description:
             "Supports live event setup, artist coordination, volunteer management, and day-of-event operations.",
         applyLink: "#",
@@ -202,6 +221,7 @@ const roles: Role[] = [
         id: 22,
         title: "Creative Director",
         committee: "Creative",
+        team: "Label Team",
         description:
             "Leads the creative vision for the organization and its artists, overseeing branding, visual content, photoshoots, album artwork, and multimedia projects.",
         applyLink: "#",
@@ -210,6 +230,7 @@ const roles: Role[] = [
         id: 23,
         title: "Creative Assistant",
         committee: "Creative",
+        team: "Label Team",
         description:
             "Supports creative projects by assisting with design, branding, content creation, and production for artists and organizational initiatives.",
         applyLink: "#",
@@ -218,6 +239,7 @@ const roles: Role[] = [
         id: 24,
         title: "Photographer",
         committee: "Creative",
+        team: "Label Team",
         description:
             "Captures high-quality photography for events, artists, and promotional materials while maintaining the organization's visual archive.",
         applyLink: "#",
@@ -226,6 +248,7 @@ const roles: Role[] = [
         id: 25,
         title: "Videographer",
         committee: "Creative",
+        team: "Label Team",
         description:
             "Produces and edits video content for performances, promotional campaigns, artist features, and social media platforms.",
         applyLink: "#",
@@ -233,14 +256,28 @@ const roles: Role[] = [
 ];
 
 export default function JoinTeamPage() {
-    const [openRole, setOpenRole] = useState<number | null>(1);
+    const [openRole, setOpenRole] = useState<number | null>(null);
+
+    const [labelFirst, setLabelFirst] = useState(false);
 
     const toggleRole = (id: number) => {
         setOpenRole((current) => (current === id ? null : id));
     };
 
+    const displayedRoles = [...roles].sort((a, b) => {
+        if (a.team === b.team) {
+            return 0;
+        }
+
+        if (labelFirst) {
+            return a.team === "Label Team" ? -1 : 1;
+        }
+
+        return a.team === "Executive Board" ? -1 : 1;
+    });
+
     return (
-        <main className="min-h-screen text-[#656565] dark:text-[#E5E5E5]">
+        <main className="min-h-screen text-[#656565] dark:text-[#E5E5E5] transition-all duration-300 ease-in-out">
             <div className=" mx-auto px-6 md:px-10 lg:px-16 py-10 md:py-16">
 
                 {/* Hero */}
@@ -253,7 +290,7 @@ export default function JoinTeamPage() {
 
                     {/* Hero text */}
                     <div className="max-w-152 md:pt-8">
-                        <h1 className="text-3xl md:text-[32px] font-semibold mb-4 text-[#656565] dark:text-white">
+                        <h1 className="text-3xl md:text-[32px] font-semibold mb-4 text-[#656565] dark:text-white text-center md:text-left transition-all duration-300 ease-in-out">
                             Interested In Joining?
                         </h1>
 
@@ -268,13 +305,21 @@ export default function JoinTeamPage() {
 
                 {/* Table header */}
                 <div className="mx-8">
-                <div className="hidden md:grid grid-cols-[1.2fr_1.2fr_80px] items-center border-b border-[#D8D8D8] dark:border-[#323236] pb-2 px-1 font-semibold">
+                <div className="hidden md:grid grid-cols-[1.2fr_1.2fr_80px] items-center border-b border-[#D8D8D8] dark:border-[#323236] pb-2 px-1 font-semibold transition-all duration-300 ease-in-out">
                     <div>
                         Role
                     </div>
 
                     <div className="flex items-center gap-2">
-                        Committee <IoFilter />
+                        Committee 
+                        <button
+                            type="button"
+                            onClick={() => setLabelFirst((prev) => !prev)}
+                            aria-label="Toggle team order"
+                            className="cursor-pointer"
+                        >
+                            <IoFilter />
+                        </button>
                     </div>
 
                     <div className="text-right whitespace-nowrap">
@@ -284,13 +329,13 @@ export default function JoinTeamPage() {
 
                 {/* Role list */}
                 <div>
-                    {roles.map((role) => {
+                    {displayedRoles.map((role) => {
                         const isOpen = openRole === role.id;
 
                         return (
                             <div
                                 key={role.id}
-                                className="border-b border-[#D8D8D8] dark:border-[#323236]"
+                                className="border-b border-[#D8D8D8] dark:border-[#323236] transition-all duration-300 ease-in-out"
                             >
                                 {/* Clickable role row */}
                                 <button

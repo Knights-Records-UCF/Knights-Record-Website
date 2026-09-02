@@ -12,6 +12,7 @@ import { IoLogoDiscord } from "react-icons/io5"; // discord icon
 import { IoLogoLinkedin } from "react-icons/io5"; // linkedin icon
 import { IoMail } from "react-icons/io5"; // email icon
 import { IoMenu } from "react-icons/io5"; // menu icon
+import Image from "next/image";
 
 export default function Navbar() {
     const pathname = usePathname();
@@ -37,8 +38,16 @@ export default function Navbar() {
     const navContent = (
         <>
         {/* Title */}
-        <div className="text-xl font-semibold mb-8 text-[#656565] dark:text-white text-center">
-            Knights Records
+        <div className="flex items-center justify-center gap-2 mb-8 text-xl font-semibold text-[#656565] dark:text-white">
+            <Image
+                src="/images/krlogo.png"
+                alt="Knights Records logo"
+                width={32}
+                height={32}
+                className="object-contain"
+            />
+
+            <span>Knights Records</span>
         </div>
 
         {/* Nav */}
