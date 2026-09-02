@@ -433,6 +433,23 @@ export default function JoinTeamPage() {
                 </div>
                 </div>
             </div>
+
+            {/* Gradient */}
+            <div
+                className="
+                fixed bottom-0 left-0 md:left-65 right-0
+                h-40
+                pointer-events-none
+                bg-linear-to-b
+                from-transparent
+                via-white/40
+                to-white
+                dark:via-[#1E1E1E]/70
+                dark:to-[#1E1E1E]
+                z-20
+            "
+            />
+
         </main>
     );
 }
