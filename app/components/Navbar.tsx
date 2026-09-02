@@ -12,6 +12,7 @@ import { IoLogoDiscord } from "react-icons/io5"; // discord icon
 import { IoLogoLinkedin } from "react-icons/io5"; // linkedin icon
 import { IoMail } from "react-icons/io5"; // email icon
 import { IoMenu } from "react-icons/io5"; // menu icon
+import Image from "next/image";
 
 export default function Navbar() {
     const pathname = usePathname();
@@ -37,8 +38,16 @@ export default function Navbar() {
     const navContent = (
         <>
         {/* Title */}
-        <div className="text-xl font-semibold mb-8 text-[#656565] dark:text-white text-center">
-            Knights Records
+        <div className="flex items-center justify-center gap-2 mb-8 text-xl font-semibold text-[#656565] dark:text-white">
+            <Image
+                src="/images/krlogo.png"
+                alt="Knights Records logo"
+                width={32}
+                height={32}
+                className="object-contain"
+            />
+
+            <span>Knights Records</span>
         </div>
 
         {/* Nav */}
@@ -67,49 +76,73 @@ export default function Navbar() {
 
             {/* Team dropdown */}
             <li>
-            <div
-                className={`rounded-xl transition-colors ${
-                teamsOpen
-                    ? "bg-[#EBEBEB] dark:bg-[#39393B] transition-all duration-300 ease-in-out"
-                    : ""
-                }`}
-            >
-                <button
-                type="button"
-                onClick={() => setTeamsOpen((v) => !v)}
-                className="w-full text-left px-4 py-2 rounded-lg hover:bg-[#EBEBEB] dark:hover:bg-[#39393B] flex flex-row items-center gap-2 text-[#656565] dark:text-[#fbfbfb] transition-all duration-300 ease-in-out"
-                >
-                <IoPeople className="text-2xl text-[#b0ccb3] transition-all duration-300 ease-in-out" /> Team
-                </button>
-
                 <div
-                className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                    teamsOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-                }`}
+                    className={`rounded-xl transition-colors ${
+                        teamsOpen
+                            ? "bg-[#EBEBEB] dark:bg-[#39393B]"
+                            : ""
+                    } transition-all duration-300 ease-in-out`}
                 >
-                <div className="my-2 h-px mt-0 w-6/7 mx-auto bg-[#D8D8D8]" />
+                    <button
+                        type="button"
+                        onClick={() => setTeamsOpen((v) => !v)}
+                        className="w-full text-left px-4 py-2 rounded-lg hover:bg-[#EBEBEB] dark:hover:bg-[#39393B] flex flex-row items-center gap-2 text-[#656565] dark:text-[#fbfbfb] transition-all duration-300 ease-in-out"
+                    >
+                        <IoPeople className="text-2xl text-[#b0ccb3]" />
+                        Team
+                    </button>
 
-                <Link
-                    href="/teams/executive"
-                    className={`block px-12 rounded-md text-[15px] dark:text-[#9e9e9e] ${
-                    pathname === "/teams/executive" ? "font-semibold" : ""
-                    }`}
-                >
-                    Executive Board
-                </Link>
+                    <div
+                        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                            teamsOpen
+                                ? "max-h-96 opacity-100"
+                                : "max-h-0 opacity-0"
+                        }`}
+                    >
 
-                <div className="my-2 h-px w-6/7 mx-auto bg-[#D8D8D8]" />
+                        <div className="h-px w-6/7 mx-auto bg-[#D8D8D8]" />
 
-                <Link
-                    href="/teams/label"
-                    className={`block pb-3 px-12 rounded-md text-[15px] dark:text-[#9e9e9e] ${
-                    pathname === "/teams/label" ? "font-semibold" : ""
-                    }`}
-                >
-                    Label Team
-                </Link>
+                        {/* Executive Board */}
+                        <Link
+                            href="/teams/executive"
+                            className={`block px-12 py-2 rounded-md text-[15px] dark:text-[#9e9e9e] ${
+                                pathname === "/teams/executive"
+                                    ? "font-semibold"
+                                    : ""
+                            }`}
+                        >
+                            Executive Board
+                        </Link>
+
+                        <div className="h-px w-6/7 mx-auto bg-[#D8D8D8]" />
+
+                        {/* Label Team */}
+                        <Link
+                            href="/teams/label"
+                            className={`block px-12 py-2 rounded-md text-[15px] dark:text-[#9e9e9e] ${
+                                pathname === "/teams/label"
+                                    ? "font-semibold"
+                                    : ""
+                            }`}
+                        >
+                            Label Team
+                        </Link>
+
+                        <div className="h-px w-6/7 mx-auto bg-[#D8D8D8]" />
+
+                        {/* Join Our Team */}
+                        <Link
+                            href="/teams/join"
+                            className={`block px-12 py-2 rounded-md text-[15px] dark:text-[#9e9e9e] ${
+                                pathname === "/teams/join"
+                                    ? "font-semibold"
+                                    : ""
+                            }`}
+                        >
+                            Join Our Team
+                        </Link>
+                    </div>
                 </div>
-            </div>
             </li>
 
             <li>
