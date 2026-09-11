@@ -1,14 +1,32 @@
 "use client";
 
 import { useState } from "react";
-import Form from "next/form";
+import { useRouter } from "next/navigation";
 
-type NewAnnouncementModalProps = {
-  action: (formData: FormData) => Promise<void>;
-};
-
-export default function NewAnnouncementModal({ action }: NewAnnouncementModalProps) {
+export default function NewAnnouncementModal() {
   const [isOpen, setIsOpen] = useState(false);
+  const [image, setImage] = useState<File | null>(null);
+
+  const router = useRouter();
+
+  async function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    if (!image) {
+      console.error("Image required");
+      return;
+    }
+
+    const formData = new FormData(e.currentTarget);
+
+    const res = await fetch("/api/announcements/upload", {
+      method: "POST",
+      body: formData,
+    });
+
+    setIsOpen(false);
+    router.refresh();
+  }
 
   return (
     <>
@@ -24,7 +42,10 @@ export default function NewAnnouncementModal({ action }: NewAnnouncementModalPro
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
           <div className="w-full max-w-lg rounded-xl bg-white p-6 shadow-2xl">
             <div className="mb-4 flex items-center justify-between">
-              <h2 className="text-xl font-semibold">Create Announcement</h2>
+              <h2 className="text-xl font-semibold">
+                Create Announcement
+              </h2>
+
               <button
                 type="button"
                 onClick={() => setIsOpen(false)}
@@ -34,11 +55,12 @@ export default function NewAnnouncementModal({ action }: NewAnnouncementModalPro
               </button>
             </div>
 
-            <Form action={action} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4">
               <div className="flex flex-col gap-1">
-                <label htmlFor="title" className="text-sm font-medium ">
+                <label htmlFor="title" className="text-sm font-medium">
                   Title
                 </label>
+
                 <input
                   type="text"
                   id="title"
@@ -50,9 +72,13 @@ export default function NewAnnouncementModal({ action }: NewAnnouncementModalPro
               </div>
 
               <div className="flex flex-col gap-1">
-                <label htmlFor="description" className="text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="description"
+                  className="text-sm font-medium text-gray-700"
+                >
                   Description
                 </label>
+
                 <textarea
                   id="description"
                   name="description"
@@ -64,29 +90,35 @@ export default function NewAnnouncementModal({ action }: NewAnnouncementModalPro
               </div>
 
               <div className="flex flex-col gap-1">
-                <label htmlFor="backgroundColor" className="text-sm font-medium ">
-                  Background Color
+                <label htmlFor="image" className="text-sm font-medium">
+                  Image
                 </label>
+
                 <input
-                  type="text"
-                  id="backgroundColor"
-                  name="backgroundColor"
-                  placeholder="Enter background color"
+                  type="file"
+                  accept="image/*"
+                  id="image"
+                  name="image"
                   required
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+
+                    if (file) {
+                      setImage(file);
+                    }
+                  }}
                   className="rounded-md border border-gray-300 px-3 py-2 outline-none focus:border-gray-500"
                 />
               </div>
 
-              <div className="flex flex-col gap-1">
-                <label htmlFor="image" className="text-sm">
-                  Image
-                </label>
-              </div>
-
               <div className="flex items-center gap-2 pt-2">
-                <button type="submit" className="rounded-xl bg-gray-600 p-3 text-white">
+                <button
+                  type="submit"
+                  className="rounded-xl bg-gray-600 p-3 text-white"
+                >
                   Create announcement!
                 </button>
+
                 <button
                   type="button"
                   onClick={() => setIsOpen(false)}
@@ -95,7 +127,7 @@ export default function NewAnnouncementModal({ action }: NewAnnouncementModalPro
                   Cancel
                 </button>
               </div>
-            </Form>
+            </form>
           </div>
         </div>
       )}
