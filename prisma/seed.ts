@@ -16,33 +16,8 @@ async function main() {
             {
                 title: "Next meeting",
                 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget ultricies lacinia, nunc nisl aliquam nisl, eget aliquam nunc nisl eget nunc.",
-                backgroundColor: "#E18181",
-            },
-            {
-                title: "Workshop!!!",
-                description: "hello oijdoifjaoidsjfo jasdof fdosfj osdjfosd",
-                backgroundColor: "#17A1FA",
-            },
-            {
-                title: "Super cool social",
-                description: "hello oijdoifjaoidsjfo jasdof fdosfj osdjfosd",
-                backgroundColor: "#8AFFC8",
-            },
-            {
-                title: "Helo guys!!!!",
-                description: "hello oijdoifjaoidsjfo jasdof fdosfj osdjfosd",
-                backgroundColor: "#1C7049",
-            },
-            {
-                title: "Helo guys!!!!",
-                description: "hello oijdoifjaoidsjfo jasdof fdosfj osdjfosd",
-                backgroundColor: "#1C7049",
-            },
-            {
-                title: "Helo guys!!!!",
-                description: "hello oijdoifjaoidsjfo jasdof fdosfj osdjfosd",
-                backgroundColor: "#1C7049",
-            },
+                imageKey: null,
+            },  
         ]
     })
 

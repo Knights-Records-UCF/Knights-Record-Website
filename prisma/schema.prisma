@@ -16,7 +16,7 @@ model Announcement {
   id Int @id @default(autoincrement())
   title String
   description String
-  imageKey String
+  imageKey String? // this prob isnt the wisest but hey 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt // Use later
 }
