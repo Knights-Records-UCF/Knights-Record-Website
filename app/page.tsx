@@ -45,9 +45,9 @@ export default async function Home({ user }: HomeProps) {
   const isAdmin = Boolean(session?.user?.isAdmin);
   console.log("Is Admin:", isAdmin);
   console.log("User:", session?.user);
-  const announcement: Announcement[] = await prisma.announcement.findMany({
-    orderBy: { id: "desc" },
-  });
+  const announcement: Announcement[] = await prisma.announcement
+    .findMany({ orderBy: { id: "desc" } })
+    .catch(() => []);
   return (
     <div className=" text-left ">
       <Carousel announcement={announcement} isAdmin={isAdmin} />

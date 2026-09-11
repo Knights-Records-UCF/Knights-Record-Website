@@ -168,7 +168,7 @@ export default function Artists() {
   return (
     <div className="flex flex-col max-md:text-red-600 md:h-full md:grid md:grid-cols-[1fr_2fr]">
       {/* vinyl scroll! */}
-      <div className=" pt-14 md:pl-0 order-1 md:order-0 flex flex-col items-center overflow-y-auto no-scrollbar md:py-10">
+      <div className="pt-14 md:pl-0 order-1 md:order-0 flex flex-col items-center overflow-y-auto no-scrollbar md:py-10 fade-y">
         <Vinyl onSelectArtist={(index) => setCurrentIndex(index)} />
       </div>
 

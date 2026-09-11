@@ -44,6 +44,15 @@ const EventsBoard: Person[] = [
     image: "/images/cassidy.jpg",
   },
   { name: "Maria Vega", role: "VP of Events", image: "/images/maria.JPG" },
+  { name: "Maria Vega", role: "VP of Events", image: "/images/maria.JPG" },
+  { name: "Maria Vega", role: "VP of Events", image: "/images/maria.JPG" },
+  { name: "Maria Vega", role: "VP of Events", image: "/images/maria.JPG" },
+  { name: "Maria Vega", role: "VP of Events", image: "/images/maria.JPG" },
+  { name: "Maria Vega", role: "VP of Events", image: "/images/maria.JPG" },
+  { name: "Maria Vega", role: "VP of Events", image: "/images/maria.JPG" },
+  { name: "Maria Vega", role: "VP of Events", image: "/images/maria.JPG" },
+  { name: "Maria Vega", role: "VP of Events", image: "/images/maria.JPG" },
+  { name: "Maria Vega", role: "VP of Events", image: "/images/maria.JPG" },
 ];
 
 const WebBoard: Person[] = [

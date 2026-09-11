@@ -13,8 +13,6 @@
   }
 }
 
-
-
 /*
 :root {
   --background: #ffffff;
@@ -40,8 +38,6 @@
 }
   */
 
-  
-
 body {
   /* background: var(--background);
   color: var(--foreground);
@@ -51,3 +47,38 @@ body {
   font-family: "Inter", sans-serif;
 }
 
+.fade-x {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 6%,
+    black 94%,
+    transparent 100%
+  );
+
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 6%,
+    black 94%,
+    transparent 100%
+  );
+}
+
+.fade-y {
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+}
