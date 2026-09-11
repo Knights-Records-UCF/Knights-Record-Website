@@ -9,11 +9,6 @@ interface Person {
 
 const LabelManagement: Person[] = [
   {
-    name: "Ingrid Blanco",
-    role: "Head of Label Management",
-    image: "/images/ingrid.PNG",
-  },
-  {
     name: "Connelly Vincent",
     role: "A&R Manager",
     image: "/images/connelly.jpg",

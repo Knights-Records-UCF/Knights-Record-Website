@@ -46,6 +46,13 @@ const EventsBoard: Person[] = [
   { name: "Maria Vega", role: "VP of Events", image: "/images/maria.JPG" },
 ];
 
+const WebBoard: Person[] = [
+  { name: "Valeria", role: "Web Designer", image: "" },
+  { name: "Samantha", role: "Web Designer", image: "" },
+  { name: "Thaira", role: "Web Designer", image: "" },
+  { name: "Carlos", role: "Web Designer", image: "" },
+];
+  
 export default function Executive() {
   return (
     <div className="dark:[&_h1]:text-[#fbfbfb] dark:[&_p]:text-[#D9D9D9] [&>div:not(.fatHeader)]:py-2 gap-2 w-full px-4 md:px-10 [&_h1]:text-[#656565] transition-all duration-300 ease-in-out">
@@ -68,6 +75,12 @@ export default function Executive() {
       <div className="block">
         <div className="block">
           <ImageCarousel arr={EventsBoard} title={"Events"} />
+        </div>
+      </div>
+
+      <div className="block">
+        <div className="block">
+          <ImageCarousel arr={WebBoard} title={"Website Designers"} />
         </div>
       </div>
     </div>
