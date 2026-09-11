@@ -10,7 +10,7 @@ interface Announcement {
   id: number;
   title: string;
   description: string;
-  backgroundColor: string;
+  imageKey: string | null;
   createdAt: Date;
   updatedAt: Date;
 }
