@@ -208,7 +208,7 @@ export default function Calendar() {
                             return (
                                 <div
                                     key={`blank-${index}`}
-                                    className="border-t border-[#f2f2f7] border-b w-32 h-24"
+                                    className="border-t border-[#f2f2f7]  dark:border-[#323236] border-b w-32 h-24 transition-all duration-300 ease-in-out"
                                 />
                             );
                         }
@@ -250,12 +250,12 @@ export default function Calendar() {
                                             <div className="flex items-center justify-between w-full pl-1">
 
                                                 {/* Event summary */}
-                                                <p className="text-xs truncate max-w-17.5 ">
+                                                <p className="text-xs truncate dark:text-[#fbfbfb] max-w-17.5 ">
                                                     {event.summary}
                                                 </p>
 
                                                 {/* Time */}
-                                                <span className="text-[9px] text-[#858585] group-focus:text-black">
+                                                <span className="text-[9px] dark:text-[#fbfbfb] group-focus:text-black">
                                                     {time}
                                                 </span>
 
