@@ -6,7 +6,7 @@ interface Announcement {
   id: number;
   title: string;
   description: string;
-  backgroundColor: string;
+  imageKey: string | null;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -27,6 +27,8 @@ interface CarouselProps {
   isAdmin: boolean;
 }
 
+const R2_URL = process.env.NEXT_PUBLIC_CLOUDFLARE_R2_DEV_URL;
+  
 function Modal({ announcement, isAdmin, onClose }: ModalProps) {
   const router = useRouter();
   const [isEditing, setIsEditing] = useState(false);
@@ -34,14 +36,18 @@ function Modal({ announcement, isAdmin, onClose }: ModalProps) {
   const [error, setError] = useState("");
   const [title, setTitle] = useState(announcement.title);
   const [description, setDescription] = useState(announcement.description);
-  const [backgroundColor, setBackgroundColor] = useState(
-    announcement.backgroundColor,
+  const [imageKey, setImageKey] = useState(
+    announcement.imageKey || "",
   );
   const [isDeleting, setIsDeleting] = useState(false);
   const [deleteConfirm, setDeleteConfirm] = useState(false);
 
+  const imageUrl = announcement.imageKey ?
+    `${R2_URL}/${announcement.imageKey}` : "";
+
+
   async function saveAnnouncement() {
-    if (!title.trim() || !description.trim() || !backgroundColor.trim()) {
+    if (!title.trim() || !description.trim() || !imageKey.trim()) {
       setError("All fields are required.");
       return;
     }
@@ -57,7 +63,7 @@ function Modal({ announcement, isAdmin, onClose }: ModalProps) {
         body: JSON.stringify({
           title: title.trim(),
           description: description.trim(),
-          backgroundColor: backgroundColor.trim(),
+          imageKey: imageKey.trim(),
         }),
       });
 
@@ -117,8 +123,8 @@ function Modal({ announcement, isAdmin, onClose }: ModalProps) {
           </button>
         </div>
         <div
-          className={`w-full h-full`}
-          style={{ backgroundColor: announcement.backgroundColor }}
+          className={`w-full h-full bg-cover bg-center`}
+          style={{ backgroundImage: imageUrl ? `url(${imageUrl})` : "none" }}
         />
         {!isEditing && !deleteConfirm && (
           <div>
@@ -173,15 +179,15 @@ function Modal({ announcement, isAdmin, onClose }: ModalProps) {
               />
             </div>
             <div className="mb-2">
-              <label htmlFor="edit-background-color" className="block text-sm">
-                Background Color
+              <label htmlFor="edit-image-key" className="block text-sm">
+                Image Key
               </label>
               <input
-                id="edit-background-color"
+                id="edit-image-key"
                 type="text"
                 className="w-full border"
-                value={backgroundColor}
-                onChange={(e) => setBackgroundColor(e.target.value)}
+                value={imageKey}
+                onChange={(e) => setImageKey(e.target.value)}
               />
             </div>
 
@@ -232,7 +238,7 @@ function Modal({ announcement, isAdmin, onClose }: ModalProps) {
                 type="button"
                 className="rounded-lg border w-full"
                 onClick={() => {
-                  setError(""); 
+                  setError("");
                   setDeleteConfirm(false);
                 }}
                 disabled={isDeleting}
@@ -249,18 +255,18 @@ function Modal({ announcement, isAdmin, onClose }: ModalProps) {
 
 // Find icons for this button later
 function TempButton({ onPrev, onNext }: ButtonProps) {
-    return (
-        <div className="flex flex-row gap-2 dark:text-[#fbfbfb] transition-all duration-300 ease-in-out">
-            <button
-                onClick={onPrev}>
-                {'<'}
-            </button>
-            <button
-                onClick={onNext}>
-                {'>'}
-            </button>
-        </div>
-    )
+  return (
+    <div className="flex flex-row gap-2 dark:text-[#fbfbfb] transition-all duration-300 ease-in-out">
+      <button
+        onClick={onPrev}>
+        {'<'}
+      </button>
+      <button
+        onClick={onNext}>
+        {'>'}
+      </button>
+    </div>
+  )
 }
 
 export default function Carousel({ announcement, isAdmin }: CarouselProps) {
@@ -285,45 +291,49 @@ export default function Carousel({ announcement, isAdmin }: CarouselProps) {
     );
   }
 
-    return (
-        <div className="overflow-hidden relative">
-            <div className="flex mt-2 items-center ">
-                <h1 className=" text-[#656565] dark:text-[#fbfbfb] font-[525] text-3xl transition-all duration-300 ease-in-out">
-                    Announcements
-                </h1>
-                <div className="ml-2">
-                    <TempButton onPrev={prev} onNext={next} />
-                </div>
-            </div>
-            <div className="border border-[#D9D9D9] dark:border-[#363636] mb-0.5 transition-all duration-300 ease-in-out" />
-            <div
-                className="flex flex-row gap-4 transition-transform ease-out duration-500"
-                style={{ transform: `translateX(-${(visibleAnnouncement * 256)}px)` }} // 256 bc w-60 + gap-4 omggggg
-            >
-                {announcement.map((item) => (
-                    <div key={item.id} className="w-60">
-                        <h1 className="text-[#656565] dark:text-[#AEAEAE] text-[14px] font-525 transition-all duration-300 ease-in-out">
-                            {item.title}
-                        </h1>
-                        <p className="text-[#656565] dark:text-[#D9D9D9] w-52 text-[14px] text-left leading-none line-clamp-2 transition-all duration-300 ease-in-out">
-                            {item.description}
-                        </p>
-                        <div
-                            className={`mt-1.5 h-42 w-60 rounded-xl`}
-                            style={{ backgroundColor: item.backgroundColor }}
-                            onClick={() => {
-                              setShowModal(true);
-                              setCurrAnnouncement(announcement.indexOf(item));
-                            }}
-                        />
-                    </div>
-                ))}
-            </div>
-            {showModal &&
-                <Modal announcement={announcement[currAnnouncement]} 
-                isAdmin={isAdmin}
-                onClose={() => setShowModal(false)} />
-            }
+  return (
+    <div className="overflow-hidden relative">
+      <div className="flex mt-2 items-center ">
+        <h1 className=" text-[#656565] dark:text-[#fbfbfb] font-[525] text-3xl transition-all duration-300 ease-in-out">
+          Announcements
+        </h1>
+        <div className="ml-2">
+          <TempButton onPrev={prev} onNext={next} />
         </div>
+      </div>
+      <div className="border border-[#D9D9D9] dark:border-[#363636] mb-0.5 transition-all duration-300 ease-in-out" />
+      <div
+        className="flex flex-row gap-4 transition-transform ease-out duration-500"
+        style={{ transform: `translateX(-${(visibleAnnouncement * 256)}px)` }} // 256 bc w-60 + gap-4 omggggg
+      >
+        {announcement.map((item) => {
+
+          const imageUrl = item.imageKey ? `${R2_URL}/${item.imageKey}` : "";
+
+          return (<div key={item.id} className="w-60">
+            <h1 className="text-[#656565] dark:text-[#AEAEAE] text-[14px] font-525 transition-all duration-300 ease-in-out">
+              {item.title}
+            </h1>
+            <p className="text-[#656565] dark:text-[#D9D9D9] w-52 text-[14px] text-left leading-none line-clamp-2 transition-all duration-300 ease-in-out">
+              {item.description}
+            </p>
+            <div
+              className={`mt-1.5 h-42 w-60 rounded-xl`}
+              style={{ backgroundImage: imageUrl ? `url(${imageUrl})` : "none", backgroundSize: "cover", backgroundPosition: "center" }}
+              onClick={() => {
+                setShowModal(true);
+                setCurrAnnouncement(announcement.indexOf(item));
+              }}
+            />
+          </div>
+          );
+        })}
+      </div>
+      {showModal &&
+        <Modal announcement={announcement[currAnnouncement]}
+          isAdmin={isAdmin}
+          onClose={() => setShowModal(false)} />
+      }
+    </div>
   );
 }
