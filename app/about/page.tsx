@@ -71,16 +71,8 @@ export default function About() {
         operating as a mock music label. Through hands-on management, marketing,
         and event coordination, we provide students and local talent with the
         tools, resources, and experience needed to succeed in the music
-        industry.
+        industry. Check out our Instagram to learn how to become a member!
       </p>
-      <Link
-        href={JOIN_NOW_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="mt-5 rounded-md bg-[#656565] px-4 py-1 text-sm sm:text-base font-semibold text-white"
-      >
-        Join Now
-      </Link>
       <div>
         <h1 className="mt-12 mb-2 text-xl sm:text-2xl font-[525] text-[#656565] dark:text-[#fbfbfb] transition-all duration-300 ease-in-out">
           Connect with Us
