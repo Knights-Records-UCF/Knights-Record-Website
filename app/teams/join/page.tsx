@@ -275,9 +275,16 @@ export default function JoinTeamPage() {
                 {/* Hero */}
                 <section className="flex flex-col md:flex-row gap-8 md:gap-10 items-start mb-12">
 
-                    {/* Hero image placeholder */}
+                    {/* Hero image */}
                     <div className="w-full md:w-52 shrink-0">
-                        <div className="w-full aspect-square rounded-2xl bg-[#D68783] shadow-lg" />
+                        <div className="relative w-full aspect-square rounded-2xl overflow-hidden shadow-lg">
+                            <Image
+                                src="/images/joinTeam/team-2-light-cropped.jpg"
+                                alt="Join Knights Records"
+                                fill
+                                className="object-cover"
+                            />
+                        </div>
                     </div>
 
                     {/* Hero text */}

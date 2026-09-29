@@ -10,54 +10,50 @@ interface Person {
 const LabelManagement: Person[] = [
   {
     name: "Connelly Vincent",
-    role: "A&R Manager",
-    image: "/images/connelly.jpg",
+    role: "A&R Director",
+    image: "/images/connelly.JPG",
   },
 ];
 
 const LabelMarketing: Person[] = [
-  { name: "Anen Jamir", role: "Social Media Assistant", image: "" },
+  { name: "Anen", role: "Marketing Manager/Graphic Designer", image: "" },
   {
-    name: "Mio Raimondi",
-    role: "Social Media Assistant",
-    image: "/images/mio.png",
+    name: "Brea",
+    role: "Marketing Manager/Graphic Designer",
+    image: "",
+  },
+  {
+    name: "Elliot",
+    role: "Marketing Manager/Graphic Designer",
+    image: "/images/elliot_irl.jpeg",
   },
 ];
 
 const ArtistRepertoire: Person[] = [
-  { name: "Gabby Govantez", role: "A&R Manager", image: "" },
-  { name: "Paulina Diaz", role: "A&R Manager", image: "/images/paulina.png" },
-  { name: "Ariah Claude", role: "A&R Manager", image: "/images/ariah.png" },
+  { name: "Brianna", role: "A&R Manager", image: "/images/brianna.jpg" },
+  { name: "Bianca", role: "A&R Manager", image: "" },
+  { name: "Ariah", role: "A&R Manager", image: "/images/ariah.png" },
 ];
 
 const ArtistPromotions: Person[] = [
   {
-    name: "Meira Lee",
+    name: "Rockxy",
     role: "Artist Promotions Director",
-    image: "/images/meira.PNG",
-  },
-  {
-    name: "Rockxy Nieves",
-    role: "Artist Promotions Manager",
     image: "/images/rockxy.png",
   },
 ];
 
-const ConcertManagement: Person[] = [
+const LiveEvents: Person[] = [
   {
-    name: "Lauren Walker",
-    role: "Concert Director",
-    image: "/images/lauren.JPEG",
+    name: "Milena",
+    role: "Live Events Director",
+    image: "",
   },
-  { name: "Mikayla Chu", role: "Concert Productions Assistant", image: "" },
 ];
 
 const Creative: Person[] = [
-  {
-    name: "Elliot Gunn",
-    role: "Social Media Assistant",
-    image: "/images/elliot_irl.jpeg",
-  },
+  { name: "Camille", role: "Creative Director", image: "" },
+  { name: "Tommy Tran", role: "Creative Assistant", image: "" },
 ];
 
 export default function Executive() {
@@ -77,11 +73,11 @@ export default function Executive() {
       </div>
 
       <div className="block">
-        <ImageCarousel arr={ArtistPromotions} title={"Artist Promotion"} />
+        <ImageCarousel arr={ArtistPromotions} title={"Artist Promotions"} />
       </div>
 
       <div className="block">
-        <ImageCarousel arr={ConcertManagement} title={"Concert Management"} />
+        <ImageCarousel arr={LiveEvents} title={"Live Events"} />
       </div>
 
       <div className="block">

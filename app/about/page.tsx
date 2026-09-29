@@ -5,7 +5,7 @@ import { SiInstagram, SiDiscord, SiLinkedin, SiLinktree } from "react-icons/si";
 const JOIN_NOW_URL = "https://linktr.ee/KnightsRecordsUCF";
 
 // Swap this to change the artwork featured inside the CD case without touching the layout below.
-const cdImage = "/team-image.jpg";
+const cdImage = "/team-image-dark.jpg";
 const cdCaseFrame = "/dvd-case.png";
 
 const socialLinks = [
