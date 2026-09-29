@@ -54,9 +54,6 @@ export default async function Home({ user }: HomeProps) {
       {isAdmin && (
         <div>
           <NewAnnouncement />
-          <h1 className="mt-4">
-            {session?.user.email ? `Signed in as ${session.user.email}` : "Not signed in"}
-          </h1>
         </div>
       )}
       <div className="mt-12">
