@@ -6,6 +6,7 @@ interface Person {
   name: string;
   role: string;
   image: string;
+  darkImage?: string;
 }
 
 interface PersonArrayProp {
@@ -33,13 +34,28 @@ function TeamContainers({ arr, currentIndex }: PersonArrayProp) {
               className="dark:[&_h2]:text-[#fbfbfb] dark:[&_p]:text-[#D9D9D9] flex flex-col flex-shrink-0 [&_h2]:text-[#656565] [&_p]:text-[#656565] w-30"
             >
               {a.image ? (
-                <img
-                  src={a.image}
-                  className="w-30 h-30 min-w-30 min-h-30 bg-gray-300 rounded-2xl object-cover"
-                />
+                <div className="relative w-30 h-30 min-w-30 min-h-30 rounded-2xl overflow-hidden bg-gray-300">
+                  {/* Light/default image */}
+                  <img
+                    src={a.image}
+                    alt={a.name}
+                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ease-in-out ${
+                      a.darkImage ? "opacity-100 dark:opacity-0" : "opacity-100"
+                    }`}
+                  />
+
+                  {/* Dark image, only if this person has one */}
+                  {a.darkImage && (
+                    <img
+                      src={a.darkImage}
+                      alt={a.name}
+                      className="absolute inset-0 w-full h-full object-cover opacity-0 dark:opacity-100 transition-opacity duration-300 ease-in-out"
+                    />
+                  )}
+                </div>
               ) : (
-                <div className="w-30 h-30 min-w-30 min-h-30 bg-gray-300 rounded-2xl object-cover flex items-center justify-center">
-                  <User2 size={50} color={"white"} />
+                <div className="w-30 h-30 min-w-30 min-h-30 bg-gray-300 rounded-2xl flex items-center justify-center">
+                  <User2 size={50} color="white" />
                 </div>
               )}
               <h2 className="font-semibold transition-all duration-300 ease-in-out">
