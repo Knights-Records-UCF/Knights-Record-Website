@@ -37,7 +37,7 @@ const socialLinks = [
 
 function CdCase({ image = cdImage }: { image?: string }) {
   return (
-    <div className="ml-5 relative w-full max-w-55 sm:max-w[260px] md:max-w-75 mb-6 drop-shadow-black hover:scale-105 transition-all ease-in-out duration-300">
+    <div className="about-cd-enter ml-5 relative w-full max-w-55 sm:max-w[260px] md:max-w-75 mb-6 drop-shadow-black hover:scale-105 transition-all ease-in-out duration-300">
       {" "}
       <Image
         src={cdCaseFrame}
@@ -65,30 +65,34 @@ export default function About() {
   return (
     <div className="flex flex-col items-center px-4 py-8 md:px-8 md:py-12">
       <CdCase />
-      <p className="mt-6 w-full max-w-2xl text-center text-sm sm:text-base md:text-lg text-[#656565] dark:text-[#fbfbfb] transition-all duration-300 ease-in-out">
+      <p className="about-content-enter mt-6 w-full max-w-2xl text-center text-sm sm:text-base md:text-lg text-[#656565] dark:text-[#fbfbfb] transition-all duration-300 ease-in-out" style={{ animationDelay: "150ms" }}>
         Knights Records aims to foster the growth of emerging artists and
         industry professionals within the UCF and Orlando communities by
         operating as a mock music label. Through hands-on management, marketing,
         and event coordination, we provide students and local talent with the
         tools, resources, and experience needed to succeed in the music
-        industry. Check out our Instagram to learn how to become a member!
-      </p>
-      <div>
-        <h1 className="mt-12 mb-2 text-xl sm:text-2xl font-[525] text-[#656565] dark:text-[#fbfbfb] transition-all duration-300 ease-in-out">
-          Connect with Us
-        </h1>
+        industry. Check out our Instagram to learn how to become a member!</p>
+      <div className="about-content-enter w-full max-w-5xl" style={{ animationDelay: "300ms" }}>
+        <div>
+          <h1 className="mt-12 mb-2 text-xl text-center sm:text-2xl font-[525] text-[#656565] dark:text-[#fbfbfb] transition-all duration-300 ease-in-out">
+            Connect with Us
+          </h1>
+        </div>
+        <div className="w-full max-w-5xl border-t-[1.5px] border-[#D9D9D9] dark:border-[#323236] transition-all duration-300 ease-in-out" />{" "}
       </div>
-      <div className="w-full max-w-5xl border-t-[1.5px] border-[#D9D9D9] dark:border-[#323236] transition-all duration-300 ease-in-out" />{" "}
       {/* modify layout.tsx at some point so each page has a footer/space at bottom */}
       <div className="mt-4 grid grid-cols-4 gap-2 sm:gap-4 md:gap-5 place-items-center">
-        {socialLinks.map((social) => (
+        {socialLinks.map((social, index) => (
           <a
             key={social.name}
             href={social.href}
             target="_blank"
             rel="noopener noreferrer"
             aria-label={social.name}
-            className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl bg-[#f0f0f0] dark:bg-[#232323] hover:bg-[#e5e5e5] dark:hover:bg-[#2d2d2d] transition-all ease-in-out duration-300"
+            className="about-content-enter flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl bg-[#f0f0f0] dark:bg-[#232323] hover:bg-[#e5e5e5] dark:hover:bg-[#2d2d2d] transition-all ease-in-out duration-300"
+            style={{
+              animationDelay: `${150 + index * 100}ms`,
+            }}
           >
             <social.icon
               className={`w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 ${social.color}`}
