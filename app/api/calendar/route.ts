@@ -1,4 +1,4 @@
-export async function GET() {
+export async function GET(request: Request) {
     const apiKey = process.env.GOOGLE_API_KEY;
 
     const calendarIds = [
@@ -7,11 +7,16 @@ export async function GET() {
         process.env.GOOGLE_LIVE_EVENTS_CALENDAR_ID,
     ];
 
-    const timeMin = new Date(
-        new Date().getFullYear(),
-        new Date().getMonth(),
-        1
-    ).toISOString();
+    const { searchParams } = new URL(request.url);
+
+    const now = new Date();
+
+    const month = Number(searchParams.get("month") ?? now.getMonth());
+    const year = Number(searchParams.get("year") ?? now.getFullYear());
+
+    // Get the beginning and end of the requested month
+    const timeMin = new Date(year, month, 1).toISOString();
+    const timeMax = new Date(year, month + 1, 1).toISOString();
 
     const requests = calendarIds.map((calendarId) => {
         const url =
@@ -19,7 +24,8 @@ export async function GET() {
             `&singleEvents=true` +
             `&orderBy=startTime` +
             `&maxResults=60` +
-            `&timeMin=${timeMin}`;
+            `&timeMin=${timeMin}` +
+            `&timeMax=${timeMax}`;
 
         return fetch(url);
     });
