@@ -168,18 +168,23 @@ export default function Artists() {
   return (
     <div className="flex flex-col max-md:text-red-600 md:h-full md:grid md:grid-cols-[1fr_2fr]">
       {/* vinyl scroll! */}
-      <div className="pt-14 md:pl-0 order-1 md:order-0 flex flex-col items-center overflow-y-auto no-scrollbar md:py-10 fade-y">
+      <div className="artists-vinyl-enter pt-14 md:pl-0 order-1 md:order-0 flex flex-col items-center overflow-y-auto no-scrollbar md:py-10 fade-y">
         <Vinyl onSelectArtist={(index) => setCurrentIndex(index)} />
       </div>
 
       {/* displays the artist here!*/}
       <div className="flex h-full w-full flex-col justify-center items-center [&_h2]:text-[#656565] dark:[&_h2]:text-[#fbfbfb] [&_h1]:text-[#656565] dark:[&_h1]:text-[#fbfbfb] [&_p]:text-[#656565] dark:[&_p]:text-[#D9D9D9] [&_p]:text-sm transition-all duration-300 ease-in-out">
         <div
-          className="md:h-64 md:w-64 w-42 h-42 bg-[#D9D9D9] rounded-full shadow-md overflow-hidden bg-cover bg-center transition-all duration-500"
+          key={`image-${currentIndex}`}
+          className="artist-image-enter md:h-64 md:w-64 w-42 h-42 bg-[#D9D9D9] rounded-full shadow-md overflow-hidden bg-cover bg-center transition-all duration-500"
           style={{ backgroundImage: `url(${artist.img})` }}
         ></div>
 
-        <h1 className="font-bold text-2xl md:text-3xl mt-8 mb-2 transition-all duration-300 ease-in-out ">
+        <div
+          key={`content-${currentIndex}`}
+          className="artist-content-enter flex flex-col items-center w-full"
+        >
+          <h1 className="font-bold text-2xl md:text-3xl mt-8 mb-2 transition-all duration-300 ease-in-out ">
           {artist.name}
         </h1>
 
@@ -204,6 +209,9 @@ export default function Artists() {
           Follow {artist.name}
         </h2>
         <div className="h-px w-[80%] bg-gray-300 dark:bg-[#323236] mt-2 transition-all duration-300 ease-in-out"></div>
+        </div>
+
+        
 
         {/* loops thru socials here*/}
         <div className="flex gap-4 mt-6">
@@ -211,11 +219,14 @@ export default function Artists() {
             const { icon, color } = getSocialDetails(link);
             return (
               <a
-                key={i}
+                key={`${currentIndex}-${i}`}
                 href={link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`h-14 w-14 bg-gray-100 text-gray-600 rounded-2xl flex items-center justify-center transition-all duration-300 shadow-sm ${color}`}
+                className={`artist-social-enter h-14 w-14 bg-gray-100 text-gray-600 rounded-2xl flex items-center justify-center transition-all duration-300 shadow-sm ${color}`}
+                style={{
+                  animationDelay: `${i * 150}ms`,
+                }}
                 title={link}
               >
                 {icon}

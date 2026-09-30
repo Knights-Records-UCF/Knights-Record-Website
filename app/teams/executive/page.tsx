@@ -63,33 +63,58 @@ export default function Executive() {
       <div className="py-7 fatHeader transition-all duration-300 ease-in-out"></div>
 
       <div className="block">
-        <ImageCarousel arr={ExecutiveBoard} title={"Executive Board"} />
+        <ImageCarousel
+          arr={ExecutiveBoard}
+          title={"Executive Board"}
+          delay={0}
+        />
       </div>
 
       <div className="block">
-        <ImageCarousel arr={FinanceBoard} title={"Finance"} />
+        <ImageCarousel
+          arr={FinanceBoard}
+          title={"Finance"}
+          delay={100}
+        />
       </div>
 
       <div className="block">
         <div className="block">
-          <ImageCarousel arr={MarketingBoard} title={"Marketing"} />
+          <ImageCarousel
+            arr={MarketingBoard}
+            title={"Marketing"}
+            delay={200}
+          />
         </div>
       </div>
 
       <div className="block">
         <div className="block">
-          <ImageCarousel arr={MembershipBoard} title={"Membership"} />
+          <ImageCarousel
+            arr={MembershipBoard}
+            title={"Membership"}
+            delay={300}
+          />
         </div>
       </div>
 
       <div className="block">
         <div className="block">
-          <ImageCarousel arr={EventsBoard} title={"Events"} />
+          <ImageCarousel
+            arr={EventsBoard}
+            title={"Events"}
+            delay={400}
+          />
         </div>
       </div>
 
       <div className="block">
         <div className="block">
+          <ImageCarousel
+            arr={WebBoard}
+            title={"Web Designers"}
+            delay={500}
+          />
           <ImageCarousel arr={WebBoard} title={"Web Designers"} />
         </div>
       </div>

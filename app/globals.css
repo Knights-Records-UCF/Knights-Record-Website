@@ -82,3 +82,245 @@ body {
     transparent 100%
   );
 }
+
+@keyframes team-card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.team-card-enter {
+  opacity: 0;
+  animation: team-card-enter 0.5s ease-out forwards;
+}
+
+@keyframes team-heading-enter {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.team-heading-enter {
+  opacity: 0;
+  animation: team-heading-enter 0.45s ease-out forwards;
+}
+
+/* Mobile hero image */
+@keyframes hero-image-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Mobile hero text */
+@keyframes hero-text-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes role-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-image-enter {
+  opacity: 0;
+  animation: hero-image-enter 0.6s ease-out forwards;
+}
+
+.hero-text-enter {
+  opacity: 0;
+  animation: hero-text-enter 0.6s ease-out 0.1s forwards;
+}
+
+.role-enter {
+  opacity: 0;
+  animation: role-enter 0.5s ease-out forwards;
+}
+
+/* Desktop hero animations */
+@media (min-width: 768px) {
+  @keyframes hero-image-enter-desktop {
+    from {
+      opacity: 0;
+      transform: translateX(-15px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes hero-text-enter-desktop {
+    from {
+      opacity: 0;
+      transform: translateX(14px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .hero-image-enter {
+    animation-name: hero-image-enter-desktop;
+  }
+
+  .hero-text-enter {
+    animation-name: hero-text-enter-desktop;
+  }
+}
+
+@media (min-width: 768px) {
+  @keyframes hero-text-enter-desktop {
+    from {
+      opacity: 0;
+      transform: translateX(14px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .hero-text-enter {
+    animation-name: hero-text-enter-desktop;
+  }
+}
+
+@keyframes about-cd-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes about-content-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.about-cd-enter {
+  opacity: 0;
+  animation: about-cd-enter 0.6s ease-out forwards;
+}
+
+.about-content-enter {
+  opacity: 0;
+  animation: about-content-enter 0.6s ease-out forwards;
+}
+
+@keyframes artists-vinyl-enter {
+  from {
+    opacity: 0;
+    transform: translateX(-15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes artist-image-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes artist-content-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.artists-vinyl-enter {
+  opacity: 0;
+  animation: artists-vinyl-enter 0.6s ease-out forwards;
+}
+
+.artist-image-enter {
+  opacity: 0;
+  animation: artist-image-enter 0.6s ease-out forwards;
+}
+
+.artist-content-enter {
+  opacity: 0;
+  animation: artist-content-enter 0.6s ease-out forwards;
+}
+
+@keyframes artist-social-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.artist-social-enter {
+  opacity: 0;
+  animation: artist-social-enter 0.6s ease-out forwards;
+}

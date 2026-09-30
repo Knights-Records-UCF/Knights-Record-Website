@@ -13,12 +13,13 @@ interface PersonArrayProp {
   arr: Person[];
   title?: String;
   currentIndex?: any;
+  delay?: number;
 }
 
 //each card is 140px long
 const CARD_STEP = 140;
 
-function TeamContainers({ arr, currentIndex }: PersonArrayProp) {
+function TeamContainers({ arr, currentIndex, delay = 0, }: PersonArrayProp) {
   return (
     <>
       <div
@@ -31,7 +32,10 @@ function TeamContainers({ arr, currentIndex }: PersonArrayProp) {
           return (
             <div
               key={index}
-              className="dark:[&_h2]:text-[#fbfbfb] dark:[&_p]:text-[#D9D9D9] flex flex-col flex-shrink-0 [&_h2]:text-[#656565] [&_p]:text-[#656565] w-30"
+              className="team-card-enter dark:[&_h2]:text-[#fbfbfb] dark:[&_p]:text-[#D9D9D9] flex flex-col flex-shrink-0 [&_h2]:text-[#656565] [&_p]:text-[#656565] w-30"
+              style={{
+                animationDelay: `${delay + 100 + index * 80}ms`,
+              }}
             >
               {a.image ? (
                 <div className="relative w-30 h-30 min-w-30 min-h-30 rounded-2xl overflow-hidden bg-gray-300">
@@ -72,7 +76,7 @@ function TeamContainers({ arr, currentIndex }: PersonArrayProp) {
   );
 }
 
-export default function ImageCarousel({ arr, title }: PersonArrayProp) {
+export default function ImageCarousel({ arr, title, delay = 0, }: PersonArrayProp) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visibleCount, setVisibleCount] = useState(arr.length);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -119,7 +123,7 @@ export default function ImageCarousel({ arr, title }: PersonArrayProp) {
 
   return (
     <div className="relative w-full group">
-      <div className="flex items-center gap-2 mb-4">
+      <div className="team-heading-enter flex items-center gap-2 mb-4" style={{ animationDelay: `${delay}ms` }}>
         <div className="w-full border-b-[1.5px] border-gray-300 flex dark:border-[#323236] transition-all duration-300 ease-in-out">
           <h1 className="font-bold text-2xl md:text-3xl transition-all duration-300 ease-in-out">
             {title}
@@ -146,7 +150,7 @@ export default function ImageCarousel({ arr, title }: PersonArrayProp) {
         className="overflow-hidden"
         style={{ WebkitMaskImage: maskImage, maskImage }}
       >
-        <TeamContainers arr={arr} currentIndex={currentIndex} />
+        <TeamContainers arr={arr} currentIndex={currentIndex} delay={delay} />
       </div>
     </div>
   );

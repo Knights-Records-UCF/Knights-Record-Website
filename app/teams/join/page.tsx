@@ -276,7 +276,7 @@ export default function JoinTeamPage() {
                 <section className="flex flex-col md:flex-row gap-8 md:gap-10 items-start mb-12">
 
                     {/* Hero image */}
-                    <div className="w-full md:w-52 shrink-0">
+                    <div className="hero-image-enter w-full md:w-52 shrink-0">
                         <div className="relative w-full aspect-square rounded-2xl overflow-hidden shadow-lg">
                             <Image
                                 src="/images/joinTeam/team-2-light-cropped.jpg"
@@ -288,7 +288,7 @@ export default function JoinTeamPage() {
                     </div>
 
                     {/* Hero text */}
-                    <div className="max-w-152 md:pt-8">
+                    <div className="hero-text-enter max-w-152 md:pt-8">
                         <h1 className="text-3xl md:text-[32px] font-semibold mb-4 text-[#656565] dark:text-white text-center md:text-left transition-all duration-300 ease-in-out">
                             Interested In Joining?
                         </h1>
@@ -328,13 +328,16 @@ export default function JoinTeamPage() {
 
                 {/* Role list */}
                 <div>
-                    {displayedRoles.map((role) => {
+                    {displayedRoles.map((role, index) => {
                         const isOpen = openRole === role.id;
 
                         return (
                             <div
                                 key={role.id}
-                                className="border-b border-[#D8D8D8] dark:border-[#323236] transition-all duration-300 ease-in-out"
+                                className="role-enter border-b border-[#D8D8D8] dark:border-[#323236] transition-all duration-300 ease-in-out"
+                                style={{
+                                    animationDelay: `${250 + Math.min(index * 45, 600)}ms`,
+                                }}
                             >
                                 {/* Clickable role row */}
                                 <button
