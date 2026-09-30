@@ -71,8 +71,8 @@ export default function Calendar() {
                 }
 
                 const data: CalendarResponse = await res.json();
-                // console.log("Entire calendar json", data)
-                // console.log("single event", data.items[0]);
+                console.log("Entire calendar json", data)
+                console.log("single event", data.items[0]);
                 setEvents(data.items);
             }
             catch (error) {
@@ -179,6 +179,14 @@ export default function Calendar() {
             eventDate = new Date(event.start.date);
         }
 
+        // Only include events from the current month and year
+        if (
+            eventDate.getMonth() !== currDate.getMonth() ||
+            eventDate.getFullYear() !== currDate.getFullYear()
+        ) {
+            return;
+        }
+
         const day = eventDate.getDate();
 
         // If this day doesn't exist yet in the object then initialize it with an empty array
@@ -188,7 +196,7 @@ export default function Calendar() {
 
         // At that day, push the event object to the array
         eventsPerDay[day].push(event);
-    })
+    });
 
     return (
         <div className="border-2 border-[#D0D0D0] dark:border-[#323236] transition-all duration-300 ease-in-out">
