@@ -6,6 +6,7 @@ interface Person {
   name: string;
   role: string;
   image: string;
+  darkImage?: string;
 }
 
 interface PersonArrayProp {
@@ -21,45 +22,39 @@ const ExecutiveBoard: Person[] = [
     image: "/images/1.jpg",
   },
   { name: "Tommy", role: "Vice-President", image: "/images/tommy.png" },
-  { name: "Lis", role: "Secretary", image: "/images/lis.png" },
+  
 ];
 
 const FinanceBoard: Person[] = [
-  { name: "Colin", role: "Head of Marketing", image: "/images/colin.png" },
+  { name: "Colin", role: "Treasurer", image: "/images/colin.png" },
 ];
 
 const MarketingBoard: Person[] = [
-  { name: "Lizbeth", role: "VP of Marketing", image: "" },
   {
-    name: "Sienna Hilland",
-    role: "Head of Marketing",
+    name: "Sienna",
+    role: "VP of Marketing",
     image: "/images/sienna.png",
   },
+  { name: "Kendall", role: "Head of Marketing", image:"" },
 ];
 
-const EventsBoard: Person[] = [
+const MembershipBoard: Person[] = [
   {
-    name: "Cassidy Zanger",
-    role: "VP of Membership",
-    image: "/images/cassidy.jpg",
+    name: "Cassidy",
+    role: "Head of Membership",
+    image: "/images/Cassidy.jpg",
   },
-  { name: "Maria Vega", role: "VP of Events", image: "/images/maria.JPG" },
-  { name: "Maria Vega", role: "VP of Events", image: "/images/maria.JPG" },
-  { name: "Maria Vega", role: "VP of Events", image: "/images/maria.JPG" },
-  { name: "Maria Vega", role: "VP of Events", image: "/images/maria.JPG" },
-  { name: "Maria Vega", role: "VP of Events", image: "/images/maria.JPG" },
-  { name: "Maria Vega", role: "VP of Events", image: "/images/maria.JPG" },
-  { name: "Maria Vega", role: "VP of Events", image: "/images/maria.JPG" },
-  { name: "Maria Vega", role: "VP of Events", image: "/images/maria.JPG" },
-  { name: "Maria Vega", role: "VP of Events", image: "/images/maria.JPG" },
-  { name: "Maria Vega", role: "VP of Events", image: "/images/maria.JPG" },
+]
+
+const EventsBoard: Person[] = [
+  { name: "Sydney", role: "VP of Events", image:""}
 ];
 
 const WebBoard: Person[] = [
-  { name: "Valeria", role: "Web Designer", image: "" },
-  { name: "Samantha", role: "Web Designer", image: "" },
-  { name: "Thaira", role: "Web Designer", image: "" },
-  { name: "Carlos", role: "Web Designer", image: "" },
+  { name: "Valeria", role: "Web Designer", image: "/images/Valeria.JPG" },
+  { name: "Samantha", role: "Web Designer", image: "/images/sam.jpg", darkImage: "/images/sam-evil.jpg" },
+  { name: "Thaira", role: "Web Designer", image: "/images/thaira.jpg", darkImage: "/images/thaira-evil.png" },
+  { name: "Carlos", role: "Web Designer", image: "/images/carlos.jpg", darkImage: "/images/carlos-dark.png" },
 ];
   
 export default function Executive() {
@@ -78,6 +73,12 @@ export default function Executive() {
       <div className="block">
         <div className="block">
           <ImageCarousel arr={MarketingBoard} title={"Marketing"} />
+        </div>
+      </div>
+
+      <div className="block">
+        <div className="block">
+          <ImageCarousel arr={MembershipBoard} title={"Membership"} />
         </div>
       </div>
 

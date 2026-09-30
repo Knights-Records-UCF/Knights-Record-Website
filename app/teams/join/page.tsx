@@ -11,7 +11,6 @@ type Role = {
     committee: string;
     team: "Executive Board" | "Label Team";
     description: string;
-    applyLink?: string;
     image?: string;
 };
 
@@ -23,7 +22,6 @@ const roles: Role[] = [
         team: "Executive Board",
         description:
             "Provides strategic leadership for Knights Records, oversees all organizational operations, chairs executive meetings, and represents the organization to UCF and external partners.",
-        applyLink: "#",
         // image: "",
     },
     {
@@ -33,7 +31,6 @@ const roles: Role[] = [
         team: "Executive Board",
         description:
             "Supports the President in organizational leadership, oversees committee coordination, and ensures initiatives are executed effectively across all departments.",
-        applyLink: "#",
         // image: "",
     },
     {
@@ -43,7 +40,6 @@ const roles: Role[] = [
         team: "Executive Board",
         description:
             "Maintains meeting notes, organizational records, attendance, and official documentation while ensuring clear communication among officers and members.",
-        applyLink: "#",
         // image: "",
     },
     {
@@ -53,7 +49,6 @@ const roles: Role[] = [
         team: "Executive Board",
         description:
             "Oversees the organization's budget, financial planning, fundraising efforts, and compliance with UCF financial policies while providing financial updates to the Executive Board.",
-        applyLink: "#",
         // image: "",
     },
     {
@@ -63,7 +58,6 @@ const roles: Role[] = [
         team: "Executive Board",
         description:
             "Assists with budgeting, expense tracking, reimbursement processes, fundraising logistics, and maintaining accurate financial records.",
-        applyLink: "#",
         // image: "",
     },
     {
@@ -73,7 +67,6 @@ const roles: Role[] = [
         team: "Executive Board",
         description:
             "Leads the planning and execution of organization-wide events, manages event logistics and timelines, and coordinates with committees, venues, and performers. Events include: Guest Speakers, Fundraisers, Workshops, Socials, etc.",
-        applyLink: "#",
         // image: "",
     },
     {
@@ -83,7 +76,6 @@ const roles: Role[] = [
         team: "Executive Board",
         description:
             "Supports event planning by coordinating volunteers, managing event operations, and ensuring smooth execution before, during, and after events. Events include: Guest Speakers, Fundraisers, Workshops, Socials, etc.",
-        applyLink: "#",
         // image: "",
     },
     {
@@ -93,7 +85,6 @@ const roles: Role[] = [
         team: "Executive Board",
         description:
             "Leads member recruitment, onboarding, engagement, and retention while fostering a welcoming and active organizational culture.",
-        applyLink: "#",
         // image: "",
     },
     {
@@ -102,8 +93,7 @@ const roles: Role[] = [
         committee: "Membership",
         team: "Executive Board",
         description:
-            "Assists with recruitment efforts, member communications, attendance tracking, and planning member development and social activities.",
-        applyLink: "#",
+            "Assists with recruitment efforts, member communications, attendance tracking, and planning member development and social activities.",      
         // image: "",
     },
     {
@@ -112,8 +102,7 @@ const roles: Role[] = [
         committee: "Marketing",
         team: "Executive Board",
         description:
-            "Develops marketing strategy for the organization, oversees branding and social media, and manages promotional campaigns for events and initiatives.",
-        applyLink: "#",
+            "Develops marketing strategy for the organization, oversees branding and social media, and manages promotional campaigns for events and initiatives.",     
         // image: "",
     },
     {
@@ -122,8 +111,7 @@ const roles: Role[] = [
         committee: "Marketing",
         team: "Executive Board",
         description:
-            "Creates marketing content, assists with social media management, and supports promotional campaigns to increase organizational visibility.",
-        applyLink: "#",
+            "Creates marketing content, assists with social media management, and supports promotional campaigns to increase organizational visibility.",     
         // image: "",
     },
     {
@@ -132,8 +120,7 @@ const roles: Role[] = [
         committee: "Marketing",
         team: "Executive Board",
         description:
-            "Designs, updates, and maintains the organization's website while ensuring accurate information, strong branding, and a user-friendly experience.",
-        applyLink: "#",
+            "Designs, updates, and maintains the organization's website while ensuring accurate information, strong branding, and a user-friendly experience.",   
         // image: "",
     },
     {
@@ -143,7 +130,7 @@ const roles: Role[] = [
         team: "Label Team",
         description:
             "Oversees day-to-day label operations, manages artist relations, coordinates projects across departments, and ensures artists receive organizational support.",
-        applyLink: "#",
+        
     },
     {
         id: 14,
@@ -152,7 +139,7 @@ const roles: Role[] = [
         team: "Label Team",
         description:   
             "Leads artist recruitment, evaluates talent, oversees artist development, and serves as the primary liaison between artists and the label.",
-        applyLink: "#",
+        
     },
     {
         id: 15,
@@ -161,7 +148,7 @@ const roles: Role[] = [
         team: "Label Team",
         description:
             "Assists with artist scouting, maintains communication with their assigned artist, provides developmental support, and helps coordinate artist projects.",
-        applyLink: "#",
+        
     },
     {
         id: 16,
@@ -170,7 +157,7 @@ const roles: Role[] = [
         team: "Label Team",
         description:
             "Leads marketing strategy for signed artists, oversees release campaigns, and coordinates branding efforts across creative and promotional teams.",
-        applyLink: "#",
+        
     },
     {
         id: 17,
@@ -179,7 +166,7 @@ const roles: Role[] = [
         team: "Label Team",
         description:
             "Executes artist marketing campaigns, manages promotional content, monitors campaign performance, and assists with release planning as well as graphic design support.",
-        applyLink: "#",
+        
     },
     {
         id: 18,
@@ -188,7 +175,7 @@ const roles: Role[] = [
         team: "Label Team",
         description:
             "Leads promotional initiatives for artists and label events while developing partnerships and outreach opportunities within the UCF and Orlando communities.",
-        applyLink: "#",
+        
     },
     {
         id: 19,
@@ -197,7 +184,7 @@ const roles: Role[] = [
         team: "Label Team",
         description:
             "Supports promotional campaigns, coordinates outreach efforts, assists with partnerships, and helps increase artist and event visibility.",
-        applyLink: "#",
+        
     },
     {
         id: 20,
@@ -206,7 +193,7 @@ const roles: Role[] = [
         team: "Label Team",
         description:
             "Plans and manages artist showcases, concerts, and live performances while coordinating logistics, production, and venue operations.",
-        applyLink: "#",
+        
     },
     {
         id: 21,
@@ -215,7 +202,7 @@ const roles: Role[] = [
         team: "Label Team",
         description:
             "Supports live event setup, artist coordination, volunteer management, and day-of-event operations.",
-        applyLink: "#",
+        
     },
     {
         id: 22,
@@ -224,7 +211,7 @@ const roles: Role[] = [
         team: "Label Team",
         description:
             "Leads the creative vision for the organization and its artists, overseeing branding, visual content, photoshoots, album artwork, and multimedia projects.",
-        applyLink: "#",
+        
     },
     {
         id: 23,
@@ -233,7 +220,7 @@ const roles: Role[] = [
         team: "Label Team",
         description:
             "Supports creative projects by assisting with design, branding, content creation, and production for artists and organizational initiatives.",
-        applyLink: "#",
+        
     },
     {
         id: 24,
@@ -242,7 +229,7 @@ const roles: Role[] = [
         team: "Label Team",
         description:
             "Captures high-quality photography for events, artists, and promotional materials while maintaining the organization's visual archive.",
-        applyLink: "#",
+        
     },
     {
         id: 25,
@@ -251,9 +238,14 @@ const roles: Role[] = [
         team: "Label Team",
         description:
             "Produces and edits video content for performances, promotional campaigns, artist features, and social media platforms.",
-        applyLink: "#",
+        
     }
 ];
+
+const applicationLinks = {
+    "Executive Board": "https://docs.google.com/forms/d/e/1FAIpQLSekqBzdIj7NWtKNT6VQqfjZVV8RwTeRlb_vr3x-_Crj6X6H1w/viewform",
+    "Label Team": "https://docs.google.com/forms/d/e/1FAIpQLSdnXfI2V3iiJwXMVOavCHAtqUNSPyK9gCFgRfD8sYAGtKo8ew/viewform?usp=send_form",
+};
 
 export default function JoinTeamPage() {
     const [openRole, setOpenRole] = useState<number | null>(null);
@@ -283,9 +275,16 @@ export default function JoinTeamPage() {
                 {/* Hero */}
                 <section className="flex flex-col md:flex-row gap-8 md:gap-10 items-start mb-12">
 
-                    {/* Hero image placeholder */}
+                    {/* Hero image */}
                     <div className="w-full md:w-52 shrink-0">
-                        <div className="w-full aspect-square rounded-2xl bg-[#D68783] shadow-lg" />
+                        <div className="relative w-full aspect-square rounded-2xl overflow-hidden shadow-lg">
+                            <Image
+                                src="/images/joinTeam/team-2-light-cropped.jpg"
+                                alt="Join Knights Records"
+                                fill
+                                className="object-cover"
+                            />
+                        </div>
                     </div>
 
                     {/* Hero text */}
@@ -350,16 +349,14 @@ export default function JoinTeamPage() {
                                         <div className="flex items-center gap-3">
 
                                             {/* Role image */}
-                                            <div className="relative w-11 h-11 rounded-lg bg-[#EAB0AE] overflow-hidden shrink-0">
-                                                {role.image && (
-                                                    <Image
-                                                        src={role.image}
-                                                        alt={`${role.title} role`}
-                                                        fill
-                                                        sizes="44px"
-                                                        className="object-cover"
-                                                    />
-                                                )}
+                                            <div className="relative w-11 h-11 rounded-lg overflow-hidden shrink-0">
+                                                <Image
+                                                    src="/images/joinTeam/placeholder.png"
+                                                    alt="Knights Records"
+                                                    fill
+                                                    sizes="44px"
+                                                    className="object-cover"
+                                                />
                                             </div>
 
                                             <span className="text-[16px]">
@@ -410,19 +407,17 @@ export default function JoinTeamPage() {
                                             </p>
 
                                             {/* Apply */}
-                                            {role.applyLink && (
-                                                <div className="md:col-span-2 flex justify-center mt-8">
-                                                    <a
-                                                        href={role.applyLink}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        onClick={(e) => e.stopPropagation()}
-                                                        className="px-5 py-1.5 rounded-md bg-[#656565] hover:bg-[#555555] text-white text-sm font-semibold transition-colors shadow-md"
-                                                    >
-                                                        Apply
-                                                    </a>
-                                                </div>
-                                            )}
+                                            <div className="md:col-span-2 flex justify-center mt-8">
+                                                <a
+                                                    href={applicationLinks[role.team]}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    onClick={(e) => e.stopPropagation()}
+                                                    className="px-5 py-1.5 rounded-md bg-[#656565] hover:bg-[#555555] text-white text-sm font-semibold transition-colors shadow-md"
+                                                >
+                                                    Apply
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

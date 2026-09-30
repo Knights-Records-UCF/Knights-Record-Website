@@ -40,7 +40,7 @@ export default function Navbar() {
         {/* Title */}
         <div className="flex items-center justify-center gap-2 mb-8 text-xl font-semibold text-[#656565] dark:text-white">
             <Image
-                src="/images/krlogo.png"
+                src="/images/krlogo.svg"
                 alt="Knights Records logo"
                 width={32}
                 height={32}
