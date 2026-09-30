@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface Announcement {
   id: number;
@@ -18,6 +18,8 @@ interface ModalProps {
 }
 
 interface ButtonProps {
+  canPrev: boolean;
+  canNext: boolean;
   onPrev: () => void;
   onNext: () => void;
 }
@@ -28,7 +30,8 @@ interface CarouselProps {
 }
 
 const R2_URL = process.env.NEXT_PUBLIC_CLOUDFLARE_R2_DEV_URL;
-  
+const CARD_STEP = 256;
+
 function Modal({ announcement, isAdmin, onClose }: ModalProps) {
   const router = useRouter();
   const [isEditing, setIsEditing] = useState(false);
@@ -36,15 +39,13 @@ function Modal({ announcement, isAdmin, onClose }: ModalProps) {
   const [error, setError] = useState("");
   const [title, setTitle] = useState(announcement.title);
   const [description, setDescription] = useState(announcement.description);
-  const [imageKey, setImageKey] = useState(
-    announcement.imageKey || "",
-  );
+  const [imageKey, setImageKey] = useState(announcement.imageKey || "");
   const [isDeleting, setIsDeleting] = useState(false);
   const [deleteConfirm, setDeleteConfirm] = useState(false);
 
-  const imageUrl = announcement.imageKey ?
-    `${R2_URL}/${announcement.imageKey}` : "";
-
+  const imageUrl = announcement.imageKey
+    ? `${R2_URL}/${announcement.imageKey}`
+    : "";
 
   async function saveAnnouncement() {
     if (!title.trim() || !description.trim() || !imageKey.trim()) {
@@ -254,19 +255,29 @@ function Modal({ announcement, isAdmin, onClose }: ModalProps) {
 }
 
 // Find icons for this button later
-function TempButton({ onPrev, onNext }: ButtonProps) {
+function TempButton({ onPrev, onNext, canPrev, canNext }: ButtonProps) {
   return (
     <div className="flex flex-row gap-2 dark:text-[#fbfbfb] transition-all duration-300 ease-in-out">
       <button
-        onClick={onPrev}>
-        {'<'}
+        type="button"
+        disabled={!canPrev}
+        aria-label="Previous announcement"
+        className="disabled:opacity-30"
+        onClick={onPrev}
+      >
+        {"<"}
       </button>
       <button
-        onClick={onNext}>
-        {'>'}
+        type="button"
+        disabled={!canNext}
+        aria-label="Next announcement"
+        className="disabled:opacity-30"
+        onClick={onNext}
+      >
+        {">"}
       </button>
     </div>
-  )
+  );
 }
 
 export default function Carousel({ announcement, isAdmin }: CarouselProps) {
@@ -274,21 +285,51 @@ export default function Carousel({ announcement, isAdmin }: CarouselProps) {
   const [currAnnouncement, setCurrAnnouncement] = useState(0);
   const [showModal, setShowModal] = useState(false);
 
+  const [maxOffset, setMaxOffset] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    const track = trackRef.current;
+    if (!container || !track) return;
+
+    const measure = () => {
+      setMaxOffset(
+        Math.max(
+          0,
+          track.getBoundingClientRect().width - container.clientWidth,
+        ),
+      );
+    };
+
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(container);
+    observer.observe(track);
+    return () => observer.disconnect();
+  }, []);
+
+  const maxIndex = Math.ceil(maxOffset / CARD_STEP);
+  const currentIndex = Math.min(visibleAnnouncement, maxIndex);
+  const offset = Math.min(currentIndex * CARD_STEP, maxOffset);
+
+  if (visibleAnnouncement !== currentIndex) {
+    setVisibleAnnouncement(currentIndex);
+  }
+
+  const showLeftFade = offset > 0;
+  const showRightFade = offset < maxOffset;
+  const from = showLeftFade ? "transparent 0%, black 6%" : "black 0%";
+  const to = showRightFade ? "black 94%, transparent 100%" : "black 100%";
+  const maskImage = `linear-gradient(to right, ${from}, ${to})`;
+
   function prev() {
-    setVisibleAnnouncement(
-      visibleAnnouncement === 0
-        ? announcement.length - 1
-        : visibleAnnouncement - 1,
-    );
+    setVisibleAnnouncement((index) => Math.max(0, index - 1));
   }
 
   function next() {
-    // >= just for flexibility between showcasing two announcements at a time or just one, depends on what we wanna do
-    setVisibleAnnouncement(
-      visibleAnnouncement >= announcement.length - 1
-        ? 0
-        : visibleAnnouncement + 1,
-    );
+    setVisibleAnnouncement((index) => Math.min(maxIndex, index + 1));
   }
 
   return (
@@ -298,42 +339,60 @@ export default function Carousel({ announcement, isAdmin }: CarouselProps) {
           Announcements
         </h1>
         <div className="ml-2">
-          <TempButton onPrev={prev} onNext={next} />
+          <TempButton
+            onPrev={prev}
+            onNext={next}
+            canPrev={showLeftFade}
+            canNext={showRightFade}
+          />
         </div>
       </div>
       <div className="border border-[#D9D9D9] dark:border-[#363636] mb-0.5 transition-all duration-300 ease-in-out" />
       <div
-        className="flex flex-row gap-4 transition-transform ease-out duration-500"
-        style={{ transform: `translateX(-${(visibleAnnouncement * 256)}px)` }} // 256 bc w-60 + gap-4 omggggg
+        ref={containerRef}
+        className="overflow-hidden"
+        style={{ WebkitMaskImage: maskImage, maskImage }}
       >
-        {announcement.map((item) => {
+        <div
+          ref={trackRef}
+          className="flex w-max flex-row gap-4 transition-transform ease-out duration-500"
+          style={{ transform: `translateX(-${offset}px)` }}
+        >
+          {announcement.map((item) => {
+            const imageUrl = item.imageKey ? `${R2_URL}/${item.imageKey}` : "";
 
-          const imageUrl = item.imageKey ? `${R2_URL}/${item.imageKey}` : "";
-
-          return (<div key={item.id} className="w-60">
-            <h1 className="text-[#656565] dark:text-[#AEAEAE] text-[14px] font-525 transition-all duration-300 ease-in-out">
-              {item.title}
-            </h1>
-            <p className="text-[#656565] dark:text-[#D9D9D9] w-52 text-[14px] text-left leading-none line-clamp-2 transition-all duration-300 ease-in-out">
-              {item.description}
-            </p>
-            <div
-              className={`mt-1.5 h-42 w-60 rounded-xl`}
-              style={{ backgroundImage: imageUrl ? `url(${imageUrl})` : "none", backgroundSize: "cover", backgroundPosition: "center" }}
-              onClick={() => {
-                setShowModal(true);
-                setCurrAnnouncement(announcement.indexOf(item));
-              }}
-            />
-          </div>
-          );
-        })}
+            return (
+              <div key={item.id} className="w-60 shrink-0">
+                <h1 className="text-[#656565] dark:text-[#AEAEAE] text-[14px] font-525 transition-all duration-300 ease-in-out">
+                  {item.title}
+                </h1>
+                <p className="text-[#656565] dark:text-[#D9D9D9] w-52 text-[14px] text-left leading-none truncate transition-all duration-300 ease-in-out">
+                  {item.description}
+                </p>
+                <div
+                  className={`mt-1.5 h-42 w-60 rounded-xl`}
+                  style={{
+                    backgroundImage: imageUrl ? `url(${imageUrl})` : "none",
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                  onClick={() => {
+                    setShowModal(true);
+                    setCurrAnnouncement(announcement.indexOf(item));
+                  }}
+                />
+              </div>
+            );
+          })}
+        </div>
       </div>
-      {showModal &&
-        <Modal announcement={announcement[currAnnouncement]}
+      {showModal && announcement[currAnnouncement] && (
+        <Modal
+          announcement={announcement[currAnnouncement]}
           isAdmin={isAdmin}
-          onClose={() => setShowModal(false)} />
-      }
+          onClose={() => setShowModal(false)}
+        />
+      )}
     </div>
   );
 }
