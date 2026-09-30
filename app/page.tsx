@@ -1,6 +1,5 @@
 import Carousel from "./components/Carousel";
 import Calendar from "./components/Calendar";
-import NewAnnouncement from "./components/NewAnnouncement";
 import prisma from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
@@ -51,14 +50,6 @@ export default async function Home({ user }: HomeProps) {
   return (
     <div className=" text-left ">
       <Carousel announcement={announcement} isAdmin={isAdmin} />
-      {isAdmin && (
-        <div>
-          <NewAnnouncement />
-          <h1 className="mt-4">
-            {session?.user.email ? `Signed in as ${session.user.email}` : "Not signed in"}
-          </h1>
-        </div>
-      )}
       <div className="mt-12">
         <h1 className="font-[525] text-2xl text-left text-[#656565] dark:text-[#fbfbfb]">
           {`${months[new Date().getMonth()]}`} <span className="text-xl font-normal text-[#656565]/50 dark:text-[#8e8e8f]"> 2026</span>

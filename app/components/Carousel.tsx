@@ -1,6 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import CreateAnnouncement from "./CreateAnnouncement";
 
 interface Announcement {
   id: number;
@@ -334,18 +335,25 @@ export default function Carousel({ announcement, isAdmin }: CarouselProps) {
 
   return (
     <div className="overflow-hidden relative">
-      <div className="flex mt-2 items-center ">
-        <h1 className=" text-[#656565] dark:text-[#fbfbfb] font-[525] text-3xl transition-all duration-300 ease-in-out">
-          Announcements
-        </h1>
-        <div className="ml-2">
-          <TempButton
-            onPrev={prev}
-            onNext={next}
-            canPrev={showLeftFade}
-            canNext={showRightFade}
-          />
+      <div className="mt-2 mb-1 flex flex-wrap items-center justify-between gap-2">
+        <div className="flex items-center">
+          <h1 className=" text-[#656565] dark:text-[#fbfbfb] font-[525] text-3xl transition-all duration-300 ease-in-out">
+            Announcements
+          </h1>
+          <div className="ml-2">
+            <TempButton
+              onPrev={prev}
+              onNext={next}
+              canPrev={showLeftFade}
+              canNext={showRightFade}
+            />
+          </div>
         </div>
+        {isAdmin && (
+          <div className="ml-auto">
+            <CreateAnnouncement />
+          </div>
+        )}
       </div>
       <div className="border border-[#D9D9D9] dark:border-[#363636] mb-0.5 transition-all duration-300 ease-in-out" />
       <div
