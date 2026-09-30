@@ -90,7 +90,7 @@ export default function Executive() {
 
       <div className="block">
         <div className="block">
-          <ImageCarousel arr={WebBoard} title={"Website Designers"} />
+          <ImageCarousel arr={WebBoard} title={"Web Designers"} />
         </div>
       </div>
     </div>

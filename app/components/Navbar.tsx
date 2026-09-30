@@ -44,7 +44,7 @@ export default function Navbar() {
                 alt="Knights Records logo"
                 width={32}
                 height={32}
-                className="object-contain"
+                className="object-contain hover:animate-[spin_5.5s_linear_infinite]"
             />
 
             <span>Knights Records</span>
