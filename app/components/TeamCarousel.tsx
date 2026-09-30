@@ -58,7 +58,7 @@ function TeamContainers({ arr, currentIndex, delay = 0, }: PersonArrayProp) {
                   )}
                 </div>
               ) : (
-                <div className="w-30 h-30 min-w-30 min-h-30 bg-gray-300 rounded-2xl flex items-center justify-center">
+                <div className="w-30 h-30 min-w-30 min-h-30 bg-gray-300 dark:bg-[#363636] rounded-2xl flex items-center justify-center">
                   <User2 size={50} color="white" />
                 </div>
               )}

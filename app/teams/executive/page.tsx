@@ -112,9 +112,10 @@ export default function Executive() {
         <div className="block">
           <ImageCarousel
             arr={WebBoard}
-            title={"Website Designers"}
+            title={"Web Designers"}
             delay={500}
           />
+          <ImageCarousel arr={WebBoard} title={"Web Designers"} />
         </div>
       </div>
     </div>
