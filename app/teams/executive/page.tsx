@@ -53,7 +53,7 @@ const EventsBoard: Person[] = [
 const WebBoard: Person[] = [
   { name: "Valeria", role: "Web Designer", image: "/images/Valeria.JPG" },
   { name: "Samantha", role: "Web Designer", image: "/images/sam.jpg", darkImage: "/images/sam-evil.jpg" },
-  { name: "Thaira", role: "Web Designer", image: "/images/thaira.jpg" },
+  { name: "Thaira", role: "Web Designer", image: "/images/thaira.jpg", darkImage: "/images/thaira-evil.png" },
   { name: "Carlos", role: "Web Designer", image: "/images/carlos.jpg", darkImage: "/images/carlos-dark.png" },
 ];
   
