@@ -77,7 +77,7 @@ export default function CreateAnnouncementModal() {
       <button
         type="button"
         onClick={() => setIsOpen(true)}
-        className="rounded-lg bg-red-500 px-4 py-2 text-white cursor-pointer hover:bg-red-600"
+        className="rounded-lg bg-red-500 px-4 py-2 text-sm text-[#fbfbfb] cursor-pointer hover:bg-red-600"
       >
         Create New
       </button>
