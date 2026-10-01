@@ -105,151 +105,158 @@ function Modal({ announcement, isAdmin, onClose }: ModalProps) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex p-4 items-center text-center justify-center bg-black/10"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
       onClick={onClose}
     >
       <div
-        className="w-100 h-100 bg-white rounded-xl  shadow-2xl drop-shadow-2xl flex flex-col items-center"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="announcement-title"
+        className="max-h-[85vh] w-full max-w-md overflow-y-auto rounded-xl bg-white text-[#656565] shadow-2xl dark:bg-[#171717] dark:text-[#fbfbfb] md:grid md:aspect-[8/5] md:w-[min(64rem,136vh)] md:max-w-full md:grid-cols-2 md:grid-rows-[minmax(0,1fr)] md:overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className=" flex w-full justify-center">
-          <h2 className="text-2xl font-bold text-[#656565] p-2 w-[90%] ">
-            {announcement.title}{" "}
-          </h2>
-          <button
-            className="font-bold text-[#656565]/90 hover:text-black transition-all duration-300 ease-in-out"
-            onClick={onClose}
-          >
-            {" "}
-            X
-          </button>
-        </div>
         <div
-          className={`w-full h-full bg-cover bg-center`}
+          role="img"
+          aria-label={announcement.title}
+          className="aspect-4/5 w-full bg-contain bg-center bg-no-repeat"
           style={{ backgroundImage: imageUrl ? `url(${imageUrl})` : "none" }}
         />
-        {!isEditing && !deleteConfirm && (
-          <div>
-            <p className="text-[#656565] h-24 p-2 ">
-              {announcement.description}
-            </p>
-            {isAdmin && (
-              <div className="gap-2 flex flex-row justify-center">
+        <div className="relative min-h-0 min-w-0 p-8 text-left md:flex md:flex-col md:justify-[safe_center] md:overflow-y-auto md:p-10 md:[&>*]:shrink-0 lg:p-12">
+          <h2 id="announcement-title" className="mb-6 pr-10 text-left text-2xl font-bold leading-snug wrap-break-word">
+            {announcement.title}
+          </h2>
+          <button
+            type="button"
+            aria-label="Close announcement"
+            className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-lg font-bold transition-colors hover:bg-black/5 hover:text-black dark:hover:bg-white/10 dark:hover:text-white"
+            onClick={onClose}
+          >
+            X
+          </button>
+          {!isEditing && !deleteConfirm && (
+            <div>
+              <p className="max-w-[34ch] text-left whitespace-pre-wrap wrap-break-word leading-7">
+                {announcement.description}
+              </p>
+              {/* Hide these for now */}
+              {isAdmin && (
+                <div className="hidden mt-6 flex flex-wrap gap-2">
+                  <button
+                    type="button"
+                    className="mb-3 rounded-lg bg-gray-500 p-3"
+                    onClick={() => setIsEditing(true)}
+                  >
+                    Edit announcement
+                  </button>
+                  <button
+                    type="button"
+                    className="mb-3 rounded-lg bg-gray-500 p-3"
+                    onClick={() => setDeleteConfirm(true)}
+                  >
+                    Delete announcement
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
+
+          {isEditing && isAdmin && (
+            <div className="w-full text-left">
+              <div className="mb-2">
+                <label htmlFor="edit-title" className="block text-sm">
+                  Title
+                </label>
+                <input
+                  id="edit-title"
+                  type="text"
+                  className="w-full border"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                />
+              </div>
+              <div className="mb-2">
+                <label htmlFor="edit-description" className="block text-sm">
+                  Description
+                </label>
+                <textarea
+                  id="edit-description"
+                  className="w-full border"
+                  rows={3}
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                />
+              </div>
+              <div className="mb-2">
+                <label htmlFor="edit-image-key" className="block text-sm">
+                  Image Key
+                </label>
+                <input
+                  id="edit-image-key"
+                  type="text"
+                  className="w-full border"
+                  value={imageKey}
+                  onChange={(e) => setImageKey(e.target.value)}
+                />
+              </div>
+
+              {error && <p className="mb-2 text-sm text-red-600">{error}</p>}
+
+              <div className="flex gap-2">
                 <button
                   type="button"
-                  className="mb-3 rounded-lg bg-gray-500 p-3"
-                  onClick={() => setIsEditing(true)}
+                  className="rounded-lg bg-gray-500 w-full"
+                  onClick={saveAnnouncement}
+                  disabled={isSaving}
                 >
-                  Edit announcement
+                  {isSaving ? "Saving..." : "Save changes"}
                 </button>
                 <button
                   type="button"
-                  className="mb-3 rounded-lg bg-gray-500 p-3"
-                  onClick={() => setDeleteConfirm(true)}
+                  className="rounded-lg border w-full"
+                  onClick={() => {
+                    setIsEditing(false);
+                    setError("");
+                  }}
+                  disabled={isSaving}
                 >
-                  Delete announcement
+                  Cancel
                 </button>
               </div>
-            )}
-          </div>
-        )}
-
-        {isEditing && isAdmin && (
-          <div className="w-full p-4 text-left">
-            <div className="mb-2">
-              <label htmlFor="edit-title" className="block text-sm">
-                Title
-              </label>
-              <input
-                id="edit-title"
-                type="text"
-                className="w-full border"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
             </div>
-            <div className="mb-2">
-              <label htmlFor="edit-description" className="block text-sm">
-                Description
-              </label>
-              <textarea
-                id="edit-description"
-                className="w-full border"
-                rows={3}
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              />
+          )}
+
+          {deleteConfirm && isAdmin && (
+            <div>
+              <p className="mb-4 leading-relaxed">
+                Are you sure you want to delete this announcement?
+              </p>
+
+              {error && <p className="mb-2 text-sm text-red-600">{error}</p>}
+
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  className="rounded-lg bg-gray-500 w-full"
+                  onClick={deleteAnnouncement}
+                  disabled={isDeleting}
+                >
+                  {isDeleting ? "Deleting..." : "Delete"}
+                </button>
+                <button
+                  type="button"
+                  className="rounded-lg border w-full"
+                  onClick={() => {
+                    setError("");
+                    setDeleteConfirm(false);
+                  }}
+                  disabled={isDeleting}
+                >
+                  Cancel
+                </button>
+              </div>
             </div>
-            <div className="mb-2">
-              <label htmlFor="edit-image-key" className="block text-sm">
-                Image Key
-              </label>
-              <input
-                id="edit-image-key"
-                type="text"
-                className="w-full border"
-                value={imageKey}
-                onChange={(e) => setImageKey(e.target.value)}
-              />
-            </div>
-
-            {error && <p className="mb-2 text-sm text-red-600">{error}</p>}
-
-            <div className="flex gap-2">
-              <button
-                type="button"
-                className="rounded-lg bg-gray-500 w-full"
-                onClick={saveAnnouncement}
-                disabled={isSaving}
-              >
-                {isSaving ? "Saving..." : "Save changes"}
-              </button>
-              <button
-                type="button"
-                className="rounded-lg border w-full"
-                onClick={() => {
-                  setIsEditing(false);
-                  setError("");
-                }}
-                disabled={isSaving}
-              >
-                Cancel
-              </button>
-            </div>
-          </div>
-        )}
-
-        {deleteConfirm && isAdmin && (
-          <div>
-            <p className="text-[#656565] h-24 p-2">
-              Are you sure you want to delete this announcement?
-            </p>
-
-            {error && <p className="mb-2 text-sm text-red-600">{error}</p>}
-
-            <div className="flex gap-2">
-              <button
-                type="button"
-                className="rounded-lg bg-gray-500 w-full"
-                onClick={deleteAnnouncement}
-                disabled={isDeleting}
-              >
-                {isDeleting ? "Deleting..." : "Delete"}
-              </button>
-              <button
-                type="button"
-                className="rounded-lg border w-full"
-                onClick={() => {
-                  setError("");
-                  setDeleteConfirm(false);
-                }}
-                disabled={isDeleting}
-              >
-                Cancel
-              </button>
-            </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );
@@ -382,7 +389,7 @@ export default function Carousel({ announcement, isAdmin }: CarouselProps) {
                   style={{
                     backgroundImage: imageUrl ? `url(${imageUrl})` : "none",
                     backgroundSize: "cover",
-                    backgroundPosition: "center",
+                    backgroundPosition: "top",
                   }}
                   onClick={() => {
                     setShowModal(true);
