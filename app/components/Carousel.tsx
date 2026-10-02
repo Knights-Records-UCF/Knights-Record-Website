@@ -140,17 +140,17 @@ function Modal({ announcement, isAdmin, onClose }: ModalProps) {
               </p>
               {/* Hide these for now */}
               {isAdmin && (
-                <div className="hidden mt-6 flex flex-wrap gap-2">
+                <div className="mt-auto pt-6 flex justify-end gap-2">
                   <button
                     type="button"
-                    className="mb-3 rounded-lg bg-gray-500 p-3"
+                    className="hidden mb-3 rounded-lg bg-gray-500 p-3" // fix editing later
                     onClick={() => setIsEditing(true)}
                   >
                     Edit announcement
                   </button>
                   <button
                     type="button"
-                    className="mb-3 rounded-lg bg-gray-500 p-3"
+                    className="rounded-lg bg-red-500 p-3"
                     onClick={() => setDeleteConfirm(true)}
                   >
                     Delete announcement
@@ -342,8 +342,8 @@ export default function Carousel({ announcement, isAdmin }: CarouselProps) {
 
   return (
     <div className="overflow-hidden relative">
-      <div className="mt-2 mb-1 flex flex-wrap items-center justify-between gap-2">
-        <div className="flex items-center">
+      <div className=" mt-2 mb-1 flex flex-wrap items-center justify-between gap-2">
+        <div className="carousel-header-enter flex items-center">
           <h1 className=" text-[#656565] dark:text-[#fbfbfb] font-[525] text-3xl transition-all duration-300 ease-in-out">
             Announcements
           </h1>
@@ -373,12 +373,12 @@ export default function Carousel({ announcement, isAdmin }: CarouselProps) {
           className="flex w-max flex-row gap-4 transition-transform ease-out duration-500"
           style={{ transform: `translateX(-${offset}px)` }}
         >
-          {announcement.map((item) => {
+          {announcement.map((item, index) => {
             const imageUrl = item.imageKey ? `${R2_URL}/${item.imageKey}` : "";
 
             return (
-              <div key={item.id} className="w-60 shrink-0">
-                <h1 className="text-[#656565] dark:text-[#AEAEAE] text-[14px] font-525 transition-all duration-300 ease-in-out">
+              <div key={item.id} className="carousel-card-enter w-60 shrink-0" style={{ animationDelay: `${100 + index * 100}ms`,}}>
+                <h1 className="text-[#656565] dark:text-[#AEAEAE] text-[14px] font-525 font-semibold transition-all duration-300 ease-in-out">
                   {item.title}
                 </h1>
                 <p className="text-[#656565] dark:text-[#D9D9D9] w-52 text-[14px] text-left leading-none truncate transition-all duration-300 ease-in-out">
