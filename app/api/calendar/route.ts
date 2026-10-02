@@ -52,12 +52,12 @@ export async function GET(request: Request) {
             return new Date(aStart).getTime() - new Date(bStart).getTime();
         });
 
-    console.log(
-        events.map((event) => ({
-            summary: event.summary,
-            start: event.start,
-        }))
-    );
+    // console.log(
+    //   events.map((event) => ({
+    //        summary: event.summary,
+    //        start: event.start,
+    //    }))
+    //);
 
     return Response.json({ items: events });
 }

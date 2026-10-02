@@ -1,9 +1,10 @@
+
 "use client";
 
 import Image from "next/image";
 import { useState } from "react";
-import { IoChevronDown } from "react-icons/io5";
-import { IoFilter } from "react-icons/io5";
+import { IoChevronDown, IoFilter } from "react-icons/io5";
+import { User2 } from "lucide-react";
 
 type Role = {
     id: number;
@@ -93,7 +94,7 @@ const roles: Role[] = [
         committee: "Membership",
         team: "Executive Board",
         description:
-            "Assists with recruitment efforts, member communications, attendance tracking, and planning member development and social activities.",      
+            "Assists with recruitment efforts, member communications, attendance tracking, and planning member development and social activities.",
         // image: "",
     },
     {
@@ -102,7 +103,7 @@ const roles: Role[] = [
         committee: "Marketing",
         team: "Executive Board",
         description:
-            "Develops marketing strategy for the organization, oversees branding and social media, and manages promotional campaigns for events and initiatives.",     
+            "Develops marketing strategy for the organization, oversees branding and social media, and manages promotional campaigns for events and initiatives.",
         // image: "",
     },
     {
@@ -111,7 +112,7 @@ const roles: Role[] = [
         committee: "Marketing",
         team: "Executive Board",
         description:
-            "Creates marketing content, assists with social media management, and supports promotional campaigns to increase organizational visibility.",     
+            "Creates marketing content, assists with social media management, and supports promotional campaigns to increase organizational visibility.",
         // image: "",
     },
     {
@@ -120,7 +121,7 @@ const roles: Role[] = [
         committee: "Marketing",
         team: "Executive Board",
         description:
-            "Designs, updates, and maintains the organization's website while ensuring accurate information, strong branding, and a user-friendly experience.",   
+            "Designs, updates, and maintains the organization's website while ensuring accurate information, strong branding, and a user-friendly experience.",
         // image: "",
     },
     {
@@ -130,16 +131,14 @@ const roles: Role[] = [
         team: "Label Team",
         description:
             "Oversees day-to-day label operations, manages artist relations, coordinates projects across departments, and ensures artists receive organizational support.",
-        
     },
     {
         id: 14,
         title: "A&R Director",
         committee: "Artist & Repertoire",
         team: "Label Team",
-        description:   
+        description:
             "Leads artist recruitment, evaluates talent, oversees artist development, and serves as the primary liaison between artists and the label.",
-        
     },
     {
         id: 15,
@@ -148,7 +147,6 @@ const roles: Role[] = [
         team: "Label Team",
         description:
             "Assists with artist scouting, maintains communication with their assigned artist, provides developmental support, and helps coordinate artist projects.",
-        
     },
     {
         id: 16,
@@ -157,7 +155,6 @@ const roles: Role[] = [
         team: "Label Team",
         description:
             "Leads marketing strategy for signed artists, oversees release campaigns, and coordinates branding efforts across creative and promotional teams.",
-        
     },
     {
         id: 17,
@@ -166,7 +163,6 @@ const roles: Role[] = [
         team: "Label Team",
         description:
             "Executes artist marketing campaigns, manages promotional content, monitors campaign performance, and assists with release planning as well as graphic design support.",
-        
     },
     {
         id: 18,
@@ -175,7 +171,6 @@ const roles: Role[] = [
         team: "Label Team",
         description:
             "Leads promotional initiatives for artists and label events while developing partnerships and outreach opportunities within the UCF and Orlando communities.",
-        
     },
     {
         id: 19,
@@ -184,16 +179,14 @@ const roles: Role[] = [
         team: "Label Team",
         description:
             "Supports promotional campaigns, coordinates outreach efforts, assists with partnerships, and helps increase artist and event visibility.",
-        
     },
     {
         id: 20,
-        title: " Live Events Director",
-        committee: " Live Events",
+        title: "Live Events Director",
+        committee: "Live Events",
         team: "Label Team",
         description:
             "Plans and manages artist showcases, concerts, and live performances while coordinating logistics, production, and venue operations.",
-        
     },
     {
         id: 21,
@@ -202,7 +195,6 @@ const roles: Role[] = [
         team: "Label Team",
         description:
             "Supports live event setup, artist coordination, volunteer management, and day-of-event operations.",
-        
     },
     {
         id: 22,
@@ -211,7 +203,6 @@ const roles: Role[] = [
         team: "Label Team",
         description:
             "Leads the creative vision for the organization and its artists, overseeing branding, visual content, photoshoots, album artwork, and multimedia projects.",
-        
     },
     {
         id: 23,
@@ -220,7 +211,6 @@ const roles: Role[] = [
         team: "Label Team",
         description:
             "Supports creative projects by assisting with design, branding, content creation, and production for artists and organizational initiatives.",
-        
     },
     {
         id: 24,
@@ -229,7 +219,6 @@ const roles: Role[] = [
         team: "Label Team",
         description:
             "Captures high-quality photography for events, artists, and promotional materials while maintaining the organization's visual archive.",
-        
     },
     {
         id: 25,
@@ -238,18 +227,18 @@ const roles: Role[] = [
         team: "Label Team",
         description:
             "Produces and edits video content for performances, promotional campaigns, artist features, and social media platforms.",
-        
-    }
+    },
 ];
 
 const applicationLinks = {
-    "Executive Board": "https://docs.google.com/forms/d/e/1FAIpQLSekqBzdIj7NWtKNT6VQqfjZVV8RwTeRlb_vr3x-_Crj6X6H1w/viewform",
-    "Label Team": "https://docs.google.com/forms/d/e/1FAIpQLSdnXfI2V3iiJwXMVOavCHAtqUNSPyK9gCFgRfD8sYAGtKo8ew/viewform?usp=send_form",
+    "Executive Board":
+        "https://docs.google.com/forms/d/e/1FAIpQLSekqBzdIj7NWtKNT6VQqfjZVV8RwTeRlb_vr3x-_Crj6X6H1w/viewform",
+    "Label Team":
+        "https://docs.google.com/forms/d/e/1FAIpQLSdnXfI2V3iiJwXMVOavCHAtqUNSPyK9gCFgRfD8sYAGtKo8ew/viewform?usp=send_form",
 };
 
 export default function JoinTeamPage() {
     const [openRole, setOpenRole] = useState<number | null>(null);
-
     const [labelFirst, setLabelFirst] = useState(false);
 
     const toggleRole = (id: number) => {
@@ -270,7 +259,7 @@ export default function JoinTeamPage() {
 
     return (
         <main className="min-h-screen text-[#656565] dark:text-[#E5E5E5] transition-all duration-300 ease-in-out">
-            <div className=" mx-auto px-6 md:px-10 lg:px-16 py-10 md:py-16">
+            <div className="mx-auto px-6 md:px-10 lg:px-16 py-10 md:py-16">
 
                 {/* Hero */}
                 <section className="flex flex-col md:flex-row gap-8 md:gap-10 items-start mb-12">
@@ -294,176 +283,225 @@ export default function JoinTeamPage() {
                         </h1>
 
                         <p className="text-[17px] leading-tight">
-                            Join a team of students passionate about music, creativity,
-                            and community. Whether you're interested in planning events,
-                            marketing, or management, we would love for you to join
-                            Knights Records! Check out our roles below.
+                            Join a team of students passionate about music,
+                            creativity, and community. Whether you're interested
+                            in planning events, marketing, or management, we
+                            would love for you to join Knights Records! Check
+                            out our roles below.
                         </p>
                     </div>
                 </section>
 
-                {/* Table header */}
+                {/* Table */}
                 <div className="mx-8">
-                <div className="hidden md:grid grid-cols-[1.2fr_1.2fr_80px] items-center border-b border-[#D8D8D8] dark:border-[#323236] pb-2 px-1 font-semibold transition-all duration-300 ease-in-out">
-                    <div>
-                        Role
-                    </div>
 
-                    <div className="flex items-center gap-2">
-                        Committee 
-                        <button
-                            type="button"
-                            onClick={() => setLabelFirst((prev) => !prev)}
-                            aria-label="Toggle team order"
-                            className="cursor-pointer"
-                        >
-                            <IoFilter />
-                        </button>
-                    </div>
+                    {/* Table header */}
+                    <div className="hidden md:grid grid-cols-[1.2fr_1.2fr_80px] items-center border-b border-[#D8D8D8] dark:border-[#323236] pb-2 px-1 font-semibold transition-all duration-300 ease-in-out">
+                        <div>
+                            Role
+                        </div>
 
-                    <div className="text-right whitespace-nowrap">
-                        Learn More    
-                    </div>
-                </div>
+                        <div className="flex items-center gap-2">
+                            Committee
 
-                {/* Role list */}
-                <div>
-                    {displayedRoles.map((role, index) => {
-                        const isOpen = openRole === role.id;
-
-                        return (
-                            <div
-                                key={role.id}
-                                className="role-enter border-b border-[#D8D8D8] dark:border-[#323236] transition-all duration-300 ease-in-out"
-                                style={{
-                                    animationDelay: `${250 + Math.min(index * 45, 600)}ms`,
-                                }}
+                            <button
+                                type="button"
+                                onClick={() =>
+                                    setLabelFirst((prev) => !prev)
+                                }
+                                aria-label="Toggle team order"
+                                className="cursor-pointer"
                             >
-                                {/* Clickable role row */}
-                                <button
-                                    type="button"
-                                    onClick={() => toggleRole(role.id)}
-                                    className="w-full text-left"
-                                    aria-expanded={isOpen}
+                                <IoFilter />
+                            </button>
+                        </div>
+
+                        <div className="text-right whitespace-nowrap">
+                            Learn More
+                        </div>
+                    </div>
+
+                    {/* Role list */}
+                    <div>
+                        {displayedRoles.map((role, index) => {
+                            const isOpen = openRole === role.id;
+
+                            return (
+                                <div
+                                    key={role.id}
+                                    className="role-enter border-b border-[#D8D8D8] dark:border-[#323236] transition-all duration-300 ease-in-out"
+                                    style={{
+                                        animationDelay: `${
+                                            250 +
+                                            Math.min(index * 45, 600)
+                                        }ms`,
+                                    }}
                                 >
-                                    <div className="grid grid-cols-[1fr_auto] md:grid-cols-[1.2fr_1.2fr_80px] items-center gap-4 py-2">
+                                    {/* Clickable role row */}
+                                    <button
+                                        type="button"
+                                        onClick={() =>
+                                            toggleRole(role.id)
+                                        }
+                                        className="w-full text-left"
+                                        aria-expanded={isOpen}
+                                    >
+                                        <div className="grid grid-cols-[1fr_auto] md:grid-cols-[1.2fr_1.2fr_80px] items-center gap-4 py-2">
 
-                                        {/* Role */}
-                                        <div className="flex items-center gap-3">
+                                            {/* Role */}
+                                            <div className="flex items-center gap-3">
 
-                                            {/* Role image */}
-                                            <div className="relative w-11 h-11 rounded-lg overflow-hidden shrink-0">
-                                                <Image
-                                                    src="/images/joinTeam/placeholder.png"
-                                                    alt="Knights Records"
-                                                    fill
-                                                    sizes="44px"
-                                                    className="object-cover"
-                                                />
+                                                {/* Role image */}
+                                                {role.image ? (
+                                                    <div className="relative w-11 h-11 rounded-lg overflow-hidden shrink-0 bg-gray-300 dark:bg-[#363636] transition-all duration-300 ease-in-out">
+                                                        <Image
+                                                            src={role.image}
+                                                            alt={role.title}
+                                                            fill
+                                                            sizes="44px"
+                                                            className="object-cover"
+                                                        />
+                                                    </div>
+                                                ) : (
+                                                    <div
+                                                        className="
+                                                            w-11
+                                                            h-11
+                                                            shrink-0
+
+                                                            bg-gray-300
+                                                            dark:bg-[#363636]
+
+                                                            rounded-lg
+
+                                                            flex
+                                                            items-center
+                                                            justify-center
+
+                                                            transition-all
+                                                            duration-300
+                                                            ease-in-out
+                                                        "
+                                                    >
+                                                        <User2
+                                                            size={24}
+                                                            color="white"
+                                                        />
+                                                    </div>
+                                                )}
+
+                                                <span className="text-[16px]">
+                                                    {role.title}
+                                                </span>
                                             </div>
 
-                                            <span className="text-[16px]">
-                                                {role.title}
-                                            </span>
+                                            {/* Committee */}
+                                            <div className="hidden md:block text-[16px]">
+                                                {role.committee}
+                                            </div>
+
+                                            {/* Learn More Dropdown */}
+                                            <div className="flex justify-end">
+                                                <IoChevronDown
+                                                    className={`text-base transition-transform duration-300 ${
+                                                        isOpen
+                                                            ? "rotate-180"
+                                                            : ""
+                                                    }`}
+                                                />
+                                            </div>
                                         </div>
 
-                                        {/* Committee */}
-                                        <div className="hidden md:block text-[16px]">
+                                        {/* Committee shown under role on mobile */}
+                                        <div className="md:hidden pl-14 pb-2 text-sm text-[#8A8A8A]">
                                             {role.committee}
                                         </div>
+                                    </button>
 
-                                        {/* Learn More Dropdown */}
-                                        <div className="flex justify-end">
-                                            <IoChevronDown
-                                                className={`text-base transition-transform duration-300 ${
-                                                    isOpen ? "rotate-180" : ""
-                                                }`}
-                                            />
-                                        </div>
-                                    </div>
+                                    {/* Expanded role information */}
+                                    <div
+                                        className={`grid transition-all duration-300 ease-in-out ${
+                                            isOpen
+                                                ? "grid-rows-[1fr] opacity-100"
+                                                : "grid-rows-[0fr] opacity-0"
+                                        }`}
+                                    >
+                                        <div className="overflow-hidden">
+                                            <div className="md:grid md:grid-cols-[150px_1fr] gap-x-8 px-4 md:px-17 pt-6 pb-7">
 
-                                    {/* Committee shown under role on mobile */}
-                                    <div className="md:hidden pl-14 pb-2 text-sm text-[#8A8A8A]">
-                                        {role.committee}
-                                    </div>
-                                </button>
+                                                {/* About label */}
+                                                <h3 className="font-semibold mb-2 md:mb-0">
+                                                    About
+                                                </h3>
 
-                                {/* Expanded role information */}
-                                <div
-                                    className={`grid transition-all duration-300 ease-in-out ${
-                                        isOpen
-                                            ? "grid-rows-[1fr] opacity-100"
-                                            : "grid-rows-[0fr] opacity-0"
-                                    }`}
-                                >
-                                    <div className="overflow-hidden">
-                                        <div className="md:grid md:grid-cols-[150px_1fr] gap-x-8 px-4 md:px-17 pt-6 pb-7">
+                                                {/* Description */}
+                                                <p className="text-[15px] leading-[1.2] max-w-140">
+                                                    {role.description}
+                                                </p>
 
-                                            {/* About label */}
-                                            <h3 className="font-semibold mb-2 md:mb-0">
-                                                About
-                                            </h3>
-
-                                            {/* Description */}
-                                            <p className="text-[15px] leading-[1.2] max-w-140">
-                                                {role.description}
-                                            </p>
-
-                                            {/* Apply */}
-                                            <div className="md:col-span-2 flex justify-center mt-8">
-                                                <a
-                                                    href={applicationLinks[role.team]}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    onClick={(e) => e.stopPropagation()}
-                                                    className="px-5 py-1.5 rounded-md bg-[#656565] hover:bg-[#555555] text-white text-sm font-semibold transition-colors shadow-md"
-                                                >
-                                                    Apply
-                                                </a>
+                                                {/* Apply */}
+                                                <div className="md:col-span-2 flex justify-center mt-8">
+                                                    <a
+                                                        href={
+                                                            applicationLinks[
+                                                                role.team
+                                                            ]
+                                                        }
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        onClick={(e) =>
+                                                            e.stopPropagation()
+                                                        }
+                                                        className="px-5 py-1.5 rounded-md bg-[#656565] hover:bg-[#555555] text-white text-sm font-semibold transition-colors shadow-md"
+                                                    >
+                                                        Apply
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        );
-                    })}
-                    
-                </div>
+                            );
+                        })}
+                    </div>
                 </div>
             </div>
 
-            {/* Gradients*/}
+            {/* Gradients */}
             <div className="fixed bottom-0 left-0 md:left-65 right-0 h-40 pointer-events-none z-20">
 
-            {/* Light mode gradient */}
-            <div
-                className="
-                    absolute inset-0
-                    bg-linear-to-b
-                    from-transparent
-                    via-white/40
-                    to-white
-                    opacity-100
-                    dark:opacity-0
-                    transition-opacity duration-300 ease-in-out
-                "
-            />
+                {/* Light mode gradient */}
+                <div
+                    className="
+                        absolute inset-0
+                        bg-linear-to-b
+                        from-transparent
+                        via-white/40
+                        to-white
+                        opacity-100
+                        dark:opacity-0
+                        transition-opacity
+                        duration-300
+                        ease-in-out
+                    "
+                />
 
-            {/* Dark mode gradient */}
-            <div
-                className="
-                    absolute inset-0
-                    bg-linear-to-b
-                    from-transparent
-                    via-[#1E1E1E]/70
-                    to-[#1E1E1E]
-                    opacity-0
-                    dark:opacity-100
-                    transition-opacity duration-300 ease-in-out
-                "
-            />
-        </div>
-
+                {/* Dark mode gradient */}
+                <div
+                    className="
+                        absolute inset-0
+                        bg-linear-to-b
+                        from-transparent
+                        via-[#1E1E1E]/70
+                        to-[#1E1E1E]
+                        opacity-0
+                        dark:opacity-100
+                        transition-opacity
+                        duration-300
+                        ease-in-out
+                    "
+                />
+            </div>
         </main>
     );
 }
